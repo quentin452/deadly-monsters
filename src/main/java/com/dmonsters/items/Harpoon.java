@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 
 import com.dmonsters.entity.EntityTopielec;
 import com.dmonsters.main.MainMod;
+import com.dmonsters.main.ModConfig;
 
 public class Harpoon extends Item
 {
@@ -84,8 +85,11 @@ public class Harpoon extends Item
     {
         TextComponentTranslation msg = new TextComponentTranslation("item.dmonsters.addInformation.harpoon_1");
         tooltip.add(msg.getUnformattedText());
-        msg = new TextComponentTranslation("item.dmonsters.addInformation.harpoon_2");
-        tooltip.add(msg.getUnformattedText());
+        if (ModConfig.topielecHarpoonOnly)
+        {
+            msg = new TextComponentTranslation("item.dmonsters.addInformation.harpoon_2");
+            tooltip.add(msg.getUnformattedText());
+        }
     }
 
     private List<Item> createDropTable()

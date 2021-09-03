@@ -112,6 +112,7 @@ public class ModConfig
     public static float topielecSpeedMultiplier = 1;
     public static int topielecSpawnChance = 25;
     public static int topielecSearchDistance = 8;
+    public static boolean topielecHarpoonOnly = false;
     public static boolean topielecDisabled = false;
 
     public static void readConfig()
@@ -178,7 +179,7 @@ public class ModConfig
         babyHealthMultiplier = cfg.getFloat("babyHealthMultiplier", CATEGORY_BABY, 1, 0.01F, 999, "Unborn Baby health multiplier");
         babyStrengthMultiplier = cfg.getFloat("babyStrengthMultiplier", CATEGORY_BABY, 1, 0.01F, 999, "Unborn Baby strenght multiplier");
         babySpeedMultiplier = cfg.getFloat("babySpeedMultiplier", CATEGORY_BABY, 1, 0.01F, 999, "Unborn Baby speed multiplier");
-        babySpawnRate = cfg.getInt("babySawnRate", CATEGORY_BABY, babySpawnRate, 0, 999, "Unborn Baby spawn rate. Default for Zombie is 8.");
+        babySpawnRate = cfg.getInt("babySpawnRate", CATEGORY_BABY, babySpawnRate, 0, 999, "Unborn Baby spawn rate. Default for Zombie is 8.");
     }
 
     private static void initClimberConfig(Configuration cfg)
@@ -188,7 +189,7 @@ public class ModConfig
         climberHealthMultiplier = cfg.getFloat("climberHealthMultiplier", CATEGORY_CLIMBER, 1, 0.01F, 999, "Climber health multiplier");
         climberStrengthMultiplier = cfg.getFloat("climberStrengthMultiplier", CATEGORY_CLIMBER, 1, 0.01F, 999, "Climber strenght multiplier");
         climberSpeedMultiplier = cfg.getFloat("climberSpeedMultiplier", CATEGORY_CLIMBER, 1, 0.01F, 999, "Climber speed multiplier");
-        climberSpawnRate = cfg.getInt("climberSawnRate", CATEGORY_CLIMBER, climberSpawnRate, 0, 999, "Climber spawn rate. Default for Zombie is 8.");
+        climberSpawnRate = cfg.getInt("climberSpawnRate", CATEGORY_CLIMBER, climberSpawnRate, 0, 999, "Climber spawn rate. Default for Zombie is 8.");
     }
 
     private static void initEntrailConfig(Configuration cfg)
@@ -198,7 +199,7 @@ public class ModConfig
         entrailHealthMultiplier = cfg.getFloat("entrailHealthMultiplier", CATEGORY_ENTRAIL, 1, 0.01F, 999, "Entrail health multiplier");
         entrailStrengthMultiplier = cfg.getFloat("entrailStrengthMultiplier", CATEGORY_ENTRAIL, 1, 0.01F, 999, "Entrail strenght multiplier");
         entrailSpeedMultiplier = cfg.getFloat("entrailSpeedMultiplier", CATEGORY_ENTRAIL, 1, 0.01F, 999, "Entrail speed multiplier");
-        entrailSpawnRate = cfg.getInt("entrailSawnRate", CATEGORY_ENTRAIL, entrailSpawnRate, 0, 999, "Entrail spawn rate. Default for Zombie is 8.");
+        entrailSpawnRate = cfg.getInt("entrailSpawnRate", CATEGORY_ENTRAIL, entrailSpawnRate, 0, 999, "Entrail spawn rate. Default for Zombie is 8.");
     }
 
     private static void initFreezerConfig(Configuration cfg)
@@ -208,7 +209,7 @@ public class ModConfig
         freezerHealthMultiplier = cfg.getFloat("freezerHealthMultiplier", CATEGORY_FREEZER, 1, 0.01F, 999, "Freezer health multiplier");
         freezerStrengthMultiplier = cfg.getFloat("freezerStrengthMultiplier", CATEGORY_FREEZER, 1, 0.01F, 999, "Freezer strenght multiplier");
         freezerSpeedMultiplier = cfg.getFloat("freezerSpeedMultiplier", CATEGORY_FREEZER, 1, 0.01F, 999, "Freezer speed multiplier");
-        freezerSpawnRate = cfg.getInt("freezerSawnRate", CATEGORY_FREEZER, freezerSpawnRate, 0, 999, "Freezer spawn rate. Default for Zombie is 8.");
+        freezerSpawnRate = cfg.getInt("freezerSpawnRate", CATEGORY_FREEZER, freezerSpawnRate, 0, 999, "Freezer spawn rate. Default for Zombie is 8.");
     }
 
     private static void initMutantSteveConfig(Configuration cfg)
@@ -218,7 +219,7 @@ public class ModConfig
         mutantSteveHealthMultiplier = cfg.getFloat("mutantSteveHealthMultiplier", CATEGORY_MUTANT, 1, 0.01F, 999, "Mutant Steve health multiplier");
         mutantSteveStrengthMultiplier = cfg.getFloat("mutantSteveStrengthMultiplier", CATEGORY_MUTANT, 1, 0.01F, 999, "Mutant Steve strenght multiplier");
         mutantSteveSpeedMultiplier = cfg.getFloat("mutantSteveSpeedMultiplier", CATEGORY_MUTANT, 1, 0.01F, 999, "Mutant Steve speed multiplier");
-        mutantSteveSpawnRate = cfg.getInt("mutantSteveSawnRate", CATEGORY_MUTANT, mutantSteveSpawnRate, 0, 999, "Mutant Steve spawn rate. Default for Zombie is 8.");
+        mutantSteveSpawnRate = cfg.getInt("mutantSteveSpawnRate", CATEGORY_MUTANT, mutantSteveSpawnRate, 0, 999, "Mutant Steve spawn rate. Default for Zombie is 8.");
     }
 
     private static void initWidemanConfig(Configuration cfg)
@@ -228,7 +229,7 @@ public class ModConfig
         fallenLeaderHealthMultiplier = cfg.getFloat("fallenLeaderHealthMultiplier", CATEGORY_WIDEMAN, 1, 0.01F, 999, "Fallen Leader health multiplier");
         fallenLeaderStrengthMultiplier = cfg.getFloat("fallenLeaderStrengthMultiplier", CATEGORY_WIDEMAN, 1, 0.01F, 999, "Fallen Leader strenght multiplier");
         fallenLeaderSpeedMultiplier = cfg.getFloat("fallenLeaderSpeedMultiplier", CATEGORY_WIDEMAN, 1, 0.01F, 999, "Fallen Leader speed multiplier");
-        fallenLeaderSpawnRate = cfg.getInt("fallenLeaderSawnRate", CATEGORY_WIDEMAN, fallenLeaderSpawnRate, 0, 999, "Fallen Leader spawn rate. Default for Zombie is 8.");
+        fallenLeaderSpawnRate = cfg.getInt("fallenLeaderSpawnRate", CATEGORY_WIDEMAN, fallenLeaderSpawnRate, 0, 999, "Fallen Leader spawn rate. Default for Zombie is 8.");
     }
 
     private static void initWomanConfig(Configuration cfg)
@@ -238,7 +239,7 @@ public class ModConfig
         bloodyMaidenHealthMultiplier = cfg.getFloat("bloodyMaidenHealthMultiplier", CATEGORY_WOMAN, 1, 0.01F, 999, "Bloody Maiden health multiplier");
         bloodyMaidenStrengthMultiplier = cfg.getFloat("bloodyMaidenStrengthMultiplier", CATEGORY_WOMAN, 1, 0.01F, 999, "Bloody Maiden strenght multiplier");
         bloodyMaidenSpeedMultiplier = cfg.getFloat("bloodyMaidenSpeedMultiplier", CATEGORY_WOMAN, 1, 0.01F, 999, "Bloody Maiden speed multiplier");
-        bloodyMaidenSpawnRate = cfg.getInt("bloodyMaidenSawnRate", CATEGORY_WOMAN, bloodyMaidenSpawnRate, 0, 999, "Bloody Maiden spawn rate. Default for Zombie is 8.");
+        bloodyMaidenSpawnRate = cfg.getInt("bloodyMaidenSpawnRate", CATEGORY_WOMAN, bloodyMaidenSpawnRate, 0, 999, "Bloody Maiden spawn rate. Default for Zombie is 8.");
     }
 
     private static void initZombieChickenConfig(Configuration cfg)
@@ -248,7 +249,7 @@ public class ModConfig
         zombieChickenHealthMultiplier = cfg.getFloat("zombieChickenHealthMultiplier", CATEGORY_ZOMBIECHICKEN, 1, 0.01F, 999, "Zombie Chicken health multiplier");
         zombieChickenStrengthMultiplier = cfg.getFloat("zombieChickenStrengthMultiplier", CATEGORY_ZOMBIECHICKEN, 1, 0.01F, 999, "Zombie Chicken strenght multiplier");
         zombieChickenSpeedMultiplier = cfg.getFloat("zombieChickenSpeedMultiplier", CATEGORY_ZOMBIECHICKEN, 1, 0.01F, 999, "Zombie Chicken speed multiplier");
-        zombieChickenSpawnRate = cfg.getInt("zombieChickenSawnRate", CATEGORY_ZOMBIECHICKEN, zombieChickenSpawnRate, 0, 999, "Zombie Chicken spawn rate. Default for Zombie is 8.");
+        zombieChickenSpawnRate = cfg.getInt("zombieChickenSpawnRate", CATEGORY_ZOMBIECHICKEN, zombieChickenSpawnRate, 0, 999, "Zombie Chicken spawn rate. Default for Zombie is 8.");
     }
 
     private static void initPresentConfig(Configuration cfg)
@@ -258,7 +259,7 @@ public class ModConfig
         presentHealthMultiplier = cfg.getFloat("presentHealthMultiplier", CATEGORY_PRESENT, 1, 0.01F, 999, "Present health multiplier");
         presentStrengthMultiplier = cfg.getFloat("presentStrengthMultiplier", CATEGORY_PRESENT, 1, 0.01F, 999, "Present strenght multiplier");
         presentSpeedMultiplier = cfg.getFloat("presentSpeedMultiplier", CATEGORY_PRESENT, 1, 0.01F, 999, "Present speed multiplier");
-        presentSpawnRate = cfg.getInt("presentSawnRate", CATEGORY_PRESENT, presentSpawnRate, 0, 999, "Present spawn rate. Default for Zombie is 8.");
+        presentSpawnRate = cfg.getInt("presentSpawnRate", CATEGORY_PRESENT, presentSpawnRate, 0, 999, "Present spawn rate. Default for Zombie is 8.");
     }
 
     private static void initStrangerConfig(Configuration cfg)
@@ -268,7 +269,7 @@ public class ModConfig
         strangerHealthMultiplier = cfg.getFloat("strangerHealthMultiplier", CATEGORY_STRANGER, 1, 0.01F, 999, "Stranger health multiplier");
         strangerStrengthMultiplier = cfg.getFloat("strangerStrengthMultiplier", CATEGORY_STRANGER, 1, 0.01F, 999, "Stranger strenght multiplier");
         strangerSpeedMultiplier = cfg.getFloat("strangerSpeedMultiplier", CATEGORY_STRANGER, 1, 0.01F, 999, "Stranger speed multiplier");
-        strangerSpawnRate = cfg.getInt("strangerSawnRate", CATEGORY_STRANGER, strangerSpawnRate, 0, 999, "Stranger spawn rate. Default for Zombie is 8.");
+        strangerSpawnRate = cfg.getInt("strangerSpawnRate", CATEGORY_STRANGER, strangerSpawnRate, 0, 999, "Stranger spawn rate. Default for Zombie is 8.");
     }
 
     private static void initHauntedCowConfig(Configuration cfg)
@@ -278,7 +279,7 @@ public class ModConfig
         hauntedCowHealthMultiplier = cfg.getFloat("hauntedCowHealthMultiplier", CATEGORY_HAUNTEDCOW, 1, 0.01F, 999, "Haunted Cow health multiplier");
         hauntedCowStrengthMultiplier = cfg.getFloat("hauntedCowStrengthMultiplier", CATEGORY_HAUNTEDCOW, 1, 0.01F, 999, "Haunted Cow strenght multiplier");
         hauntedCowSpeedMultiplier = cfg.getFloat("hauntedCowSpeedMultiplier", CATEGORY_HAUNTEDCOW, 1, 0.01F, 999, "Haunted Cow speed multiplier");
-        hauntedCowSpawnRate = cfg.getInt("hauntedCowSawnRate", CATEGORY_HAUNTEDCOW, hauntedCowSpawnRate, 0, 999, "Haunted Cow spawn rate. Default for Zombie is 8.");
+        hauntedCowSpawnRate = cfg.getInt("hauntedCowSpawnRate", CATEGORY_HAUNTEDCOW, hauntedCowSpawnRate, 0, 999, "Haunted Cow spawn rate. Default for Zombie is 8.");
         hauntedCowDisableTimeChange = cfg.getBoolean("disableTimeChange", CATEGORY_HAUNTEDCOW, hauntedCowDisableTimeChange, "Set to true if you want to disable time change event");
     }
 
@@ -289,6 +290,6 @@ public class ModConfig
         topielecHealthMultiplier = cfg.getFloat("topielecHealthMultiplier", CATEGORY_TOPIELEC, 1, 0.01F, 999, "Topielec health multiplier");
         topielecStrengthMultiplier = cfg.getFloat("topielecStrengthMultiplier", CATEGORY_TOPIELEC, 1, 0.01F, 999, "Topielec strenght multiplier");
         topielecSpeedMultiplier = cfg.getFloat("topielecSpeedMultiplier", CATEGORY_TOPIELEC, 1, 0.01F, 999, "Topielec speed multiplier");
-        topielecSpawnChance = cfg.getInt("topielecSawnChance", CATEGORY_TOPIELEC, topielecSpawnChance, 0, 999, "Precentage Topielec spawn chance, for example 25 means 25%.");
+        topielecSpawnChance = cfg.getInt("topielecSpawnChance", CATEGORY_TOPIELEC, topielecSpawnChance, 0, 999, "Precentage Topielec spawn chance, for example 25 means 25%.");
     }
 }

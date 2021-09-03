@@ -28,12 +28,13 @@ import com.dmonsters.network.PacketHandler;
 
 public class EventHandler
 {
-
     @SubscribeEvent(priority = EventPriority.NORMAL)
     public void onEntitySpawn(SpecialSpawn e)
     {
         if (ModConfig.topielecDisabled)
+        {
             return;
+        }
         Entity squid = e.getEntity();
         if (squid instanceof EntitySquid)
         {
@@ -74,14 +75,11 @@ public class EventHandler
                 player.sendMessage(msg);
             }
         }
-        if (!ModConfig.topielecDisabled)
+        if (!ModConfig.topielecDisabled && ModConfig.topielecHarpoonOnly && entity instanceof EntityTopielec)
         {
-            if (entity instanceof EntityTopielec)
-            {
-                EntityPlayer player = e.getEntityPlayer();
-                Item itemClass = player.getHeldItemMainhand().getItem();
-                e.setCanceled(!(itemClass instanceof Harpoon));
-            }
+            EntityPlayer player = e.getEntityPlayer();
+            Item itemClass = player.getHeldItemMainhand().getItem();
+            e.setCanceled(!(itemClass instanceof Harpoon));
         }
     }
 

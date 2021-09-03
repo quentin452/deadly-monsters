@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name": "dmonsters:woman",
+      "name": "dmonsters:woman:0",
       "rolls": 1,
       "entries": [
         {
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "name": "dmonsters:woman",
+      "name": "dmonsters:woman:1",
       "conditions": [
         {
           "condition": "killed_by_player"

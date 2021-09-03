@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name": "dmonsters:topielec",
+      "name": "dmonsters:topielec:0",
       "rolls": 1,
       "entries": [
         {
@@ -25,7 +25,7 @@
       ]
     },
     {
-      "name": "dmonsters:topielec",
+      "name": "dmonsters:topielec:1",
       "conditions": [
         {
           "condition": "killed_by_player"

@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name": "dmonsters:steve_zombie",
+      "name": "dmonsters:steve_zombie:0",
       "rolls": 1,
       "entries": [
         {
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "name": "dmonsters:steve_zombie",
+      "name": "dmonsters:steve_zombie:1",
       "conditions": [
         {
           "condition": "killed_by_player"

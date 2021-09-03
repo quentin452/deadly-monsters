@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name": "dmonsters:hauntedcow",
+      "name": "dmonsters:hauntedcow:0",
       "rolls": 1,
       "entries": [
         {
@@ -18,7 +18,7 @@
       ]
     },
     {
-      "name": "dmonsters:hauntedcow",
+      "name": "dmonsters:hauntedcow:1",
       "conditions": [
         {
           "condition": "killed_by_player"

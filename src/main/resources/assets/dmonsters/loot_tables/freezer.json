@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name": "dmonsters:freezer",
+      "name": "dmonsters:freezer:0",
       "rolls": 1,
       "entries": [
         {
@@ -21,7 +21,7 @@
       ]
     },
     {
-      "name": "dmonsters:freezer",
+      "name": "dmonsters:freezer:1",
       "conditions": [
         {
           "condition": "killed_by_player"

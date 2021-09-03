@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name": "dmonsters:climber",
+      "name": "dmonsters:climber:0",
       "rolls": 1,
       "entries": [
         {
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "name": "dmonsters:climber",
+      "name": "dmonsters:climber:1",
       "conditions": [
         {
           "condition": "killed_by_player"

@@ -31,7 +31,6 @@ import com.dmonsters.main.ModItems;
 
 public class PresentBox extends Block
 {
-
     protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.13, 0.0D, 0.13, 0.87, 0.75, 0.87);
 
     public PresentBox()

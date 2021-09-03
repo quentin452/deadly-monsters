@@ -15,7 +15,6 @@ import com.dmonsters.models.ModelClimber;
 
 public class RenderClimber extends RenderLiving<EntityClimber>
 {
-
     public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/climber.png");
 
@@ -38,13 +37,10 @@ public class RenderClimber extends RenderLiving<EntityClimber>
 
     public static class Factory implements IRenderFactory<EntityClimber>
     {
-
         @Override
         public Render<? super EntityClimber> createRenderFor(RenderManager manager)
         {
             return new RenderClimber(manager);
         }
-
     }
-
 }

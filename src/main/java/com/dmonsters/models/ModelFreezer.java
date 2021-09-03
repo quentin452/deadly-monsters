@@ -148,5 +148,4 @@ public class ModelFreezer extends ModelBase
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
 }

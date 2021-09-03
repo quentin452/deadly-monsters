@@ -45,12 +45,12 @@ public class EntityMutantSteve extends EntityMob
     @SideOnly(Side.CLIENT)
     public boolean isArmsRaised()
     {
-        return this.getDataManager().get(ARMS_RAISED).booleanValue();
+        return this.getDataManager().get(ARMS_RAISED);
     }
 
     public void setArmsRaised(boolean armsRaised)
     {
-        this.getDataManager().set(ARMS_RAISED, Boolean.valueOf(armsRaised));
+        this.getDataManager().set(ARMS_RAISED, armsRaised);
     }
 
     public void onLivingUpdate()
@@ -135,7 +135,7 @@ public class EntityMutantSteve extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
-        this.getDataManager().register(ARMS_RAISED, Boolean.valueOf(false));
+        this.getDataManager().register(ARMS_RAISED, Boolean.FALSE);
     }
 
     @Override

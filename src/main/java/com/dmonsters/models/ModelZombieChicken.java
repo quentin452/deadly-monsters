@@ -19,7 +19,6 @@ public class ModelZombieChicken extends ModelBase
     ModelRenderer leftwing;
     ModelRenderer rightwing;
 
-
     public ModelZombieChicken()
     {
         textureWidth = 32;
@@ -136,5 +135,4 @@ public class ModelZombieChicken extends ModelBase
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
 }

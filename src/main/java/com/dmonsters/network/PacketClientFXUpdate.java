@@ -18,7 +18,6 @@ import io.netty.buffer.ByteBuf;
 
 public class PacketClientFXUpdate implements IMessage
 {
-
     private BlockPos blockPos;
     private Type FXtype;
 

@@ -15,7 +15,6 @@ import com.dmonsters.models.ModelZombieChicken;
 
 public class RenderZombieChicken extends RenderLiving<EntityZombieChicken>
 {
-
     public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/zombieChicken.png");
 
@@ -38,13 +37,10 @@ public class RenderZombieChicken extends RenderLiving<EntityZombieChicken>
 
     public static class Factory implements IRenderFactory<EntityZombieChicken>
     {
-
         @Override
         public Render<? super EntityZombieChicken> createRenderFor(RenderManager manager)
         {
             return new RenderZombieChicken(manager);
         }
-
     }
-
 }

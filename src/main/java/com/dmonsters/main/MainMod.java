@@ -12,12 +12,10 @@ import com.dmonsters.proxy.CommonProxy;
 @Mod(modid = MainMod.MODID, name = MainMod.MODNAME, version = MainMod.MODVERSION)
 public class MainMod
 {
-
     public static final String MODID = "dmonsters";
     public static final String MODNAME = "Deadly Monsters";
-    public static final String MODVERSION = "1.7";
-    public static final ModCreativeTabs MOD_CREATIVETAB = new ModCreativeTabs("modTab");
-
+    public static final String MODVERSION = "1.72";
+    public static final ModCreativeTabs MOD_CREATIVETAB = new ModCreativeTabs("dmonstersTab");
 
     @SidedProxy(clientSide = "com.dmonsters.proxy.ClientProxy", serverSide = "com.dmonsters.proxy.ServerProxy")
     public static CommonProxy proxy;

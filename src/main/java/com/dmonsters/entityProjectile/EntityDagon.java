@@ -15,7 +15,6 @@ import com.dmonsters.main.ModItems;
 
 public class EntityDagon extends EntityThrowable
 {
-
     public EntityDagon(World worldIn)
     {
         super(worldIn);

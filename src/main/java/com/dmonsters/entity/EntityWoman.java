@@ -102,22 +102,22 @@ public class EntityWoman extends EntityMob
     @SideOnly(Side.CLIENT)
     public boolean isArmsRaised()
     {
-        return this.getDataManager().get(ARMS_RAISED).booleanValue();
+        return this.getDataManager().get(ARMS_RAISED);
     }
 
     public void setArmsRaised(boolean armsRaised)
     {
-        this.getDataManager().set(ARMS_RAISED, Boolean.valueOf(armsRaised));
+        this.getDataManager().set(ARMS_RAISED, armsRaised);
     }
 
     public boolean getTriggered()
     {
-        return this.getDataManager().get(TRIGGERED).booleanValue();
+        return this.getDataManager().get(TRIGGERED);
     }
 
     public void setTriggered(boolean mode)
     {
-        this.getDataManager().set(TRIGGERED, Boolean.valueOf(mode));
+        this.getDataManager().set(TRIGGERED, mode);
     }
 
     public EnumCreatureAttribute getCreatureAttribute()
@@ -141,8 +141,8 @@ public class EntityWoman extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
-        this.getDataManager().register(ARMS_RAISED, Boolean.valueOf(false));
-        this.getDataManager().register(TRIGGERED, Boolean.valueOf(false));
+        this.getDataManager().register(ARMS_RAISED, Boolean.FALSE);
+        this.getDataManager().register(TRIGGERED, Boolean.FALSE);
     }
 
     @Override

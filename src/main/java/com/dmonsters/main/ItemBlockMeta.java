@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 
 public class ItemBlockMeta extends ItemBlock
 {
-
     public ItemBlockMeta(Block block)
     {
         super(block);

@@ -124,5 +124,4 @@ public class ModelStranger extends ModelBase
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
 }

@@ -191,5 +191,4 @@ public class ModelClimber extends ModelBase
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
 }

@@ -149,5 +149,4 @@ public class ModelWoman extends ModelBase
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
 }

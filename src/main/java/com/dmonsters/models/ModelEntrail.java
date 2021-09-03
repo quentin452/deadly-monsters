@@ -59,16 +59,16 @@ public class ModelEntrail extends ModelBase
         //if (entityIn.getDistance(entityIn.prevPosX, entityIn.prevPosY, entityIn.prevPosZ) == 0)
         //  return;
 
-        this.middle.rotateAngleX = MathHelper.cos(ageInTicks * 0.2F + 2 * 0.15F * (float) Math.PI) * (float) Math.PI * 0.05F * (float) (1 + Math.abs(2 - 2));
-        this.middle.rotationPointY = MathHelper.sin(ageInTicks * 0.2F + 2 * 0.15F * (float) Math.PI) * (float) Math.PI * 0.2F * (float) Math.abs(2 - 2);
+        this.middle.rotateAngleX = MathHelper.cos(ageInTicks * 0.2F + 2 * 0.15F * (float) Math.PI) * (float) Math.PI * 0.05F * (float) (1);
+        this.middle.rotationPointY = MathHelper.sin(ageInTicks * 0.2F + 2 * 0.15F * (float) Math.PI) * (float) Math.PI * 0.2F * (float) 0;
         this.middle.rotationPointY += 5;
 
         this.bottom.rotateAngleX = MathHelper.cos(ageInTicks * 0.2F + 1 * 0.05F * (float) Math.PI) * (float) Math.PI * 0.05F * (float) (1 + Math.abs(1 - 2));
         this.bottom.rotationPointY = MathHelper.sin(ageInTicks * 0.2F + 1 * 0.05F * (float) Math.PI) * (float) Math.PI * 0.2F * (float) Math.abs(1 - 2);
         this.bottom.rotationPointY += 5;
 
-        this.end.rotateAngleX = MathHelper.cos(ageInTicks * 0.2F + 0 * 0.5F * (float) Math.PI) * (float) Math.PI * 0.05F * (float) (1 + Math.abs(0 - 2));
-        this.end.rotationPointY = MathHelper.sin(ageInTicks * 0.2F + 0 * 0.05F * (float) Math.PI) * (float) Math.PI * 0.2F * (float) Math.abs(0 - 2);
+        this.end.rotateAngleX = MathHelper.cos(ageInTicks * 0.2F + 0 * 0.5F * (float) Math.PI) * (float) Math.PI * 0.05F * (float) (1 + Math.abs(-2));
+        this.end.rotationPointY = MathHelper.sin(ageInTicks * 0.2F + 0 * 0.05F * (float) Math.PI) * (float) Math.PI * 0.2F * (float) Math.abs(-2);
         this.end.rotationPointY += 5;
 
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
@@ -81,5 +81,4 @@ public class ModelEntrail extends ModelBase
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
 }

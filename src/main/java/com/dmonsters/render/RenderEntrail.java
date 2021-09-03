@@ -15,7 +15,6 @@ import com.dmonsters.models.ModelEntrail;
 
 public class RenderEntrail extends RenderLiving<EntityEntrail>
 {
-
     public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/entrail.png");
 
@@ -38,7 +37,6 @@ public class RenderEntrail extends RenderLiving<EntityEntrail>
 
     public static class Factory implements IRenderFactory<EntityEntrail>
     {
-
         @Override
         public Render<? super EntityEntrail> createRenderFor(RenderManager manager)
         {

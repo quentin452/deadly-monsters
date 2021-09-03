@@ -20,7 +20,6 @@ import com.dmonsters.main.ModBlocks;
 
 public class ChristmasTree extends Block
 {
-
     protected static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 1.9375D, 0.9375D);
     protected static final AxisAlignedBB BLOCK_COLLISION_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 1.0D, 0.9375D);
 

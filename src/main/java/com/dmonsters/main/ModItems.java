@@ -10,7 +10,6 @@ import com.dmonsters.items.*;
 
 public class ModItems
 {
-
     public static Rebar rebar;
     public static LuckyEgg luckyEgg;
     public static BabyEye babyEye;

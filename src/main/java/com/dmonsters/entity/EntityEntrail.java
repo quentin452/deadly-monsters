@@ -32,7 +32,6 @@ public class EntityEntrail extends EntityMob
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EntityEntrail.class, DataSerializers.BOOLEAN);
     private final PriorityQueue<BlockPos> freezedBlocks = new PriorityQueue(10);
 
-
     public EntityEntrail(World worldIn)
     {
         super(worldIn);
@@ -63,7 +62,7 @@ public class EntityEntrail extends EntityMob
     {
         if (!this.world.isRemote && !source.isFireDamage())
         {
-            double x, y, z = 0;
+            double x, y, z;
             x = this.posX;
             y = this.posY;
             z = this.posZ;

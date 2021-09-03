@@ -29,7 +29,6 @@ import com.dmonsters.network.PacketHandler;
 
 public class SoulEye extends Block
 {
-
     public static final PropertyEnum MODE = PropertyEnum.create("mode", EnumMode.class);
 
     public SoulEye()

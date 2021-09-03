@@ -14,7 +14,6 @@ import com.dmonsters.network.PacketHandler;
 
 public class CommonProxy
 {
-
     public static Configuration config;
 
     public void preInit(FMLPreInitializationEvent e)

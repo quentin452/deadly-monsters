@@ -15,7 +15,6 @@ import com.dmonsters.models.ModelWoman;
 
 public class RenderWoman extends RenderLiving<EntityWoman>
 {
-
     public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/woman.png");
     private final ResourceLocation mobTextureTriggered = new ResourceLocation(MainMod.MODID + ":textures/entity/womanTriggered.png");
@@ -41,13 +40,10 @@ public class RenderWoman extends RenderLiving<EntityWoman>
 
     public static class Factory implements IRenderFactory<EntityWoman>
     {
-
         @Override
         public Render<? super EntityWoman> createRenderFor(RenderManager manager)
         {
             return new RenderWoman(manager);
         }
-
     }
-
 }

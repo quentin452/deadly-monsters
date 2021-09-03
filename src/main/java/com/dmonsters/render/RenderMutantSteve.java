@@ -15,7 +15,6 @@ import com.dmonsters.models.ModelZombieSteve;
 
 public class RenderMutantSteve extends RenderLiving<EntityMutantSteve>
 {
-
     public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/mutantSteve.png");
 
@@ -40,13 +39,10 @@ public class RenderMutantSteve extends RenderLiving<EntityMutantSteve>
 
     public static class Factory implements IRenderFactory<EntityMutantSteve>
     {
-
         @Override
         public Render<? super EntityMutantSteve> createRenderFor(RenderManager manager)
         {
             return new RenderMutantSteve(manager);
         }
-
     }
-
 }

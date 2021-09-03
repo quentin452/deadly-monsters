@@ -21,7 +21,6 @@ import com.dmonsters.entity.EntityZombieChicken;
 
 public class EntityLuckyEgg extends EntityThrowable
 {
-
     public EntityLuckyEgg(World worldIn)
     {
         super(worldIn);

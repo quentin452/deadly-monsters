@@ -15,7 +15,6 @@ import com.dmonsters.models.ModelBaby;
 
 public class RenderBaby extends RenderLiving<EntityBaby>
 {
-
     public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/baby.png");
 
@@ -38,13 +37,10 @@ public class RenderBaby extends RenderLiving<EntityBaby>
 
     public static class Factory implements IRenderFactory<EntityBaby>
     {
-
         @Override
         public Render<? super EntityBaby> createRenderFor(RenderManager manager)
         {
             return new RenderBaby(manager);
         }
-
     }
-
 }

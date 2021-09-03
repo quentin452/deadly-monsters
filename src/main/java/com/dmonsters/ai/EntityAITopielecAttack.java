@@ -2,7 +2,7 @@ package com.dmonsters.ai;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -16,7 +16,7 @@ public class EntityAITopielecAttack extends EntityAIBase
     private final int searchDistance = 8;
     private BlockPos targetPos;
     private int ticks = 0;
-    private EntityPlayerMP playerEntity;
+    private EntityPlayer playerEntity;
 
     public EntityAITopielecAttack(EntityTopielec _owner, float _speed)
     {
@@ -26,14 +26,17 @@ public class EntityAITopielecAttack extends EntityAIBase
 
     public boolean shouldExecute()
     {
-        EntityPlayerMP player = (EntityPlayerMP) this.topielec.getAttackTarget();
-        if (player != null && !player.isCreative() && !player.isRiding())
+        if (this.topielec.getAttackTarget() instanceof EntityPlayer)
         {
-            double distance = this.topielec.getDistance(player.posX, player.posY, player.posZ);
-            if (distance < 2d)
+            EntityPlayer player = (EntityPlayer) this.topielec.getAttackTarget();
+            if (player != null && !player.isCreative() && !player.isRiding())
             {
-                playerEntity = player;
-                return true;
+                double distance = this.topielec.getDistance(player.posX, player.posY, player.posZ);
+                if (distance < 2d)
+                {
+                    playerEntity = player;
+                    return true;
+                }
             }
         }
         return false;

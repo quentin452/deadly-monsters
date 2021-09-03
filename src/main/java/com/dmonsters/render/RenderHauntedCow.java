@@ -15,7 +15,6 @@ import com.dmonsters.models.ModelHauntedCow;
 
 public class RenderHauntedCow extends RenderLiving<EntityHauntedCow>
 {
-
     public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/hauntedcow.png");
 
@@ -38,7 +37,6 @@ public class RenderHauntedCow extends RenderLiving<EntityHauntedCow>
 
     public static class Factory implements IRenderFactory<EntityHauntedCow>
     {
-
         @Override
         public Render<? super EntityHauntedCow> createRenderFor(RenderManager manager)
         {

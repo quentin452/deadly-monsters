@@ -13,7 +13,6 @@ import com.dmonsters.blocks.*;
 
 public class ModBlocks
 {
-
     public static StrengthenedStone strengthenedStone;
     public static StrengthenedCobblestone strengthenedCobblestone;
     public static BarbedWire barbedWire;

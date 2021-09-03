@@ -200,5 +200,4 @@ public class ModelTopielec extends ModelBase
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
 }

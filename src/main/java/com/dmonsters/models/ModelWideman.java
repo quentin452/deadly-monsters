@@ -164,5 +164,4 @@ public class ModelWideman extends ModelBase
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
 }

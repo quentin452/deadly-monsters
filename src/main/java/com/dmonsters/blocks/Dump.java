@@ -30,7 +30,6 @@ import com.dmonsters.main.ModBlocks;
 
 public class Dump extends Block implements IMetaBlockName
 {
-
     public static final PropertyInteger STACKS = PropertyInteger.create("stacks", 0, 15);
     protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.25, 0.0D, 0.25, 0.75, 0.4, 0.75);
 

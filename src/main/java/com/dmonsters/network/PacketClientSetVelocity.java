@@ -13,7 +13,6 @@ import io.netty.buffer.ByteBuf;
 
 public class PacketClientSetVelocity implements IMessage
 {
-
     private float x, y, z;
     private int entityID;
 

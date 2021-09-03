@@ -8,7 +8,6 @@ import net.minecraft.util.math.Vec3d;
 
 public class EntityAIChaseTroughBlocks extends EntityAIBase
 {
-
     private final double movementSpeed;
     private EntityCreature theEntity;
     private double movePosX;

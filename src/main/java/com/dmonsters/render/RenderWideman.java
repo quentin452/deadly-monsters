@@ -15,7 +15,6 @@ import com.dmonsters.models.ModelWideman;
 
 public class RenderWideman extends RenderLiving<EntityWideman>
 {
-
     public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/wideman.png");
 
@@ -38,13 +37,10 @@ public class RenderWideman extends RenderLiving<EntityWideman>
 
     public static class Factory implements IRenderFactory<EntityWideman>
     {
-
         @Override
         public Render<? super EntityWideman> createRenderFor(RenderManager manager)
         {
             return new RenderWideman(manager);
         }
-
     }
-
 }

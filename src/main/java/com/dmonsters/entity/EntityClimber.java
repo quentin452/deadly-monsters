@@ -123,7 +123,7 @@ public class EntityClimber extends EntityMob
      */
     public boolean isBesideClimbableBlock()
     {
-        return (this.dataManager.get(CLIMBING).byteValue() & 1) != 0;
+        return (this.dataManager.get(CLIMBING) & 1) != 0;
     }
 
     /**
@@ -132,7 +132,7 @@ public class EntityClimber extends EntityMob
      */
     public void setBesideClimbableBlock(boolean climbing)
     {
-        byte b0 = this.dataManager.get(CLIMBING).byteValue();
+        byte b0 = this.dataManager.get(CLIMBING);
 
         if (climbing)
         {
@@ -143,7 +143,7 @@ public class EntityClimber extends EntityMob
             b0 = (byte) (b0 & -2);
         }
 
-        this.dataManager.set(CLIMBING, Byte.valueOf(b0));
+        this.dataManager.set(CLIMBING, b0);
     }
 
     protected void initEntityAI()
@@ -162,7 +162,7 @@ public class EntityClimber extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
-        this.dataManager.register(CLIMBING, Byte.valueOf((byte) 0));
+        this.dataManager.register(CLIMBING, (byte) 0);
     }
 
     protected SoundEvent getAmbientSound()

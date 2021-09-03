@@ -15,7 +15,6 @@ import com.dmonsters.models.ModelFreezer;
 
 public class RenderFreezer extends RenderLiving<EntityFreezer>
 {
-
     public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/freezerIdle.png");
     private final ResourceLocation mobTextureAttaking = new ResourceLocation(MainMod.MODID + ":textures/entity/freezerAngry.png");
@@ -41,13 +40,10 @@ public class RenderFreezer extends RenderLiving<EntityFreezer>
 
     public static class Factory implements IRenderFactory<EntityFreezer>
     {
-
         @Override
         public Render<? super EntityFreezer> createRenderFor(RenderManager manager)
         {
             return new RenderFreezer(manager);
         }
-
     }
-
 }

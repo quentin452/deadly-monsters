@@ -17,7 +17,6 @@ import com.dmonsters.main.MainMod;
 
 public class PresentBlock extends Block implements IMetaBlockName
 {
-
     public static final PropertyEnum COLOR = PropertyEnum.create("color", EnumMode.class);
 
     public PresentBlock()

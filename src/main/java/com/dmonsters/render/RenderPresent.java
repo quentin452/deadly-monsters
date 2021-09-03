@@ -15,7 +15,6 @@ import com.dmonsters.models.ModelPresent;
 
 public class RenderPresent extends RenderLiving<EntityPresent>
 {
-
     public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/present.png");
 
@@ -38,7 +37,6 @@ public class RenderPresent extends RenderLiving<EntityPresent>
 
     public static class Factory implements IRenderFactory<EntityPresent>
     {
-
         @Override
         public Render<? super EntityPresent> createRenderFor(RenderManager manager)
         {

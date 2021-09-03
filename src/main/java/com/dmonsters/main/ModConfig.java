@@ -11,15 +11,15 @@ import com.dmonsters.proxy.CommonProxy;
 
 public class ModConfig
 {
-    private static final String CATEGORY_GENERAL = "aGeneral";
-    private static final String CATEGORY_BABY = "Unborn_Baby";
+    private static final String CATEGORY_GENERAL = "General";
+    private static final String CATEGORY_UNBORNBABY = "Unborn Baby";
     private static final String CATEGORY_CLIMBER = "Climber";
     private static final String CATEGORY_ENTRAIL = "Entrail";
     private static final String CATEGORY_FREEZER = "Freezer";
-    private static final String CATEGORY_MUTANT = "Mutant_Steve";
-    private static final String CATEGORY_WIDEMAN = "Fallen_Leader";
-    private static final String CATEGORY_WOMAN = "Bloody_Maiden";
-    private static final String CATEGORY_ZOMBIECHICKEN = "Zombie_Chicken";
+    private static final String CATEGORY_MUTANTSTEVE = "Mutant Steve";
+    private static final String CATEGORY_FALLENLEADER = "Fallen Leader";
+    private static final String CATEGORY_BLOODYMAIDEN = "Bloody Maiden";
+    private static final String CATEGORY_ZOMBIECHICKEN = "Zombie Chicken";
     private static final String CATEGORY_PRESENT = "Present";
     private static final String CATEGORY_STRANGER = "Stranger";
     private static final String CATEGORY_HAUNTEDCOW = "Haunted Cow";
@@ -31,89 +31,89 @@ public class ModConfig
 
     public static boolean mobsDisable = false;
     public static float healthMultiplier = 1;
-    public static float strengthMultiplier = 1;
+    public static float strengthMultiplier = 0.8F;
     public static float speedMultiplier = 1;
 
     //
     //MOBS
     //
 
-    //baby
-    public static float babyHealthMultiplier = 1;
-    public static float babyStrengthMultiplier = 1;
-    public static float babySpeedMultiplier = 1;
-    public static int babySpawnRate = 4;
-    public static boolean babyBlindness = false;
-    public static boolean babyDisabled = false;
-    //climber
-    public static float climberHealthMultiplier = 1;
-    public static float climberStrengthMultiplier = 1;
-    public static float climberSpeedMultiplier = 1;
-    public static int climberSpawnRate = 4;
-    public static boolean climberDisabled = false;
-    //entrail
-    public static float entrailHealthMultiplier = 1;
-    public static float entrailStrengthMultiplier = 1;
-    public static float entrailSpeedMultiplier = 1;
-    public static int entrailSpawnRate = 4;
-    public static boolean entrailDisabled = false;
-    //freezer
-    public static float freezerHealthMultiplier = 1;
-    public static float freezerStrengthMultiplier = 1;
-    public static float freezerSpeedMultiplier = 1;
-    public static int freezerSpawnRate = 4;
-    public static boolean freezerDisabled = false;
-    //mutantSteve
-    public static float mutantSteveHealthMultiplier = 1;
-    public static float mutantSteveStrengthMultiplier = 1;
-    public static float mutantSteveSpeedMultiplier = 1;
-    public static int mutantSteveSpawnRate = 4;
-    public static boolean mutantSteveDisabled = false;
-    //wideman
-    public static float fallenLeaderHealthMultiplier = 1;
-    public static float fallenLeaderStrengthMultiplier = 1;
-    public static float fallenLeaderSpeedMultiplier = 1;
-    public static int fallenLeaderSpawnRate = 4;
-    public static boolean fallenLeaderDisabled = false;
-    //woman
+    //Bloody Maiden
     public static float bloodyMaidenHealthMultiplier = 1;
     public static float bloodyMaidenStrengthMultiplier = 1;
     public static float bloodyMaidenSpeedMultiplier = 1;
-    public static int bloodyMaidenSpawnRate = 4;
+    public static int bloodyMaidenSpawnRate = 12;
     public static boolean bloodyMaidenDisabled = false;
-    //chicken
-    public static float zombieChickenHealthMultiplier = 1;
-    public static float zombieChickenStrengthMultiplier = 1;
-    public static float zombieChickenSpeedMultiplier = 1;
-    public static int zombieChickenSpawnRate = 8;
-    public static boolean zombieChickenDisabled = false;
-    //present
-    public static float presentHealthMultiplier = 1;
-    public static float presentStrengthMultiplier = 1;
-    public static float presentSpeedMultiplier = 1;
-    public static int presentSpawnRate = 4;
-    public static boolean presentDisabled = false;
-    //stranger
-    public static float strangerHealthMultiplier = 1;
-    public static float strangerStrengthMultiplier = 1;
-    public static float strangerSpeedMultiplier = 1;
-    public static int strangerSpawnRate = 4;
-    public static boolean strangerDisabled = false;
-    //haunted cow
+    //Climber
+    public static float climberHealthMultiplier = 1;
+    public static float climberStrengthMultiplier = 1;
+    public static float climberSpeedMultiplier = 1;
+    public static int climberSpawnRate = 8;
+    public static boolean climberDisabled = false;
+    //Entrail
+    public static float entrailHealthMultiplier = 1;
+    public static float entrailStrengthMultiplier = 1;
+    public static float entrailSpeedMultiplier = 1;
+    public static int entrailSpawnRate = 12;
+    public static boolean entrailDisabled = false;
+    //Fallen Leader
+    public static float fallenLeaderHealthMultiplier = 1;
+    public static float fallenLeaderStrengthMultiplier = 1;
+    public static float fallenLeaderSpeedMultiplier = 1;
+    public static int fallenLeaderSpawnRate = 12;
+    public static boolean fallenLeaderDisabled = false;
+    //Freezer
+    public static float freezerHealthMultiplier = 1;
+    public static float freezerStrengthMultiplier = 1;
+    public static float freezerSpeedMultiplier = 1;
+    public static int freezerSpawnRate = 8;
+    public static boolean freezerDisabled = false;
+    //Haunted Cow
     public static float hauntedCowHealthMultiplier = 1;
     public static float hauntedCowStrengthMultiplier = 1;
     public static float hauntedCowSpeedMultiplier = 1;
     public static int hauntedCowSpawnRate = 8;
     public static boolean hauntedCowDisabled = false;
     public static boolean hauntedCowDisableTimeChange = false;
-    //topielec
+    //Mutant Steve
+    public static float mutantSteveHealthMultiplier = 1;
+    public static float mutantSteveStrengthMultiplier = 1;
+    public static float mutantSteveSpeedMultiplier = 1;
+    public static int mutantSteveSpawnRate = 8;
+    public static boolean mutantSteveDisabled = false;
+    //Present
+    public static float presentHealthMultiplier = 1;
+    public static float presentStrengthMultiplier = 1;
+    public static float presentSpeedMultiplier = 1;
+    public static int presentSpawnRate = 12;
+    public static boolean presentDisabled = false;
+    //Stranger
+    public static float strangerHealthMultiplier = 1;
+    public static float strangerStrengthMultiplier = 1;
+    public static float strangerSpeedMultiplier = 1;
+    public static int strangerSpawnRate = 12;
+    public static boolean strangerDisabled = false;
+    //Topielec
     public static float topielecHealthMultiplier = 1;
     public static float topielecStrengthMultiplier = 1;
     public static float topielecSpeedMultiplier = 1;
-    public static int topielecSpawnChance = 25;
+    public static int topielecSpawnRate = 8;
     public static int topielecSearchDistance = 8;
     public static boolean topielecHarpoonOnly = false;
     public static boolean topielecDisabled = false;
+    //Unborn Baby
+    public static float babyHealthMultiplier = 1;
+    public static float babyStrengthMultiplier = 1;
+    public static float babySpeedMultiplier = 1;
+    public static int babySpawnRate = 12;
+    public static boolean babyBlindness = false;
+    public static boolean babyDisabled = false;
+    //Zombie Chicken
+    public static float zombieChickenHealthMultiplier = 1;
+    public static float zombieChickenStrengthMultiplier = 1;
+    public static float zombieChickenSpeedMultiplier = 1;
+    public static int zombieChickenSpawnRate = 12;
+    public static boolean zombieChickenDisabled = false;
 
     public static void readConfig()
     {
@@ -174,12 +174,13 @@ public class ModConfig
 
     private static void initBabyConfig(Configuration cfg)
     {
-        cfg.addCustomCategoryComment(CATEGORY_BABY, "Unborn Baby");
-        babyDisabled = cfg.getBoolean("babyDisabled", CATEGORY_BABY, babyDisabled, "Set to true if you want to disable Unborn Baby");
-        babyHealthMultiplier = cfg.getFloat("babyHealthMultiplier", CATEGORY_BABY, 1, 0.01F, 999, "Unborn Baby health multiplier");
-        babyStrengthMultiplier = cfg.getFloat("babyStrengthMultiplier", CATEGORY_BABY, 1, 0.01F, 999, "Unborn Baby strength multiplier");
-        babySpeedMultiplier = cfg.getFloat("babySpeedMultiplier", CATEGORY_BABY, 1, 0.01F, 999, "Unborn Baby speed multiplier");
-        babySpawnRate = cfg.getInt("babySpawnRate", CATEGORY_BABY, babySpawnRate, 0, 999, "Unborn Baby spawn rate. Default for Zombie is 8.");
+        cfg.addCustomCategoryComment(CATEGORY_UNBORNBABY, "Unborn Baby");
+        babyDisabled = cfg.getBoolean("babyDisabled", CATEGORY_UNBORNBABY, babyDisabled, "Set to true if you want to disable Unborn Baby");
+        babyBlindness = cfg.getBoolean("babyBlindness", CATEGORY_UNBORNBABY, babyBlindness, "Set to true if you want to enable the blindness ability");
+        babyHealthMultiplier = cfg.getFloat("babyHealthMultiplier", CATEGORY_UNBORNBABY, 1, 0.01F, 999, "Unborn Baby health multiplier");
+        babyStrengthMultiplier = cfg.getFloat("babyStrengthMultiplier", CATEGORY_UNBORNBABY, 1, 0.01F, 999, "Unborn Baby strength multiplier");
+        babySpeedMultiplier = cfg.getFloat("babySpeedMultiplier", CATEGORY_UNBORNBABY, 1, 0.01F, 999, "Unborn Baby speed multiplier");
+        babySpawnRate = cfg.getInt("babySpawnRate", CATEGORY_UNBORNBABY, babySpawnRate, 0, 999, "Unborn Baby spawn rate. Default for Zombie is 8.");
     }
 
     private static void initClimberConfig(Configuration cfg)
@@ -214,32 +215,32 @@ public class ModConfig
 
     private static void initMutantSteveConfig(Configuration cfg)
     {
-        cfg.addCustomCategoryComment(CATEGORY_MUTANT, "Mutant Steve");
-        mutantSteveDisabled = cfg.getBoolean("mutantSteveDisabled", CATEGORY_MUTANT, mutantSteveDisabled, "Set to true if you want to disable Mutant Steve");
-        mutantSteveHealthMultiplier = cfg.getFloat("mutantSteveHealthMultiplier", CATEGORY_MUTANT, 1, 0.01F, 999, "Mutant Steve health multiplier");
-        mutantSteveStrengthMultiplier = cfg.getFloat("mutantSteveStrengthMultiplier", CATEGORY_MUTANT, 1, 0.01F, 999, "Mutant Steve strength multiplier");
-        mutantSteveSpeedMultiplier = cfg.getFloat("mutantSteveSpeedMultiplier", CATEGORY_MUTANT, 1, 0.01F, 999, "Mutant Steve speed multiplier");
-        mutantSteveSpawnRate = cfg.getInt("mutantSteveSpawnRate", CATEGORY_MUTANT, mutantSteveSpawnRate, 0, 999, "Mutant Steve spawn rate. Default for Zombie is 8.");
+        cfg.addCustomCategoryComment(CATEGORY_MUTANTSTEVE, "Mutant Steve");
+        mutantSteveDisabled = cfg.getBoolean("mutantSteveDisabled", CATEGORY_MUTANTSTEVE, mutantSteveDisabled, "Set to true if you want to disable Mutant Steve");
+        mutantSteveHealthMultiplier = cfg.getFloat("mutantSteveHealthMultiplier", CATEGORY_MUTANTSTEVE, 1, 0.01F, 999, "Mutant Steve health multiplier");
+        mutantSteveStrengthMultiplier = cfg.getFloat("mutantSteveStrengthMultiplier", CATEGORY_MUTANTSTEVE, 1, 0.01F, 999, "Mutant Steve strength multiplier");
+        mutantSteveSpeedMultiplier = cfg.getFloat("mutantSteveSpeedMultiplier", CATEGORY_MUTANTSTEVE, 1, 0.01F, 999, "Mutant Steve speed multiplier");
+        mutantSteveSpawnRate = cfg.getInt("mutantSteveSpawnRate", CATEGORY_MUTANTSTEVE, mutantSteveSpawnRate, 0, 999, "Mutant Steve spawn rate. Default for Zombie is 8.");
     }
 
     private static void initWidemanConfig(Configuration cfg)
     {
-        cfg.addCustomCategoryComment(CATEGORY_WIDEMAN, "Fallen Leader");
-        fallenLeaderDisabled = cfg.getBoolean("fallenLeaderDisabled", CATEGORY_WIDEMAN, fallenLeaderDisabled, "Set to true if you want to disable Fallen Leader");
-        fallenLeaderHealthMultiplier = cfg.getFloat("fallenLeaderHealthMultiplier", CATEGORY_WIDEMAN, 1, 0.01F, 999, "Fallen Leader health multiplier");
-        fallenLeaderStrengthMultiplier = cfg.getFloat("fallenLeaderStrengthMultiplier", CATEGORY_WIDEMAN, 1, 0.01F, 999, "Fallen Leader strength multiplier");
-        fallenLeaderSpeedMultiplier = cfg.getFloat("fallenLeaderSpeedMultiplier", CATEGORY_WIDEMAN, 1, 0.01F, 999, "Fallen Leader speed multiplier");
-        fallenLeaderSpawnRate = cfg.getInt("fallenLeaderSpawnRate", CATEGORY_WIDEMAN, fallenLeaderSpawnRate, 0, 999, "Fallen Leader spawn rate. Default for Zombie is 8.");
+        cfg.addCustomCategoryComment(CATEGORY_FALLENLEADER, "Fallen Leader");
+        fallenLeaderDisabled = cfg.getBoolean("fallenLeaderDisabled", CATEGORY_FALLENLEADER, fallenLeaderDisabled, "Set to true if you want to disable Fallen Leader");
+        fallenLeaderHealthMultiplier = cfg.getFloat("fallenLeaderHealthMultiplier", CATEGORY_FALLENLEADER, 1, 0.01F, 999, "Fallen Leader health multiplier");
+        fallenLeaderStrengthMultiplier = cfg.getFloat("fallenLeaderStrengthMultiplier", CATEGORY_FALLENLEADER, 1, 0.01F, 999, "Fallen Leader strength multiplier");
+        fallenLeaderSpeedMultiplier = cfg.getFloat("fallenLeaderSpeedMultiplier", CATEGORY_FALLENLEADER, 1, 0.01F, 999, "Fallen Leader speed multiplier");
+        fallenLeaderSpawnRate = cfg.getInt("fallenLeaderSpawnRate", CATEGORY_FALLENLEADER, fallenLeaderSpawnRate, 0, 999, "Fallen Leader spawn rate. Default for Zombie is 8.");
     }
 
     private static void initWomanConfig(Configuration cfg)
     {
-        cfg.addCustomCategoryComment(CATEGORY_WOMAN, "Bloody Maiden");
-        bloodyMaidenDisabled = cfg.getBoolean("bloodyMaidenDisabled", CATEGORY_WOMAN, bloodyMaidenDisabled, "Set to true if you want to disable Bloody Maiden");
-        bloodyMaidenHealthMultiplier = cfg.getFloat("bloodyMaidenHealthMultiplier", CATEGORY_WOMAN, 1, 0.01F, 999, "Bloody Maiden health multiplier");
-        bloodyMaidenStrengthMultiplier = cfg.getFloat("bloodyMaidenStrengthMultiplier", CATEGORY_WOMAN, 1, 0.01F, 999, "Bloody Maiden strength multiplier");
-        bloodyMaidenSpeedMultiplier = cfg.getFloat("bloodyMaidenSpeedMultiplier", CATEGORY_WOMAN, 1, 0.01F, 999, "Bloody Maiden speed multiplier");
-        bloodyMaidenSpawnRate = cfg.getInt("bloodyMaidenSpawnRate", CATEGORY_WOMAN, bloodyMaidenSpawnRate, 0, 999, "Bloody Maiden spawn rate. Default for Zombie is 8.");
+        cfg.addCustomCategoryComment(CATEGORY_BLOODYMAIDEN, "Bloody Maiden");
+        bloodyMaidenDisabled = cfg.getBoolean("bloodyMaidenDisabled", CATEGORY_BLOODYMAIDEN, bloodyMaidenDisabled, "Set to true if you want to disable Bloody Maiden");
+        bloodyMaidenHealthMultiplier = cfg.getFloat("bloodyMaidenHealthMultiplier", CATEGORY_BLOODYMAIDEN, 1, 0.01F, 999, "Bloody Maiden health multiplier");
+        bloodyMaidenStrengthMultiplier = cfg.getFloat("bloodyMaidenStrengthMultiplier", CATEGORY_BLOODYMAIDEN, 1, 0.01F, 999, "Bloody Maiden strength multiplier");
+        bloodyMaidenSpeedMultiplier = cfg.getFloat("bloodyMaidenSpeedMultiplier", CATEGORY_BLOODYMAIDEN, 1, 0.01F, 999, "Bloody Maiden speed multiplier");
+        bloodyMaidenSpawnRate = cfg.getInt("bloodyMaidenSpawnRate", CATEGORY_BLOODYMAIDEN, bloodyMaidenSpawnRate, 0, 999, "Bloody Maiden spawn rate. Default for Zombie is 8.");
     }
 
     private static void initZombieChickenConfig(Configuration cfg)
@@ -290,6 +291,8 @@ public class ModConfig
         topielecHealthMultiplier = cfg.getFloat("topielecHealthMultiplier", CATEGORY_TOPIELEC, 1, 0.01F, 999, "Topielec health multiplier");
         topielecStrengthMultiplier = cfg.getFloat("topielecStrengthMultiplier", CATEGORY_TOPIELEC, 1, 0.01F, 999, "Topielec strength multiplier");
         topielecSpeedMultiplier = cfg.getFloat("topielecSpeedMultiplier", CATEGORY_TOPIELEC, 1, 0.01F, 999, "Topielec speed multiplier");
-        topielecSpawnChance = cfg.getInt("topielecSpawnChance", CATEGORY_TOPIELEC, topielecSpawnChance, 0, 999, "Topielec spawn chance in percent on every squid spawn.");
+        topielecSpawnRate = cfg.getInt("topielecSpawnRate", CATEGORY_TOPIELEC, topielecSpawnRate, 0, 999, "Topielec spawn rate. Default for Zombie is 8.");
+        topielecSearchDistance = cfg.getInt("topielecSearchDistance", CATEGORY_TOPIELEC, topielecSearchDistance, 0, 999, "Topielec search distance.");
+        topielecHarpoonOnly = cfg.getBoolean("topielecHarpoonOnly", CATEGORY_TOPIELEC, topielecHarpoonOnly, "Set to true if harpoons should be the only weapon against Topielecs.");
     }
 }

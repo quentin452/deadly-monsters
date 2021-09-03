@@ -10,7 +10,7 @@ public class BiomesProvider
 {
     public static Biome[] getBiomes()
     {
-        List<Biome> biomesList = new ArrayList<Biome>();
+        List<Biome> biomesList = new ArrayList<>();
         biomesList.add(Biomes.BEACH);
         biomesList.add(Biomes.BIRCH_FOREST);
         biomesList.add(Biomes.BIRCH_FOREST_HILLS);
@@ -38,7 +38,6 @@ public class BiomesProvider
         biomesList.add(Biomes.TAIGA);
         biomesList.add(Biomes.TAIGA_HILLS);
 
-        //konwersja na tablic�
         Biome[] biomes = new Biome[biomesList.size()];
         biomes = biomesList.toArray(biomes);
         return biomes;
@@ -46,7 +45,7 @@ public class BiomesProvider
 
     public static Biome[] getSnowBiomes()
     {
-        List<Biome> biomesList = new ArrayList<Biome>();
+        List<Biome> biomesList = new ArrayList<>();
         biomesList.add(Biomes.COLD_BEACH);
         biomesList.add(Biomes.COLD_TAIGA);
         biomesList.add(Biomes.COLD_TAIGA_HILLS);
@@ -56,7 +55,18 @@ public class BiomesProvider
         biomesList.add(Biomes.EXTREME_HILLS_EDGE);
         biomesList.add(Biomes.EXTREME_HILLS_WITH_TREES);
 
-        //konwersja na tablic�
+        Biome[] biomes = new Biome[biomesList.size()];
+        biomes = biomesList.toArray(biomes);
+        return biomes;
+    }
+
+    public static Biome[] getWaterBiomes()
+    {
+        List<Biome> biomesList = new ArrayList<>();
+        biomesList.add(Biomes.DEEP_OCEAN);
+        biomesList.add(Biomes.OCEAN);
+        biomesList.add(Biomes.RIVER);
+
         Biome[] biomes = new Biome[biomesList.size()];
         biomes = biomesList.toArray(biomes);
         return biomes;

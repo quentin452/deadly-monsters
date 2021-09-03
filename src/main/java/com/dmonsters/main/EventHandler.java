@@ -55,7 +55,7 @@ public class EventHandler
         {
             if (!ModConfig.hauntedCowDisabled)
             {
-                if (entity instanceof EntityCow || entity instanceof EntityHauntedCow)
+                if (entity instanceof EntityHauntedCow)
                 {
                     Random random = new Random();
                     float rndChance = random.nextFloat();

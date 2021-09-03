@@ -4,7 +4,6 @@ import java.util.Random;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.passive.EntityCow;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -53,52 +52,35 @@ public class EventHandler
         Entity entity = e.getTarget();
         if (!e.getEntity().getEntityWorld().isRemote)
         {
-            if (!ModConfig.hauntedCowDisabled)
+            if (!ModConfig.hauntedCowDisabled && entity instanceof EntityHauntedCow)
             {
-                if (entity instanceof EntityHauntedCow)
+                World world = entity.getEntityWorld();
+                EntityPlayer player = e.getEntityPlayer();
+                Item itemClass = player.getHeldItemMainhand().getItem();
+                if (ModConfig.hauntedCowDisableTimeChange || itemClass instanceof ItemSword || itemClass instanceof ItemBow)
                 {
-                    Random random = new Random();
-                    float rndChance = random.nextFloat();
-                    if (rndChance < 0.5F)
-                    {
-                        return;
-                    }
-                    World world = entity.getEntityWorld();
-                    EntityPlayer player = e.getEntityPlayer();
-                    Item itemClass = player.getHeldItemMainhand().getItem();
-                    if (itemClass instanceof ItemSword || itemClass instanceof ItemBow)
-                    {
-                        return;
-                    }
-                    entity.setDropItemsWhenDead(false);
-                    entity.setDead();
-                    spawnEntity(entity, new EntityHauntedCow(world));
-                    PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(entity.getPosition(), PacketClientFXUpdate.Type.SOULEYE));
-                    if (ModConfig.hauntedCowDisableTimeChange)
-                    {
-                        return;
-                    }
-                    Style red = new Style().setColor(TextFormatting.DARK_RED);
-                    TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.hauntedcow");
-                    msg.setStyle(red);
-                    PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(player.getPosition(), PacketClientFXUpdate.Type.TIME_CHANGE));
-                    long worldTime = world.getWorldTime();
-                    while (worldTime % 18000 != 0)
-                    {
-                        worldTime++;
-                    }
-                    world.setWorldTime(worldTime);
-                    player.sendMessage(msg);
+                    return;
                 }
+                Style red = new Style().setColor(TextFormatting.DARK_RED);
+                TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.hauntedcow");
+                msg.setStyle(red);
+                PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(player.getPosition(), PacketClientFXUpdate.Type.TIME_CHANGE));
+                long worldTime = world.getWorldTime();
+                while (worldTime % 18000 != 0)
+                {
+                    worldTime++;
+                }
+                world.setWorldTime(worldTime);
+                player.sendMessage(msg);
             }
-            if (!ModConfig.topielecDisabled)
+        }
+        if (!ModConfig.topielecDisabled)
+        {
+            if (entity instanceof EntityTopielec)
             {
-                if (entity instanceof EntityTopielec)
-                {
-                    EntityPlayer player = e.getEntityPlayer();
-                    Item itemClass = player.getHeldItemMainhand().getItem();
-                    e.setCanceled(!(itemClass instanceof Harpoon));
-                }
+                EntityPlayer player = e.getEntityPlayer();
+                Item itemClass = player.getHeldItemMainhand().getItem();
+                e.setCanceled(!(itemClass instanceof Harpoon));
             }
         }
     }

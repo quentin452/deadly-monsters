@@ -39,7 +39,7 @@ public class EventHandler
         {
             Random rnd = new Random();
             int rndInt = rnd.nextInt(100);
-            if (rndInt < ModConfig.topielecSawnChance)
+            if (rndInt < ModConfig.topielecSpawnChance)
             {
                 spawnEntity(squid, new EntityTopielec(squid.getEntityWorld()));
             }

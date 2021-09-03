@@ -10,7 +10,6 @@ import com.dmonsters.main.MainMod;
 
 public class EntrailFlesh extends Item
 {
-
     public EntrailFlesh()
     {
         setRegistryName("entrailFlesh");

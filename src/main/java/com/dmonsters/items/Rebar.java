@@ -17,7 +17,6 @@ import com.dmonsters.main.ModBlocks;
 
 public class Rebar extends Item
 {
-
     public Rebar()
     {
         setRegistryName("rebar");

@@ -22,7 +22,6 @@ import com.dmonsters.network.PacketHandler;
 
 public class SunlightDrop extends Item
 {
-
     public SunlightDrop()
     {
         setRegistryName("sunlightdrop");

@@ -28,77 +28,77 @@ public class ModEntities
             resLocation = new ResourceLocation(MainMod.MODID + ":mutantSteve");
             EntityRegistry.registerModEntity(resLocation, EntityMutantSteve.class, "mutantSteve", id++, MainMod.instance, 64, 3, true);
             if (!ModConfig.mutantSteveDisabled)
-                EntityRegistry.addSpawn(EntityMutantSteve.class, ModConfig.mutantSteveSawnRate, 1, 1, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
+                EntityRegistry.addSpawn(EntityMutantSteve.class, ModConfig.mutantSteveSpawnRate, 1, 1, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
             LootTableList.register(EntityMutantSteve.LOOT);
 
             //Freezer
             resLocation = new ResourceLocation(MainMod.MODID + ":freezer");
             EntityRegistry.registerModEntity(resLocation, EntityFreezer.class, "freezer", id++, MainMod.instance, 64, 3, true);
             if (!ModConfig.freezerDisabled)
-                EntityRegistry.addSpawn(EntityFreezer.class, ModConfig.freezerSawnRate, 1, 1, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
+                EntityRegistry.addSpawn(EntityFreezer.class, ModConfig.freezerSpawnRate, 1, 1, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
             LootTableList.register(EntityFreezer.LOOT);
 
             //Climber
             resLocation = new ResourceLocation(MainMod.MODID + ":climber");
             EntityRegistry.registerModEntity(resLocation, EntityClimber.class, "climber", id++, MainMod.instance, 64, 3, true);
             if (!ModConfig.climberDisabled)
-                EntityRegistry.addSpawn(EntityClimber.class, ModConfig.climberSawnRate, 1, 5, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
+                EntityRegistry.addSpawn(EntityClimber.class, ModConfig.climberSpawnRate, 1, 5, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
             LootTableList.register(EntityClimber.LOOT);
 
             //Zombie Chicken
             resLocation = new ResourceLocation(MainMod.MODID + ":zombieChicken");
             EntityRegistry.registerModEntity(resLocation, EntityZombieChicken.class, "zombieChicken", id++, MainMod.instance, 64, 3, true);
             if (!ModConfig.zombieChickenDisabled)
-                EntityRegistry.addSpawn(EntityZombieChicken.class, ModConfig.zombieChickenSawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
+                EntityRegistry.addSpawn(EntityZombieChicken.class, ModConfig.zombieChickenSpawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
             LootTableList.register(EntityZombieChicken.LOOT);
 
             //Baby
             resLocation = new ResourceLocation(MainMod.MODID + ":baby");
             EntityRegistry.registerModEntity(resLocation, EntityBaby.class, "baby", id++, MainMod.instance, 64, 3, true);
             if (!ModConfig.babyDisabled)
-                EntityRegistry.addSpawn(EntityBaby.class, ModConfig.babySawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
+                EntityRegistry.addSpawn(EntityBaby.class, ModConfig.babySpawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
             LootTableList.register(EntityBaby.LOOT);
 
             //Wideman
             resLocation = new ResourceLocation(MainMod.MODID + ":wideman");
             EntityRegistry.registerModEntity(resLocation, EntityWideman.class, "wideman", id++, MainMod.instance, 64, 3, true);
             if (!ModConfig.fallenLeaderDisabled)
-                EntityRegistry.addSpawn(EntityWideman.class, ModConfig.fallenLeaderSawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
+                EntityRegistry.addSpawn(EntityWideman.class, ModConfig.fallenLeaderSpawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
             LootTableList.register(EntityWideman.LOOT);
 
             //Woman
             resLocation = new ResourceLocation(MainMod.MODID + ":woman");
             EntityRegistry.registerModEntity(resLocation, EntityWoman.class, "woman", id++, MainMod.instance, 64, 3, true);
             if (!ModConfig.bloodyMaidenDisabled)
-                EntityRegistry.addSpawn(EntityWoman.class, ModConfig.bloodyMaidenSawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
+                EntityRegistry.addSpawn(EntityWoman.class, ModConfig.bloodyMaidenSpawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
             LootTableList.register(EntityWoman.LOOT);
 
             //Entrail
             resLocation = new ResourceLocation(MainMod.MODID + ":entrail");
             EntityRegistry.registerModEntity(resLocation, EntityEntrail.class, "entrail", id++, MainMod.instance, 64, 3, true);
             if (!ModConfig.entrailDisabled)
-                EntityRegistry.addSpawn(EntityEntrail.class, ModConfig.entrailSawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
+                EntityRegistry.addSpawn(EntityEntrail.class, ModConfig.entrailSpawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
             LootTableList.register(EntityEntrail.LOOT);
 
             //Present
             resLocation = new ResourceLocation(MainMod.MODID + ":present");
             EntityRegistry.registerModEntity(resLocation, EntityPresent.class, "present", id++, MainMod.instance, 64, 3, true);
             if (!ModConfig.presentDisabled)
-                EntityRegistry.addSpawn(EntityPresent.class, ModConfig.presentSawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getSnowBiomes());
+                EntityRegistry.addSpawn(EntityPresent.class, ModConfig.presentSpawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getSnowBiomes());
             LootTableList.register(EntityPresent.LOOT);
 
             //Stranger
             resLocation = new ResourceLocation(MainMod.MODID + ":stranger");
             EntityRegistry.registerModEntity(resLocation, EntityStranger.class, "stranger", id++, MainMod.instance, 64, 3, true);
             if (!ModConfig.strangerDisabled)
-                EntityRegistry.addSpawn(EntityStranger.class, ModConfig.strangerSawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
+                EntityRegistry.addSpawn(EntityStranger.class, ModConfig.strangerSpawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
             LootTableList.register(EntityStranger.LOOT);
 
             //Haunted Cow
             resLocation = new ResourceLocation(MainMod.MODID + ":hauntedcow");
             EntityRegistry.registerModEntity(resLocation, EntityHauntedCow.class, "hauntedcow", id++, MainMod.instance, 64, 3, true);
             if (!ModConfig.hauntedCowDisabled)
-                EntityRegistry.addSpawn(EntityHauntedCow.class, ModConfig.hauntedCowSawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
+                EntityRegistry.addSpawn(EntityHauntedCow.class, ModConfig.hauntedCowSpawnRate, 2, 8, EnumCreatureType.MONSTER, BiomesProvider.getBiomes());
             LootTableList.register(EntityHauntedCow.LOOT);
 
             //Topielec

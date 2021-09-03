@@ -6,7 +6,6 @@ import com.dmonsters.main.MainMod;
 
 public class ModItem extends Item
 {
-
     public ModItem()
     {
         setRegistryName("modItem");

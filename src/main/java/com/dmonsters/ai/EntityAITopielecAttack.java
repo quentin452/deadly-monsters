@@ -1,22 +1,22 @@
 package com.dmonsters.ai;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.dmonsters.entity.EntityTopielec;
+import com.dmonsters.main.ModConfig;
 
 public class EntityAITopielecAttack extends EntityAIBase
 {
     private final EntityTopielec topielec;
     private final float speed;
-    private final int searchDistance = 8;
     private BlockPos targetPos;
     private int ticks = 0;
-    private EntityPlayer playerEntity;
+    private EntityLivingBase victimEntity;
 
     public EntityAITopielecAttack(EntityTopielec _owner, float _speed)
     {
@@ -26,17 +26,14 @@ public class EntityAITopielecAttack extends EntityAIBase
 
     public boolean shouldExecute()
     {
-        if (this.topielec.getAttackTarget() instanceof EntityPlayer)
+        EntityLivingBase victim = this.topielec.getAttackTarget();
+        if (victim != null)
         {
-            EntityPlayer player = (EntityPlayer) this.topielec.getAttackTarget();
-            if (player != null && !player.isCreative() && !player.isRiding())
+            double distance = this.topielec.getDistance(victim.posX, victim.posY, victim.posZ);
+            if (distance < 2d)
             {
-                double distance = this.topielec.getDistance(player.posX, player.posY, player.posZ);
-                if (distance < 2d)
-                {
-                    playerEntity = player;
-                    return true;
-                }
+                victimEntity = victim;
+                return true;
             }
         }
         return false;
@@ -44,24 +41,28 @@ public class EntityAITopielecAttack extends EntityAIBase
 
     public void updateTask()
     {
-        double myX = this.topielec.posX;
-        double myY = this.topielec.posY;
-        double myZ = this.topielec.posZ;
-        playerEntity.setPositionAndUpdate(myX, myY, myZ);
+        double victimX = this.topielec.posX;
+        double victimY = this.topielec.posY;
+        double victimZ = this.topielec.posZ;
+        victimEntity.setPositionAndUpdate(victimX, victimY, victimZ);
 
         ticks++;
         if (ticks > 40)
+        {
             return;
+        }
         else
+        {
             ticks = 0;
+        }
         BlockPos targetPos = findBestPosition();
         //System.out.println(targetPos);
-        float[] normVec = normlizeVector(targetPos.subtract(this.topielec.getPosition()));
-        //System.out.println(normVec[0] + ", " + myY + ", " + normVec[2]);
+        float[] normVec = normalizeVector(targetPos.subtract(this.topielec.getPosition()));
+        //System.out.println(normVec[0] + ", " + victimY + ", " + normVec[2]);
         this.topielec.setMovementVector(normVec[0], normVec[1], normVec[2]);
     }
 
-    private float[] normlizeVector(BlockPos v)
+    private float[] normalizeVector(BlockPos v)
     {
         float length = (float) Math.sqrt((v.getX() * v.getX()) + (v.getY() * v.getY()) + (v.getZ() * v.getZ()));
         float[] newVec = new float[3];
@@ -73,22 +74,23 @@ public class EntityAITopielecAttack extends EntityAIBase
 
     private BlockPos findBestPosition()
     {
-        BlockPos myPos = this.topielec.getPosition();
-        BlockPos bestPos = myPos;
-        int minBoundsX = -searchDistance + myPos.getX();
-        int maxBoundsX = searchDistance + myPos.getX();
-        int minBoundsZ = -searchDistance + myPos.getZ();
-        int maxBoundsZ = searchDistance + myPos.getZ();
+        BlockPos victimPos = this.topielec.getPosition();
+        BlockPos bestPos = victimPos;
+        int searchDistance = ModConfig.topielecSearchDistance;
+        int minBoundsX = -searchDistance + victimPos.getX();
+        int maxBoundsX = searchDistance + victimPos.getX();
+        int minBoundsZ = -searchDistance + victimPos.getZ();
+        int maxBoundsZ = searchDistance + victimPos.getZ();
         World worldIn = this.topielec.getEntityWorld();
-        int deepestY = myPos.getY();
-        //System.out.println("START " + myPos);
+        int deepestY = victimPos.getY();
+        //System.out.println("START " + victimPos);
         //System.out.println(deepestY);
         for (int x = minBoundsX; x < maxBoundsX; x++)
         {
             for (int z = minBoundsZ; z < maxBoundsZ; z++)
             {
-                int tempDeepestY = myPos.getY();
-                for (int y = myPos.getY(); y > 0; y--)
+                int tempDeepestY = victimPos.getY();
+                for (int y = victimPos.getY(); y > 0; y--)
                 {
                     BlockPos currPos = new BlockPos(x, y, z);
                     Block block = worldIn.getBlockState(currPos).getBlock();
@@ -110,6 +112,6 @@ public class EntityAITopielecAttack extends EntityAIBase
             }
         }
         //System.out.println("END: " + bestPos);
-        return new BlockPos(bestPos.getX(), myPos.getY(), bestPos.getZ());
+        return new BlockPos(bestPos.getX(), victimPos.getY(), bestPos.getZ());
     }
 }

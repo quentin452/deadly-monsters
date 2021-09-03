@@ -16,7 +16,6 @@ import com.dmonsters.main.MainMod;
 
 public class Dagon extends Item
 {
-
     public Dagon()
     {
         setRegistryName("dagon");

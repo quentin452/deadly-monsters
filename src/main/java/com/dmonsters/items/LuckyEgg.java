@@ -16,7 +16,6 @@ import com.dmonsters.main.MainMod;
 
 public class LuckyEgg extends Item
 {
-
     public LuckyEgg()
     {
         setRegistryName("luckyEgg");

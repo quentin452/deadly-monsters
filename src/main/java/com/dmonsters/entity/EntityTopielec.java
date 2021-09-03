@@ -10,7 +10,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
 import com.dmonsters.ai.EntityAITopielecAttack;
-import com.dmonsters.ai.EntityAITopielecFollowPlayer;
+import com.dmonsters.ai.EntityAITopielecFollow;
 import com.dmonsters.ai.EntityAITopielecIdle;
 import com.dmonsters.ai.EntityAIWaterMobNearestPlayer;
 import com.dmonsters.main.MainMod;
@@ -71,7 +71,7 @@ public class EntityTopielec extends EntityMob
     {
         //this.tasks.addTask(0, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(1, new EntityAITopielecAttack(this, 0.5F));
-        this.tasks.addTask(2, new EntityAITopielecFollowPlayer(this, 0.5F));
+        this.tasks.addTask(2, new EntityAITopielecFollow(this, 0.5F));
         this.tasks.addTask(3, new EntityAITopielecIdle(this));
         this.applyEntityAI();
     }

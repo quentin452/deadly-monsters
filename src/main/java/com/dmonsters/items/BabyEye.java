@@ -16,7 +16,6 @@ import com.dmonsters.main.MainMod;
 
 public class BabyEye extends Item
 {
-
     public BabyEye()
     {
         setRegistryName("babyEye");

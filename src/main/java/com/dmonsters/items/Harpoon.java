@@ -24,7 +24,6 @@ import com.dmonsters.main.MainMod;
 
 public class Harpoon extends Item
 {
-
     private int attackDamage = 1;
     private String harpoonType = "stone";
 

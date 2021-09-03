@@ -26,7 +26,6 @@ import com.dmonsters.network.PacketHandler;
 
 public class PurgePill extends Item
 {
-
     public PurgePill()
     {
         setRegistryName("purgePill");
@@ -105,5 +104,4 @@ public class PurgePill extends Item
         BlockPos pos = playerIn.getPosition();
         worldIn.setBlockState(pos, ModBlocks.dump.getDefaultState());
     }
-
 }

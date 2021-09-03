@@ -17,7 +17,6 @@ import com.dmonsters.network.PacketHandler;
 
 public class WomanHeart extends Item
 {
-
     public WomanHeart()
     {
         setRegistryName("womanHeart");

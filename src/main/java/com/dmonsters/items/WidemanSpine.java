@@ -8,7 +8,6 @@ import com.dmonsters.main.MainMod;
 
 public class WidemanSpine extends Item
 {
-
     public WidemanSpine()
     {
         setRegistryName("widemanSpine");

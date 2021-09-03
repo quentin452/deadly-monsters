@@ -177,7 +177,7 @@ public class ModConfig
         cfg.addCustomCategoryComment(CATEGORY_BABY, "Unborn Baby");
         babyDisabled = cfg.getBoolean("babyDisabled", CATEGORY_BABY, babyDisabled, "Set to true if you want to disable Unborn Baby");
         babyHealthMultiplier = cfg.getFloat("babyHealthMultiplier", CATEGORY_BABY, 1, 0.01F, 999, "Unborn Baby health multiplier");
-        babyStrengthMultiplier = cfg.getFloat("babyStrengthMultiplier", CATEGORY_BABY, 1, 0.01F, 999, "Unborn Baby strenght multiplier");
+        babyStrengthMultiplier = cfg.getFloat("babyStrengthMultiplier", CATEGORY_BABY, 1, 0.01F, 999, "Unborn Baby strength multiplier");
         babySpeedMultiplier = cfg.getFloat("babySpeedMultiplier", CATEGORY_BABY, 1, 0.01F, 999, "Unborn Baby speed multiplier");
         babySpawnRate = cfg.getInt("babySpawnRate", CATEGORY_BABY, babySpawnRate, 0, 999, "Unborn Baby spawn rate. Default for Zombie is 8.");
     }
@@ -187,7 +187,7 @@ public class ModConfig
         cfg.addCustomCategoryComment(CATEGORY_CLIMBER, "Climber");
         climberDisabled = cfg.getBoolean("climberDisabled", CATEGORY_CLIMBER, climberDisabled, "Set to true if you want to disable Climber");
         climberHealthMultiplier = cfg.getFloat("climberHealthMultiplier", CATEGORY_CLIMBER, 1, 0.01F, 999, "Climber health multiplier");
-        climberStrengthMultiplier = cfg.getFloat("climberStrengthMultiplier", CATEGORY_CLIMBER, 1, 0.01F, 999, "Climber strenght multiplier");
+        climberStrengthMultiplier = cfg.getFloat("climberStrengthMultiplier", CATEGORY_CLIMBER, 1, 0.01F, 999, "Climber strength multiplier");
         climberSpeedMultiplier = cfg.getFloat("climberSpeedMultiplier", CATEGORY_CLIMBER, 1, 0.01F, 999, "Climber speed multiplier");
         climberSpawnRate = cfg.getInt("climberSpawnRate", CATEGORY_CLIMBER, climberSpawnRate, 0, 999, "Climber spawn rate. Default for Zombie is 8.");
     }
@@ -197,7 +197,7 @@ public class ModConfig
         cfg.addCustomCategoryComment(CATEGORY_ENTRAIL, "Entrail");
         entrailDisabled = cfg.getBoolean("entrailDisabled", CATEGORY_ENTRAIL, entrailDisabled, "Set to true if you want to disable Entrail");
         entrailHealthMultiplier = cfg.getFloat("entrailHealthMultiplier", CATEGORY_ENTRAIL, 1, 0.01F, 999, "Entrail health multiplier");
-        entrailStrengthMultiplier = cfg.getFloat("entrailStrengthMultiplier", CATEGORY_ENTRAIL, 1, 0.01F, 999, "Entrail strenght multiplier");
+        entrailStrengthMultiplier = cfg.getFloat("entrailStrengthMultiplier", CATEGORY_ENTRAIL, 1, 0.01F, 999, "Entrail strength multiplier");
         entrailSpeedMultiplier = cfg.getFloat("entrailSpeedMultiplier", CATEGORY_ENTRAIL, 1, 0.01F, 999, "Entrail speed multiplier");
         entrailSpawnRate = cfg.getInt("entrailSpawnRate", CATEGORY_ENTRAIL, entrailSpawnRate, 0, 999, "Entrail spawn rate. Default for Zombie is 8.");
     }
@@ -207,7 +207,7 @@ public class ModConfig
         cfg.addCustomCategoryComment(CATEGORY_FREEZER, "Freezer");
         freezerDisabled = cfg.getBoolean("freezerDisabled", CATEGORY_FREEZER, freezerDisabled, "Set to true if you want to disable Freezer");
         freezerHealthMultiplier = cfg.getFloat("freezerHealthMultiplier", CATEGORY_FREEZER, 1, 0.01F, 999, "Freezer health multiplier");
-        freezerStrengthMultiplier = cfg.getFloat("freezerStrengthMultiplier", CATEGORY_FREEZER, 1, 0.01F, 999, "Freezer strenght multiplier");
+        freezerStrengthMultiplier = cfg.getFloat("freezerStrengthMultiplier", CATEGORY_FREEZER, 1, 0.01F, 999, "Freezer strength multiplier");
         freezerSpeedMultiplier = cfg.getFloat("freezerSpeedMultiplier", CATEGORY_FREEZER, 1, 0.01F, 999, "Freezer speed multiplier");
         freezerSpawnRate = cfg.getInt("freezerSpawnRate", CATEGORY_FREEZER, freezerSpawnRate, 0, 999, "Freezer spawn rate. Default for Zombie is 8.");
     }
@@ -217,7 +217,7 @@ public class ModConfig
         cfg.addCustomCategoryComment(CATEGORY_MUTANT, "Mutant Steve");
         mutantSteveDisabled = cfg.getBoolean("mutantSteveDisabled", CATEGORY_MUTANT, mutantSteveDisabled, "Set to true if you want to disable Mutant Steve");
         mutantSteveHealthMultiplier = cfg.getFloat("mutantSteveHealthMultiplier", CATEGORY_MUTANT, 1, 0.01F, 999, "Mutant Steve health multiplier");
-        mutantSteveStrengthMultiplier = cfg.getFloat("mutantSteveStrengthMultiplier", CATEGORY_MUTANT, 1, 0.01F, 999, "Mutant Steve strenght multiplier");
+        mutantSteveStrengthMultiplier = cfg.getFloat("mutantSteveStrengthMultiplier", CATEGORY_MUTANT, 1, 0.01F, 999, "Mutant Steve strength multiplier");
         mutantSteveSpeedMultiplier = cfg.getFloat("mutantSteveSpeedMultiplier", CATEGORY_MUTANT, 1, 0.01F, 999, "Mutant Steve speed multiplier");
         mutantSteveSpawnRate = cfg.getInt("mutantSteveSpawnRate", CATEGORY_MUTANT, mutantSteveSpawnRate, 0, 999, "Mutant Steve spawn rate. Default for Zombie is 8.");
     }
@@ -227,7 +227,7 @@ public class ModConfig
         cfg.addCustomCategoryComment(CATEGORY_WIDEMAN, "Fallen Leader");
         fallenLeaderDisabled = cfg.getBoolean("fallenLeaderDisabled", CATEGORY_WIDEMAN, fallenLeaderDisabled, "Set to true if you want to disable Fallen Leader");
         fallenLeaderHealthMultiplier = cfg.getFloat("fallenLeaderHealthMultiplier", CATEGORY_WIDEMAN, 1, 0.01F, 999, "Fallen Leader health multiplier");
-        fallenLeaderStrengthMultiplier = cfg.getFloat("fallenLeaderStrengthMultiplier", CATEGORY_WIDEMAN, 1, 0.01F, 999, "Fallen Leader strenght multiplier");
+        fallenLeaderStrengthMultiplier = cfg.getFloat("fallenLeaderStrengthMultiplier", CATEGORY_WIDEMAN, 1, 0.01F, 999, "Fallen Leader strength multiplier");
         fallenLeaderSpeedMultiplier = cfg.getFloat("fallenLeaderSpeedMultiplier", CATEGORY_WIDEMAN, 1, 0.01F, 999, "Fallen Leader speed multiplier");
         fallenLeaderSpawnRate = cfg.getInt("fallenLeaderSpawnRate", CATEGORY_WIDEMAN, fallenLeaderSpawnRate, 0, 999, "Fallen Leader spawn rate. Default for Zombie is 8.");
     }
@@ -237,7 +237,7 @@ public class ModConfig
         cfg.addCustomCategoryComment(CATEGORY_WOMAN, "Bloody Maiden");
         bloodyMaidenDisabled = cfg.getBoolean("bloodyMaidenDisabled", CATEGORY_WOMAN, bloodyMaidenDisabled, "Set to true if you want to disable Bloody Maiden");
         bloodyMaidenHealthMultiplier = cfg.getFloat("bloodyMaidenHealthMultiplier", CATEGORY_WOMAN, 1, 0.01F, 999, "Bloody Maiden health multiplier");
-        bloodyMaidenStrengthMultiplier = cfg.getFloat("bloodyMaidenStrengthMultiplier", CATEGORY_WOMAN, 1, 0.01F, 999, "Bloody Maiden strenght multiplier");
+        bloodyMaidenStrengthMultiplier = cfg.getFloat("bloodyMaidenStrengthMultiplier", CATEGORY_WOMAN, 1, 0.01F, 999, "Bloody Maiden strength multiplier");
         bloodyMaidenSpeedMultiplier = cfg.getFloat("bloodyMaidenSpeedMultiplier", CATEGORY_WOMAN, 1, 0.01F, 999, "Bloody Maiden speed multiplier");
         bloodyMaidenSpawnRate = cfg.getInt("bloodyMaidenSpawnRate", CATEGORY_WOMAN, bloodyMaidenSpawnRate, 0, 999, "Bloody Maiden spawn rate. Default for Zombie is 8.");
     }
@@ -247,7 +247,7 @@ public class ModConfig
         cfg.addCustomCategoryComment(CATEGORY_ZOMBIECHICKEN, "Zombie Chicken");
         zombieChickenDisabled = cfg.getBoolean("zombieChickenDisabled", CATEGORY_ZOMBIECHICKEN, zombieChickenDisabled, "Set to true if you want to disable Zombie Chicken");
         zombieChickenHealthMultiplier = cfg.getFloat("zombieChickenHealthMultiplier", CATEGORY_ZOMBIECHICKEN, 1, 0.01F, 999, "Zombie Chicken health multiplier");
-        zombieChickenStrengthMultiplier = cfg.getFloat("zombieChickenStrengthMultiplier", CATEGORY_ZOMBIECHICKEN, 1, 0.01F, 999, "Zombie Chicken strenght multiplier");
+        zombieChickenStrengthMultiplier = cfg.getFloat("zombieChickenStrengthMultiplier", CATEGORY_ZOMBIECHICKEN, 1, 0.01F, 999, "Zombie Chicken strength multiplier");
         zombieChickenSpeedMultiplier = cfg.getFloat("zombieChickenSpeedMultiplier", CATEGORY_ZOMBIECHICKEN, 1, 0.01F, 999, "Zombie Chicken speed multiplier");
         zombieChickenSpawnRate = cfg.getInt("zombieChickenSpawnRate", CATEGORY_ZOMBIECHICKEN, zombieChickenSpawnRate, 0, 999, "Zombie Chicken spawn rate. Default for Zombie is 8.");
     }
@@ -257,7 +257,7 @@ public class ModConfig
         cfg.addCustomCategoryComment(CATEGORY_PRESENT, "Present");
         presentDisabled = cfg.getBoolean("presentDisabled", CATEGORY_PRESENT, presentDisabled, "Set to true if you want to disable Present");
         presentHealthMultiplier = cfg.getFloat("presentHealthMultiplier", CATEGORY_PRESENT, 1, 0.01F, 999, "Present health multiplier");
-        presentStrengthMultiplier = cfg.getFloat("presentStrengthMultiplier", CATEGORY_PRESENT, 1, 0.01F, 999, "Present strenght multiplier");
+        presentStrengthMultiplier = cfg.getFloat("presentStrengthMultiplier", CATEGORY_PRESENT, 1, 0.01F, 999, "Present strength multiplier");
         presentSpeedMultiplier = cfg.getFloat("presentSpeedMultiplier", CATEGORY_PRESENT, 1, 0.01F, 999, "Present speed multiplier");
         presentSpawnRate = cfg.getInt("presentSpawnRate", CATEGORY_PRESENT, presentSpawnRate, 0, 999, "Present spawn rate. Default for Zombie is 8.");
     }
@@ -267,7 +267,7 @@ public class ModConfig
         cfg.addCustomCategoryComment(CATEGORY_STRANGER, "Stranger");
         strangerDisabled = cfg.getBoolean("strangerDisabled", CATEGORY_STRANGER, strangerDisabled, "Set to true if you want to disable Stranger");
         strangerHealthMultiplier = cfg.getFloat("strangerHealthMultiplier", CATEGORY_STRANGER, 1, 0.01F, 999, "Stranger health multiplier");
-        strangerStrengthMultiplier = cfg.getFloat("strangerStrengthMultiplier", CATEGORY_STRANGER, 1, 0.01F, 999, "Stranger strenght multiplier");
+        strangerStrengthMultiplier = cfg.getFloat("strangerStrengthMultiplier", CATEGORY_STRANGER, 1, 0.01F, 999, "Stranger strength multiplier");
         strangerSpeedMultiplier = cfg.getFloat("strangerSpeedMultiplier", CATEGORY_STRANGER, 1, 0.01F, 999, "Stranger speed multiplier");
         strangerSpawnRate = cfg.getInt("strangerSpawnRate", CATEGORY_STRANGER, strangerSpawnRate, 0, 999, "Stranger spawn rate. Default for Zombie is 8.");
     }
@@ -277,7 +277,7 @@ public class ModConfig
         cfg.addCustomCategoryComment(CATEGORY_HAUNTEDCOW, "Haunted Cow");
         hauntedCowDisabled = cfg.getBoolean("hauntedCowDisabled", CATEGORY_HAUNTEDCOW, hauntedCowDisabled, "Set to true if you want to disable Haunted Cow");
         hauntedCowHealthMultiplier = cfg.getFloat("hauntedCowHealthMultiplier", CATEGORY_HAUNTEDCOW, 1, 0.01F, 999, "Haunted Cow health multiplier");
-        hauntedCowStrengthMultiplier = cfg.getFloat("hauntedCowStrengthMultiplier", CATEGORY_HAUNTEDCOW, 1, 0.01F, 999, "Haunted Cow strenght multiplier");
+        hauntedCowStrengthMultiplier = cfg.getFloat("hauntedCowStrengthMultiplier", CATEGORY_HAUNTEDCOW, 1, 0.01F, 999, "Haunted Cow strength multiplier");
         hauntedCowSpeedMultiplier = cfg.getFloat("hauntedCowSpeedMultiplier", CATEGORY_HAUNTEDCOW, 1, 0.01F, 999, "Haunted Cow speed multiplier");
         hauntedCowSpawnRate = cfg.getInt("hauntedCowSpawnRate", CATEGORY_HAUNTEDCOW, hauntedCowSpawnRate, 0, 999, "Haunted Cow spawn rate. Default for Zombie is 8.");
         hauntedCowDisableTimeChange = cfg.getBoolean("disableTimeChange", CATEGORY_HAUNTEDCOW, hauntedCowDisableTimeChange, "Set to true if you want to disable time change event");
@@ -288,8 +288,8 @@ public class ModConfig
         cfg.addCustomCategoryComment(CATEGORY_TOPIELEC, "Topielec");
         topielecDisabled = cfg.getBoolean("topielecDisabled", CATEGORY_TOPIELEC, topielecDisabled, "Set to true if you want to disable Topielec");
         topielecHealthMultiplier = cfg.getFloat("topielecHealthMultiplier", CATEGORY_TOPIELEC, 1, 0.01F, 999, "Topielec health multiplier");
-        topielecStrengthMultiplier = cfg.getFloat("topielecStrengthMultiplier", CATEGORY_TOPIELEC, 1, 0.01F, 999, "Topielec strenght multiplier");
+        topielecStrengthMultiplier = cfg.getFloat("topielecStrengthMultiplier", CATEGORY_TOPIELEC, 1, 0.01F, 999, "Topielec strength multiplier");
         topielecSpeedMultiplier = cfg.getFloat("topielecSpeedMultiplier", CATEGORY_TOPIELEC, 1, 0.01F, 999, "Topielec speed multiplier");
-        topielecSpawnChance = cfg.getInt("topielecSpawnChance", CATEGORY_TOPIELEC, topielecSpawnChance, 0, 999, "Precentage Topielec spawn chance, for example 25 means 25%.");
+        topielecSpawnChance = cfg.getInt("topielecSpawnChance", CATEGORY_TOPIELEC, topielecSpawnChance, 0, 999, "Topielec spawn chance in percent on every squid spawn.");
     }
 }

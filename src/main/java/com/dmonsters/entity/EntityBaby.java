@@ -37,7 +37,6 @@ public class EntityBaby extends EntityMob
     private final PriorityQueue<BlockPos> freezedBlocks = new PriorityQueue(10);
     private int blindRefreshTick = 0;
 
-
     public EntityBaby(World worldIn)
     {
         super(worldIn);
@@ -55,7 +54,7 @@ public class EntityBaby extends EntityMob
                 this.setFire(8);
             }
         }
-        if (!this.world.isRemote && getAttaking() && this.getAttackTarget() != null)
+        if (ModConfig.babyBlindness && !this.world.isRemote && getAttaking() && this.getAttackTarget() != null)
         {
             if (blindRefreshTick == 20)
             {
@@ -111,22 +110,22 @@ public class EntityBaby extends EntityMob
     @SideOnly(Side.CLIENT)
     public boolean isArmsRaised()
     {
-        return this.getDataManager().get(ARMS_RAISED).booleanValue();
+        return this.getDataManager().get(ARMS_RAISED);
     }
 
     public void setArmsRaised(boolean armsRaised)
     {
-        this.getDataManager().set(ARMS_RAISED, Boolean.valueOf(armsRaised));
+        this.getDataManager().set(ARMS_RAISED, armsRaised);
     }
 
     public boolean getAttaking()
     {
-        return this.getDataManager().get(ATTACKING).booleanValue();
+        return this.getDataManager().get(ATTACKING);
     }
 
     public void setAttaking(boolean mode)
     {
-        this.getDataManager().set(ATTACKING, Boolean.valueOf(mode));
+        this.getDataManager().set(ATTACKING, mode);
     }
 
     public EnumCreatureAttribute getCreatureAttribute()
@@ -150,8 +149,8 @@ public class EntityBaby extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
-        this.getDataManager().register(ARMS_RAISED, Boolean.valueOf(false));
-        this.getDataManager().register(ATTACKING, Boolean.valueOf(false));
+        this.getDataManager().register(ARMS_RAISED, Boolean.FALSE);
+        this.getDataManager().register(ATTACKING, Boolean.FALSE);
     }
 
     @Override

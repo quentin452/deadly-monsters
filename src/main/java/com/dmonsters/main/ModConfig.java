@@ -11,7 +11,6 @@ import com.dmonsters.proxy.CommonProxy;
 
 public class ModConfig
 {
-
     private static final String CATEGORY_GENERAL = "aGeneral";
     private static final String CATEGORY_BABY = "Unborn_Baby";
     private static final String CATEGORY_CLIMBER = "Climber";
@@ -45,6 +44,7 @@ public class ModConfig
     public static float babyStrengthMultiplier = 1;
     public static float babySpeedMultiplier = 1;
     public static int babySawnRate = 4;
+    public static boolean babyBlindness = false;
     public static boolean babyDisabled = false;
     //climber
     public static float climberHealthMultiplier = 1;

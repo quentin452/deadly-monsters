@@ -60,23 +60,34 @@ public class EventHandler
                     Random random = new Random();
                     float rndChance = random.nextFloat();
                     if (rndChance < 0.5F)
+                    {
                         return;
+                    }
                     World world = entity.getEntityWorld();
                     EntityPlayer player = e.getEntityPlayer();
                     Item itemClass = player.getHeldItemMainhand().getItem();
                     if (itemClass instanceof ItemSword || itemClass instanceof ItemBow)
+                    {
                         return;
+                    }
                     entity.setDropItemsWhenDead(false);
                     entity.setDead();
                     spawnEntity(entity, new EntityHauntedCow(world));
                     PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(entity.getPosition(), PacketClientFXUpdate.Type.SOULEYE));
                     if (ModConfig.hauntedCowDisableTimeChange)
+                    {
                         return;
+                    }
                     Style red = new Style().setColor(TextFormatting.DARK_RED);
                     TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.hauntedcow");
                     msg.setStyle(red);
                     PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(player.getPosition(), PacketClientFXUpdate.Type.TIME_CHANGE));
-                    world.setWorldTime(18000);
+                    long worldTime = world.getWorldTime();
+                    while (worldTime % 18000 != 0)
+                    {
+                        worldTime++;
+                    }
+                    world.setWorldTime(worldTime);
                     player.sendMessage(msg);
                 }
             }

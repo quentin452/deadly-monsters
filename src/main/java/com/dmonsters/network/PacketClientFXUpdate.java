@@ -29,7 +29,6 @@ public class PacketClientFXUpdate implements IMessage
     {
         blockPos = pos;
         FXtype = type;
-
     }
 
     @Override

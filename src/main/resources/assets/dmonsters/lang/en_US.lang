@@ -1,4 +1,4 @@
-< en_US.lang - English localization file for Deadly Monsters >
+# English localization file for Deadly Monsters
 
 entity.mutantSteve.name=Mutant Steve
 entity.baby.name=Unborn Baby
@@ -53,6 +53,7 @@ tile.dmonsters.souleye.name=Soul Eyes
 tile.dmonsters.strengthenedCobblestone.name=Strengthened Cobblestone
 tile.dmonsters.strengthenedStone.name=Strengthened Stone
 tile.dmonsters.barbedWire.name=Barbed Wire
+tile.dmonsters.dump.name=Dump
 tile.dmonsters.dump.dump_0.name=Dump 100%
 tile.dmonsters.dump.dump_1.name=Dump 75%
 tile.dmonsters.dump.dump_2.name=Dump 50%
@@ -101,4 +102,4 @@ msg.dmonsters.purgePill.error=You need to be fed
 msg.dmonsters.hauntedcow=Use sword or bow! Otherwise the moon will glow
 msg.dmonsters.hauntedcowTimeDisabled=Changing time is disabled on this server
 
-itemGroup.modTab=Deadly Monsters
+itemGroup.dmonstersTab=Deadly Monsters

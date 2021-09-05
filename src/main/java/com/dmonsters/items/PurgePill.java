@@ -37,7 +37,7 @@ public class PurgePill extends Item
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
     {
         ItemStack itemStackIn = playerIn.getHeldItem(hand);
-        System.out.println(itemStackIn);
+        //System.out.println(itemStackIn);
         if (playerIn.canEat(true))
         {
             playerIn.setActiveHand(hand);

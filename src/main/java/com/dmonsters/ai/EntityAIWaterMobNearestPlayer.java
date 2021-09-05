@@ -38,7 +38,6 @@ public class EntityAIWaterMobNearestPlayer extends EntityAIBase
         	}
         }
         */
-
     }
 
     public void startExecuting()

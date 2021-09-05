@@ -1,5 +1,5 @@
-#Перевел Mr_Krab для проекта mc.beandex.ru
-< ru_RU.lang - Russian localization file for Deadly Monsters >
+# Перевел Mr_Krab для проекта mc.beandex.ru
+# Russian localization file for Deadly Monsters
 
 entity.mutantSteve.name=Стив мутант
 entity.baby.name=Нерожденный ребенок
@@ -85,4 +85,4 @@ msg.dmonsters.meshFence.tooFarFromPole=Железный забор должен 
 msg.dmonsters.barbedWire.error=Колючая проволока может быть размещена только на железном заборе
 msg.dmonsters.purgePill.error=Вам нужно будет кормить
 
-itemGroup.modTab=Deadly Monsters
+itemGroup.dmonstersTab=Deadly Monsters

@@ -1,4 +1,4 @@
-< en_US.lang - English localization file for Deadly Monsters >
+# Chinese localization file for Deadly Monsters
 
 entity.mutantSteve.name=突变史蒂夫
 entity.baby.name=腹中胎儿
@@ -102,4 +102,4 @@ msg.dmonsters.purgePill.error=你必须吃饱！
 msg.dmonsters.hauntedcow=必须使用弓或剑！否则明月将会当空
 msg.dmonsters.hauntedcowTimeDisabled=此服务器上的更改时间已禁用
 
-itemGroup.modTab=致命怪物
+itemGroup.dmonstersTab=致命怪物

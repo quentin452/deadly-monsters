@@ -10,6 +10,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -18,6 +19,8 @@ import com.dmonsters.entity.EntityTopielec;
 import com.dmonsters.items.Harpoon;
 import com.dmonsters.network.PacketClientFXUpdate;
 import com.dmonsters.network.PacketHandler;
+import slimeknights.tconstruct.library.tools.SwordCore;
+import slimeknights.tconstruct.library.tools.ranged.BowCore;
 
 public class EventHandler
 {
@@ -32,7 +35,7 @@ public class EventHandler
                 World world = entity.getEntityWorld();
                 EntityPlayer player = e.getEntityPlayer();
                 Item itemClass = player.getHeldItemMainhand().getItem();
-                if (ModConfig.hauntedCowDisableTimeChange || itemClass instanceof ItemSword || itemClass instanceof ItemBow)
+                if (ModConfig.hauntedCowDisableTimeChange || itemClass instanceof ItemSword || itemClass instanceof ItemBow || (Loader.isModLoaded("tconstruct") && itemClass instanceof SwordCore) || (Loader.isModLoaded("tconstruct") && itemClass instanceof BowCore))
                 {
                     return;
                 }

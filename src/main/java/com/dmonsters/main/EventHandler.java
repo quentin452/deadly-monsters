@@ -39,17 +39,20 @@ public class EventHandler
                 {
                     return;
                 }
-                Style red = new Style().setColor(TextFormatting.DARK_RED);
-                TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.hauntedcow");
-                msg.setStyle(red);
-                PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(player.getPosition(), PacketClientFXUpdate.Type.TIME_CHANGE));
-                long worldTime = world.getWorldTime();
-                while (worldTime % 18000 != 0)
+                if (player.world.isDaytime())
                 {
-                    worldTime++;
+                    Style red = new Style().setColor(TextFormatting.DARK_RED);
+                    TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.hauntedcow");
+                    msg.setStyle(red);
+                    PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(player.getPosition(), PacketClientFXUpdate.Type.TIME_CHANGE));
+                    long worldTime = world.getWorldTime();
+                    while (worldTime % 18000 != 0)
+                    {
+                        worldTime++;
+                    }
+                    world.setWorldTime(worldTime);
+                    player.sendMessage(msg);
                 }
-                world.setWorldTime(worldTime);
-                player.sendMessage(msg);
             }
         }
         if (!ModConfig.topielecDisabled && ModConfig.topielecHarpoonOnly && entity instanceof EntityTopielec)

@@ -11,7 +11,7 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 version = "1.8"
 group = "com.dmonsters"
-archivesBaseName = "deadlymonsters"
+archivesBaseName = "deadlymonsters-1.12.2"
 
 sourceCompatibility = targetCompatibility = '1.8'
 compileJava {

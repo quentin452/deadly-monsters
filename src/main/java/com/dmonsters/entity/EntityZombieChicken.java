@@ -20,7 +20,7 @@ import com.dmonsters.main.ModConfig;
 
 public class EntityZombieChicken extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "zombieChicken");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "zombie_chicken");
 
     public EntityZombieChicken(World worldIn)
     {

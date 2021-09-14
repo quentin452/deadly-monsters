@@ -9,7 +9,7 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.8.1"
+version = "1.8.2"
 group = "com.dmonsters"
 archivesBaseName = "deadlymonsters-1.12.2"
 

@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name": "dmonsters:zombieChicken",
+      "name": "dmonsters:zombie_chicken",
       "rolls": 1,
       "entries": [
         {

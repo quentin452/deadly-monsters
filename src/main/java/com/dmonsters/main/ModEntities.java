@@ -17,7 +17,6 @@ import com.dmonsters.render.*;
 
 public class ModEntities
 {
-
     public static void init()
     {
         int id = 1;

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityClimber;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelClimber;
+import com.dmonsters.model.ModelClimber;
 
 public class RenderClimber extends RenderLiving<EntityClimber>
 {

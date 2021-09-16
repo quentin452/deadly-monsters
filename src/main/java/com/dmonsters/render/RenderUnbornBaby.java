@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityUnbornBaby;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelUnbornBaby;
+import com.dmonsters.model.ModelUnbornBaby;
 
 public class RenderUnbornBaby extends RenderLiving<EntityUnbornBaby>
 {

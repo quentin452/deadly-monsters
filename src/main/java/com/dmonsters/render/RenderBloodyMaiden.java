@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityBloodyMaiden;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelBloodyMaiden;
+import com.dmonsters.model.ModelBloodyMaiden;
 
 public class RenderBloodyMaiden extends RenderLiving<EntityBloodyMaiden>
 {

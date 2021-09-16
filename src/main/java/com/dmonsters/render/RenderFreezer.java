@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityFreezer;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelFreezer;
+import com.dmonsters.model.ModelFreezer;
 
 public class RenderFreezer extends RenderLiving<EntityFreezer>
 {

@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityPresent;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelPresent;
+import com.dmonsters.model.ModelPresent;
 
 public class RenderPresent extends RenderLiving<EntityPresent>
 {

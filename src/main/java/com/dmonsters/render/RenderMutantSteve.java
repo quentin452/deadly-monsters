@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityMutantSteve;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelMutantSteve;
+import com.dmonsters.model.ModelMutantSteve;
 
 public class RenderMutantSteve extends RenderLiving<EntityMutantSteve>
 {

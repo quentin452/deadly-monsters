@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.dmonsters.ai.DeadlyMonsterAIMelee;
+import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
 import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;

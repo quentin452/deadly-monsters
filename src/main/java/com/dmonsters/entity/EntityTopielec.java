@@ -9,10 +9,10 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
-import com.dmonsters.ai.EntityAITopielecAttack;
-import com.dmonsters.ai.EntityAITopielecFollow;
-import com.dmonsters.ai.EntityAITopielecIdle;
-import com.dmonsters.ai.EntityAIWaterMobNearestPlayer;
+import com.dmonsters.entity.ai.EntityAITopielecAttack;
+import com.dmonsters.entity.ai.EntityAITopielecFollow;
+import com.dmonsters.entity.ai.EntityAITopielecIdle;
+import com.dmonsters.entity.ai.EntityAIWaterMobNearestPlayer;
 import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;

@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import com.dmonsters.entity.EntityHauntedCow;
 import com.dmonsters.entity.EntityTopielec;
-import com.dmonsters.items.Harpoon;
+import com.dmonsters.item.Harpoon;
 import com.dmonsters.network.PacketClientFXUpdate;
 import com.dmonsters.network.PacketHandler;
 import slimeknights.tconstruct.library.tools.SwordCore;

@@ -24,7 +24,7 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
-import com.dmonsters.ai.DeadlyMonsterAIMelee;
+import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
 import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;

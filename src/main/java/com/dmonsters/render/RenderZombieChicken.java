@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityZombieChicken;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelZombieChicken;
+import com.dmonsters.model.ModelZombieChicken;
 
 public class RenderZombieChicken extends RenderLiving<EntityZombieChicken>
 {

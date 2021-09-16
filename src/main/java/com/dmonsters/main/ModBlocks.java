@@ -9,7 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import com.dmonsters.blocks.*;
+import com.dmonsters.block.*;
 
 public class ModBlocks
 {

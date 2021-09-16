@@ -14,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.dmonsters.ai.DeadlyMonsterAIMelee;
+import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
 import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 

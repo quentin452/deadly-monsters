@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityEntrail;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelEntrail;
+import com.dmonsters.model.ModelEntrail;
 
 public class RenderEntrail extends RenderLiving<EntityEntrail>
 {

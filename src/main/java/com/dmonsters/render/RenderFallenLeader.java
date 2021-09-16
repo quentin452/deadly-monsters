@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityFallenLeader;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelFallenLeader;
+import com.dmonsters.model.ModelFallenLeader;
 
 public class RenderFallenLeader extends RenderLiving<EntityFallenLeader>
 {

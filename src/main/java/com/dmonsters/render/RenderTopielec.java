@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityTopielec;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelTopielec;
+import com.dmonsters.model.ModelTopielec;
 
 public class RenderTopielec extends RenderLiving<EntityTopielec>
 {

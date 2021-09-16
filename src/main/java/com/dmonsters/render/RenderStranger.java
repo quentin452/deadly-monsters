@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityStranger;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelStranger;
+import com.dmonsters.model.ModelStranger;
 
 public class RenderStranger extends RenderLiving<EntityStranger>
 {

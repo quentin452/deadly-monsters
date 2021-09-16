@@ -11,8 +11,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.dmonsters.entity.*;
-import com.dmonsters.entityProjectile.EntityDagon;
-import com.dmonsters.entityProjectile.EntityLuckyEgg;
+import com.dmonsters.projectile.EntityDagon;
+import com.dmonsters.projectile.EntityLuckyEgg;
 import com.dmonsters.render.*;
 
 public class ModEntities

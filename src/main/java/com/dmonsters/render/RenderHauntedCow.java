@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityHauntedCow;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelHauntedCow;
+import com.dmonsters.model.ModelHauntedCow;
 
 public class RenderHauntedCow extends RenderLiving<EntityHauntedCow>
 {

@@ -16,7 +16,7 @@ import com.dmonsters.models.ModelZombieChicken;
 public class RenderZombieChicken extends RenderLiving<EntityZombieChicken>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/zombieChicken.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/zombie_chicken.png");
 
     public RenderZombieChicken(RenderManager rendermanagerIn)
     {

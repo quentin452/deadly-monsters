@@ -24,8 +24,8 @@ public class MobSpawnerItem extends Item
 
     public MobSpawnerItem(String name)
     {
-        setRegistryName("mobSpawnerItem_" + name);
-        setUnlocalizedName(MainMod.MODID + ".mobSpawnerItem_" + name);
+        setRegistryName("mob_spawner_item_" + name);
+        setUnlocalizedName(MainMod.MODID + ".mob_spawner_item_" + name);
         this.setCreativeTab(MainMod.MOD_CREATIVETAB);
         mobName = name;
     }
@@ -56,18 +56,14 @@ public class MobSpawnerItem extends Item
 
             Entity entity = spawnEntity(worldIn, (double) pos.getX() + 0.5D, (double) pos.getY() + d0, (double) pos.getZ() + 0.5D);
 
-            if (entity != null)
+            if (entity instanceof EntityLivingBase && stack.hasDisplayName())
             {
-                if (entity instanceof EntityLivingBase && stack.hasDisplayName())
-                {
-                    entity.setCustomNameTag(stack.getDisplayName());
-                }
+                entity.setCustomNameTag(stack.getDisplayName());
+            }
 
-                if (!playerIn.capabilities.isCreativeMode)
-                {
-                    //--stack.stackSize;
-                    stack.shrink(1);
-                }
+            if (!playerIn.capabilities.isCreativeMode)
+            {
+                stack.shrink(1);
             }
 
             return EnumActionResult.SUCCESS;
@@ -92,8 +88,8 @@ public class MobSpawnerItem extends Item
         Entity entity = new EntityZombieChicken(worldIn);
         switch (mobName)
         {
-            case "baby":
-                entity = new EntityBaby(worldIn);
+            case "unborn_baby":
+                entity = new EntityUnbornBaby(worldIn);
                 break;
             case "climber":
                 entity = new EntityClimber(worldIn);
@@ -104,16 +100,16 @@ public class MobSpawnerItem extends Item
             case "freezer":
                 entity = new EntityFreezer(worldIn);
                 break;
-            case "mutantSteve":
+            case "mutant_steve":
                 entity = new EntityMutantSteve(worldIn);
                 break;
-            case "wideman":
-                entity = new EntityWideman(worldIn);
+            case "fallen_leader":
+                entity = new EntityFallenLeader(worldIn);
                 break;
-            case "woman":
-                entity = new EntityWoman(worldIn);
+            case "bloody_maiden":
+                entity = new EntityBloodyMaiden(worldIn);
                 break;
-            case "zombieChicken":
+            case "zombie_chicken":
                 entity = new EntityZombieChicken(worldIn);
                 break;
             case "present":
@@ -122,7 +118,7 @@ public class MobSpawnerItem extends Item
             case "stranger":
                 entity = new EntityStranger(worldIn);
                 break;
-            case "hauntedCow":
+            case "haunted_cow":
                 entity = new EntityHauntedCow(worldIn);
                 break;
             case "topielec":

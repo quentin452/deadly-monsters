@@ -23,8 +23,8 @@ public class StrengthenedCobblestone extends Block
     public StrengthenedCobblestone()
     {
         super(Material.IRON);
-        setUnlocalizedName(MainMod.MODID + ".strengthenedCobblestone");
-        setRegistryName("strengthenedCobblestone");
+        setUnlocalizedName(MainMod.MODID + ".strengthened_cobblestone");
+        setRegistryName("strengthened_cobblestone");
         setCreativeTab(MainMod.MOD_CREATIVETAB);
         this.setHardness(10);
         this.setResistance(25);
@@ -37,11 +37,6 @@ public class StrengthenedCobblestone extends Block
         ItemStack newItem = new ItemStack(ModItems.rebar, 1);
         EntityItem item = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), newItem);
         worldIn.spawnEntity(item);
-    	/*
-    	newItem = new ItemStack(Blocks.COBBLESTONE, 1);
-    	item = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), newItem);
-    	worldIn.spawnEntityInWorld(item);
-    	*/
     }
 
     @Override
@@ -58,11 +53,6 @@ public class StrengthenedCobblestone extends Block
             if (!worldIn.isRemote)
             {
                 worldIn.setBlockState(pos, Blocks.COBBLESTONE.getDefaultState());
-	        	/*
-	        	ItemStack newItem = new ItemStack(ModItems.rebar, 1);
-	        	EntityItem item = new EntityItem(worldIn, playerIn.posX, playerIn.posY, playerIn.posZ, newItem);
-	        	worldIn.spawnEntityInWorld(item);
-	        	*/
             }
             return true;
         }

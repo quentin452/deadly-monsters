@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dmonsters:present_block_green"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "color=green": {"model": "dmonsters:present_block_green"},
+    "color=yellow": {"model": "dmonsters:present_block_yellow"}
+  }
+}

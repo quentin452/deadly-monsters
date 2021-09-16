@@ -47,10 +47,10 @@ public class ModSounds
     public static SoundEvent STRANGER_IMPACT;
     public static SoundEvent HAUNTEDCOW_STEP;
     public static SoundEvent HAUNTEDCOW_HURT;
-    public static SoundEvent HAUNTEDCOW_AMBINET;
+    public static SoundEvent HAUNTEDCOW_AMBIENT;
     public static SoundEvent HAUNTEDCOW_DEATH;
     public static SoundEvent TOPIELEC_HURT;
-    public static SoundEvent TOPIELEC_AMBINET;
+    public static SoundEvent TOPIELEC_AMBIENT;
     public static SoundEvent TOPIELEC_DEATH;
 
     public static SoundEvent DUMP_MAKE;
@@ -68,12 +68,12 @@ public class ModSounds
         HAUNTEDCOW_TIMECHANGE = registerSound("mob.hauntedcow.timechange");
 
         TOPIELEC_HURT = registerSound("mob.topielec.hurt");
-        TOPIELEC_AMBINET = registerSound("mob.topielec.ambient");
+        TOPIELEC_AMBIENT = registerSound("mob.topielec.ambient");
         TOPIELEC_DEATH = registerSound("mob.topielec.death");
 
         HAUNTEDCOW_DEATH = registerSound("mob.hauntedcow.death");
         HAUNTEDCOW_HURT = registerSound("mob.hauntedcow.hurt");
-        HAUNTEDCOW_AMBINET = registerSound("mob.hauntedcow.ambient");
+        HAUNTEDCOW_AMBIENT = registerSound("mob.hauntedcow.ambient");
         HAUNTEDCOW_STEP = registerSound("mob.hauntedcow.step");
 
         MUTANT_DEATH = registerSound("mob.mutant.death");
@@ -148,12 +148,12 @@ public class ModSounds
                 HAUNTEDCOW_TIMECHANGE,
 
                 TOPIELEC_HURT,
-                TOPIELEC_AMBINET,
+                TOPIELEC_AMBIENT,
                 TOPIELEC_DEATH,
 
                 HAUNTEDCOW_DEATH,
                 HAUNTEDCOW_HURT,
-                HAUNTEDCOW_AMBINET,
+                HAUNTEDCOW_AMBIENT,
                 HAUNTEDCOW_STEP,
 
                 MUTANT_DEATH,

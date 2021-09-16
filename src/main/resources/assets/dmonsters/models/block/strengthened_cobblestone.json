@@ -1,12 +1,12 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "particle": "dmonsters:blocks/strengthenedCobblestone_topdown",
-    "down": "dmonsters:blocks/strengthenedCobblestone_topdown",
-    "up": "dmonsters:blocks/strengthenedCobblestone_topdown",
-    "east": "dmonsters:blocks/strengthenedCobblestone_side",
-    "west": "dmonsters:blocks/strengthenedCobblestone_side",
-    "north": "dmonsters:blocks/strengthenedCobblestone_side",
-    "south": "dmonsters:blocks/strengthenedCobblestone_side"
+    "particle": "dmonsters:blocks/strengthened_cobblestone_topdown",
+    "down": "dmonsters:blocks/strengthened_cobblestone_topdown",
+    "up": "dmonsters:blocks/strengthened_cobblestone_topdown",
+    "east": "dmonsters:blocks/strengthened_cobblestone_side",
+    "west": "dmonsters:blocks/strengthened_cobblestone_side",
+    "north": "dmonsters:blocks/strengthened_cobblestone_side",
+    "south": "dmonsters:blocks/strengthened_cobblestone_side"
   }
 }

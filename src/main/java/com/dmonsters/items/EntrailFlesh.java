@@ -12,8 +12,8 @@ public class EntrailFlesh extends Item
 {
     public EntrailFlesh()
     {
-        setRegistryName("entrailFlesh");
-        setUnlocalizedName(MainMod.MODID + ".entrailFlesh");
+        setRegistryName("entrail_flesh");
+        setUnlocalizedName(MainMod.MODID + ".entrail_flesh");
         this.setCreativeTab(MainMod.MOD_CREATIVETAB);
     }
 
@@ -23,14 +23,13 @@ public class EntrailFlesh extends Item
         if (!attacker.world.isRemote && !(target instanceof EntityEntrail))
         {
             target.setDead();
-            double x, y, z = 0;
+            double x, y, z;
             x = target.posX;
             y = target.posY;
             z = target.posZ;
             Entity slime = new EntityEntrail(attacker.world);
             slime.setPosition(x, y, z);
             attacker.world.spawnEntity(slime);
-            //--stack.stackSize;
             stack.shrink(1);
         }
         return true;

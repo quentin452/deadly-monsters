@@ -8,8 +8,7 @@ public class ModItem extends Item
 {
     public ModItem()
     {
-        setRegistryName("modItem");
-        setUnlocalizedName(MainMod.MODID + ".modItem");
-        this.setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setRegistryName("mod_item");
+        setUnlocalizedName(MainMod.MODID + ".mod_item");
     }
 }

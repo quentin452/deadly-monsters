@@ -14,7 +14,6 @@ public class EntityAITopielecAttack extends EntityAIBase
 {
     private final EntityTopielec topielec;
     private final float speed;
-    private BlockPos targetPos;
     private int ticks = 0;
     private EntityLivingBase victimEntity;
 
@@ -76,7 +75,7 @@ public class EntityAITopielecAttack extends EntityAIBase
     {
         BlockPos victimPos = this.topielec.getPosition();
         BlockPos bestPos = victimPos;
-        int searchDistance = ModConfig.topielecSearchDistance;
+        int searchDistance = ModConfig.CATEGORY_TOPIELEC.topielecSearchDistance;
         int minBoundsX = -searchDistance + victimPos.getX();
         int maxBoundsX = searchDistance + victimPos.getX();
         int minBoundsZ = -searchDistance + victimPos.getZ();

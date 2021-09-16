@@ -66,84 +66,12 @@ public class MeshFence extends Block
     public MeshFence()
     {
         super(Material.ROCK);
-        setUnlocalizedName(MainMod.MODID + ".meshFence");
-        setRegistryName("meshFence");
+        setUnlocalizedName(MainMod.MODID + ".mesh_fence");
+        setRegistryName("mesh_fence");
         setCreativeTab(MainMod.MOD_CREATIVETAB);
         this.setHardness(5);
         this.setResistance(5);
         this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.FALSE).withProperty(EAST, Boolean.FALSE).withProperty(SOUTH, Boolean.FALSE).withProperty(WEST, Boolean.FALSE));
-    }
-
-    public IBlockState onBlockPlaced(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
-    {
-        if (!worldIn.isRemote)
-        {
-            BlockPos neighborPos;
-            Block neighborBlock;
-            Boolean distReason = false;
-            //north
-            neighborPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1);
-            if (worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFence ||
-                worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole)
-            {
-                if (checkIfCanBuildInDirection(0, 0, -1, 8, pos, worldIn))
-                {
-                    return this.getDefaultState();
-                }
-                else
-                {
-                    distReason = true;
-                }
-            }
-            //east
-            neighborPos = new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ());
-            if (worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFence ||
-                worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole)
-            {
-                if (checkIfCanBuildInDirection(1, 0, 0, 8, pos, worldIn))
-                {
-                    return this.getDefaultState();
-                }
-                else
-                {
-                    distReason = true;
-                }
-            }
-            //west
-            neighborPos = new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ());
-            if (worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFence ||
-                worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole)
-            {
-                if (checkIfCanBuildInDirection(-1, 0, 0, 8, pos, worldIn))
-                {
-                    return this.getDefaultState();
-                }
-                else
-                {
-                    distReason = true;
-                }
-            }
-            //south
-            neighborPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1);
-            if (worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFence ||
-                worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole)
-            {
-                if (checkIfCanBuildInDirection(0, 0, 1, 8, pos, worldIn))
-                {
-                    return this.getDefaultState();
-                }
-                else
-                {
-                    distReason = true;
-                }
-            }
-            if (!distReason)
-                showConsoleText("msg.dmonsters.meshFence.error", placer);
-            else
-                showConsoleText("msg.dmonsters.meshFence.tooFarFromPole", placer);
-            return Blocks.AIR.getDefaultState();
-        }
-        return Blocks.AIR.getDefaultState();
     }
 
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn)
@@ -184,20 +112,20 @@ public class MeshFence extends Block
         boolean north, east, west, south = false;
         //north
         neighborPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1);
-        north = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFence ||
-            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole;
+        north = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence ||
+            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole;
         //east
         neighborPos = new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ());
-        east = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFence ||
-            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole;
+        east = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence ||
+            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole;
         //west
         neighborPos = new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ());
-        west = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFence ||
-            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole;
+        west = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence ||
+            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole;
         //south
         neighborPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1);
-        south = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFence ||
-            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole;
+        south = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence ||
+            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole;
 
         return state.withProperty(NORTH, north).withProperty(EAST, east).withProperty(WEST, west).withProperty(SOUTH, south);
     }
@@ -223,7 +151,6 @@ public class MeshFence extends Block
         return false;
     }
 
-    @Override
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos p_189540_5_)
     {
         BlockPos neighborPos;
@@ -251,6 +178,78 @@ public class MeshFence extends Block
         worldIn.destroyBlock(pos, true);
     }
 
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    {
+        if (!worldIn.isRemote)
+        {
+            BlockPos neighborPos;
+            Block neighborBlock;
+            Boolean distReason = false;
+            //north
+            neighborPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1);
+            if (worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence ||
+                worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole)
+            {
+                if (checkIfCanBuildInDirection(0, 0, -1, 8, pos, worldIn))
+                {
+                    return this.getDefaultState();
+                }
+                else
+                {
+                    distReason = true;
+                }
+            }
+            //east
+            neighborPos = new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ());
+            if (worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence ||
+                worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole)
+            {
+                if (checkIfCanBuildInDirection(1, 0, 0, 8, pos, worldIn))
+                {
+                    return this.getDefaultState();
+                }
+                else
+                {
+                    distReason = true;
+                }
+            }
+            //west
+            neighborPos = new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ());
+            if (worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence ||
+                worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole)
+            {
+                if (checkIfCanBuildInDirection(-1, 0, 0, 8, pos, worldIn))
+                {
+                    return this.getDefaultState();
+                }
+                else
+                {
+                    distReason = true;
+                }
+            }
+            //south
+            neighborPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1);
+            if (worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence ||
+                worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole)
+            {
+                if (checkIfCanBuildInDirection(0, 0, 1, 8, pos, worldIn))
+                {
+                    return this.getDefaultState();
+                }
+                else
+                {
+                    distReason = true;
+                }
+            }
+            if (!distReason)
+                showConsoleText("msg.dmonsters.mesh_fence.error", placer);
+            else
+                showConsoleText("msg.dmonsters.mesh_fence.too_far_from_pole", placer);
+            return Blocks.AIR.getDefaultState();
+        }
+        return Blocks.AIR.getDefaultState();
+    }
+
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, NORTH, EAST, WEST, SOUTH);
@@ -262,11 +261,11 @@ public class MeshFence extends Block
         for (int i = 0; i < dist; i++)
         {
             neighborPos = new BlockPos(neighborPos.getX() + x, neighborPos.getY() + y, neighborPos.getZ() + z);
-            if (worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole)
+            if (worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole)
             {
                 return true;
             }
-            else if (worldIn.getBlockState(neighborPos).getBlock() != ModBlocks.meshFence)
+            else if (worldIn.getBlockState(neighborPos).getBlock() != ModBlocks.mesh_fence)
             {
                 return false;
             }

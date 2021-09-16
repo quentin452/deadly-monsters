@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "dmonsters:mesh_fence_pole",
+    "count": 8
+  },
+  "pattern": [
+    "IRI",
+    "IRI",
+    "IRI"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "dmonsters:rebar"
+    }
+  }
+}

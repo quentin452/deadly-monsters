@@ -14,8 +14,8 @@ public class MainMod
 {
     public static final String MODID = "dmonsters";
     public static final String MODNAME = "Deadly Monsters";
-    public static final String MODVERSION = "1.8.2";
-    public static final ModCreativeTabs MOD_CREATIVETAB = new ModCreativeTabs("dmonstersTab");
+    public static final String MODVERSION = "1.9.0";
+    public static final ModCreativeTabs MOD_CREATIVETAB = new ModCreativeTabs("dmonsters_tab");
 
     @SidedProxy(clientSide = "com.dmonsters.proxy.ClientProxy", serverSide = "com.dmonsters.proxy.ServerProxy")
     public static CommonProxy proxy;

@@ -51,7 +51,7 @@ public class PacketClientFXUpdate implements IMessage
     {
         SOULEYE,
         DUMP,
-        WOMAN_HEART,
+        BLOODY_MAIDEN_HEART,
         SUNLIGHT_USE,
         TIME_CHANGE;
 
@@ -64,7 +64,7 @@ public class PacketClientFXUpdate implements IMessage
                 case 1:
                     return DUMP;
                 case 2:
-                    return WOMAN_HEART;
+                    return BLOODY_MAIDEN_HEART;
                 case 3:
                     return SUNLIGHT_USE;
                 case 4:
@@ -79,35 +79,35 @@ public class PacketClientFXUpdate implements IMessage
         @Override
         public IMessage onMessage(PacketClientFXUpdate message, MessageContext ctx)
         {
-            FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> handle(message, ctx));
+            FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> handle(message));
             return null;
         }
 
-        private void handle(PacketClientFXUpdate message, MessageContext ctx)
+        private void handle(PacketClientFXUpdate message)
         {
             switch (message.FXtype)
             {
                 case SOULEYE:
-                    SoulEye(message, ctx);
+                    SoulEye(message);
                     break;
                 case DUMP:
-                    Dump(message, ctx);
+                    Dump(message);
                     break;
-                case WOMAN_HEART:
-                    WomanHeart(message, ctx);
+                case BLOODY_MAIDEN_HEART:
+                    WomanHeart(message);
                     break;
                 case SUNLIGHT_USE:
-                    HauntedCowSounds(message, ctx, 0);
+                    HauntedCowSounds(message, 0);
                     break;
                 case TIME_CHANGE:
-                    HauntedCowSounds(message, ctx, 1);
+                    HauntedCowSounds(message, 1);
                     break;
                 default:
                     break;
             }
         }
 
-        private void SoulEye(PacketClientFXUpdate message, MessageContext ctx)
+        private void SoulEye(PacketClientFXUpdate message)
         {
             World world = Minecraft.getMinecraft().world;
             BlockPos pos = message.blockPos;
@@ -132,14 +132,14 @@ public class PacketClientFXUpdate implements IMessage
             }
         }
 
-        private void Dump(PacketClientFXUpdate message, MessageContext ctx)
+        private void Dump(PacketClientFXUpdate message)
         {
             World world = Minecraft.getMinecraft().world;
             BlockPos pos = message.blockPos;
             world.playSound(pos.getX(), pos.getY(), pos.getZ(), ModSounds.DUMP_MAKE, SoundCategory.BLOCKS, 1, 1, false);
         }
 
-        private void HauntedCowSounds(PacketClientFXUpdate message, MessageContext ctx, int soundType)
+        private void HauntedCowSounds(PacketClientFXUpdate message, int soundType)
         {
             World world = Minecraft.getMinecraft().world;
             BlockPos pos = message.blockPos;
@@ -174,7 +174,7 @@ public class PacketClientFXUpdate implements IMessage
             }
         }
 
-        private void WomanHeart(PacketClientFXUpdate message, MessageContext ctx)
+        private void WomanHeart(PacketClientFXUpdate message)
         {
             World world = Minecraft.getMinecraft().world;
             BlockPos pos = message.blockPos;

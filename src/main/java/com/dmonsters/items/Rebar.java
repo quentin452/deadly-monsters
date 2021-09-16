@@ -40,8 +40,8 @@ public class Rebar extends Item
                 {
                     stack.shrink(1);
                 }
-                worldIn.playSound(playerIn, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
-                worldIn.setBlockState(pos, ModBlocks.strengthenedStone.getDefaultState(), 11);
+                worldIn.playSound(playerIn, pos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
+                worldIn.setBlockState(pos, ModBlocks.strengthened_stone.getDefaultState(), 11);
             }
             if (worldIn.getBlockState(pos).getBlock() == Blocks.COBBLESTONE)
             {
@@ -49,8 +49,8 @@ public class Rebar extends Item
                 {
                     stack.shrink(1);
                 }
-                worldIn.playSound(playerIn, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
-                worldIn.setBlockState(pos, ModBlocks.strengthenedCobblestone.getDefaultState(), 11);
+                worldIn.playSound(playerIn, pos, SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.BLOCKS, 1.0F, itemRand.nextFloat() * 0.4F + 0.8F);
+                worldIn.setBlockState(pos, ModBlocks.strengthened_cobblestone.getDefaultState(), 11);
             }
             stack.damageItem(1, playerIn);
             return EnumActionResult.SUCCESS;

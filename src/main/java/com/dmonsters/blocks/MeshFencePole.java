@@ -61,8 +61,8 @@ public class MeshFencePole extends Block
     public MeshFencePole()
     {
         super(Material.ROCK);
-        setUnlocalizedName(MainMod.MODID + ".meshFencePole");
-        setRegistryName("meshFencePole");
+        setUnlocalizedName(MainMod.MODID + ".mesh_fence_pole");
+        setRegistryName("mesh_fence_pole");
         setCreativeTab(MainMod.MOD_CREATIVETAB);
         this.setHardness(5);
         this.setResistance(5);
@@ -107,20 +107,20 @@ public class MeshFencePole extends Block
         boolean north, east, west, south = false;
         //north
         neighborPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1);
-        north = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFence ||
-            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole;
+        north = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence ||
+            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole;
         //east
         neighborPos = new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ());
-        east = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFence ||
-            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole;
+        east = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence ||
+            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole;
         //west
         neighborPos = new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ());
-        west = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFence ||
-            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole;
+        west = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence ||
+            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole;
         //south
         neighborPos = new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1);
-        south = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFence ||
-            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.meshFencePole;
+        south = worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence ||
+            worldIn.getBlockState(neighborPos).getBlock() == ModBlocks.mesh_fence_pole;
 
         return state.withProperty(NORTH, north).withProperty(EAST, east).withProperty(WEST, west).withProperty(SOUTH, south);
     }

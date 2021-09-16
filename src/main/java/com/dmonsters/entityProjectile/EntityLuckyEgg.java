@@ -78,8 +78,6 @@ public class EntityLuckyEgg extends EntityThrowable
             }
         }
 
-        double d0 = 0.08D;
-
         for (int k = 0; k < 8; ++k)
         {
             this.world.spawnParticle(EnumParticleTypes.ITEM_CRACK, this.posX, this.posY, this.posZ, ((double) this.rand.nextFloat() - 0.5D) * 0.08D, ((double) this.rand.nextFloat() - 0.5D) * 0.08D, ((double) this.rand.nextFloat() - 0.5D) * 0.08D, Item.getIdFromItem(Items.EGG));
@@ -115,7 +113,7 @@ public class EntityLuckyEgg extends EntityThrowable
     private Item spawnRandomItem()
     {
         //TIER 00
-        List<Item> dropableItems_TIER_00 = new ArrayList<Item>();
+        List<Item> dropableItems_TIER_00 = new ArrayList<>();
         dropableItems_TIER_00.add(Items.WOODEN_SWORD);
         dropableItems_TIER_00.add(Items.LEATHER_BOOTS);
         dropableItems_TIER_00.add(Items.LEATHER_CHESTPLATE);
@@ -123,7 +121,7 @@ public class EntityLuckyEgg extends EntityThrowable
         dropableItems_TIER_00.add(Items.LEATHER_LEGGINGS);
 
         //TIER 01
-        List<Item> dropableItems_TIER_01 = new ArrayList<Item>();
+        List<Item> dropableItems_TIER_01 = new ArrayList<>();
         dropableItems_TIER_01.add(Items.IRON_SWORD);
         dropableItems_TIER_01.add(Items.STONE_SWORD);
         dropableItems_TIER_01.add(Items.IRON_BOOTS);
@@ -132,7 +130,7 @@ public class EntityLuckyEgg extends EntityThrowable
         dropableItems_TIER_01.add(Items.IRON_LEGGINGS);
 
         //TIER 02
-        List<Item> dropableItems_TIER_02 = new ArrayList<Item>();
+        List<Item> dropableItems_TIER_02 = new ArrayList<>();
         dropableItems_TIER_02.add(Items.SHIELD);
         dropableItems_TIER_02.add(Items.BOW);
         dropableItems_TIER_02.add(Items.CHAINMAIL_BOOTS);
@@ -141,7 +139,7 @@ public class EntityLuckyEgg extends EntityThrowable
         dropableItems_TIER_02.add(Items.CHAINMAIL_LEGGINGS);
 
         //TIER 03
-        List<Item> dropableItems_TIER_03 = new ArrayList<Item>();
+        List<Item> dropableItems_TIER_03 = new ArrayList<>();
         dropableItems_TIER_03.add(Items.GOLDEN_SWORD);
         dropableItems_TIER_03.add(Items.GOLDEN_BOOTS);
         dropableItems_TIER_03.add(Items.GOLDEN_CHESTPLATE);
@@ -149,7 +147,7 @@ public class EntityLuckyEgg extends EntityThrowable
         dropableItems_TIER_03.add(Items.GOLDEN_LEGGINGS);
 
         //TIER 04
-        List<Item> dropableItems_TIER_04 = new ArrayList<Item>();
+        List<Item> dropableItems_TIER_04 = new ArrayList<>();
         dropableItems_TIER_04.add(Items.DIAMOND_SWORD);
         dropableItems_TIER_04.add(Items.DIAMOND_BOOTS);
         dropableItems_TIER_04.add(Items.DIAMOND_CHESTPLATE);
@@ -162,19 +160,19 @@ public class EntityLuckyEgg extends EntityThrowable
         {
             return getRandomEntryFromList(dropableItems_TIER_00);
         }
-        else if (rndTier > 0.3F && rndTier <= 0.55F)
+        else if (rndTier <= 0.55F)
         {
             return getRandomEntryFromList(dropableItems_TIER_01);
         }
-        else if (rndTier > 0.55F && rndTier <= 0.75F)
+        else if (rndTier <= 0.75F)
         {
             return getRandomEntryFromList(dropableItems_TIER_02);
         }
-        else if (rndTier > 0.75F && rndTier <= 0.9F)
+        else if (rndTier <= 0.9F)
         {
             return getRandomEntryFromList(dropableItems_TIER_03);
         }
-        else if (rndTier > 0.9F && rndTier <= 1)
+        else if (rndTier <= 1)
         {
             return getRandomEntryFromList(dropableItems_TIER_04);
         }

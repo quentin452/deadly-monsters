@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "dmonsters:harpoon_stone"
+    "item": "dmonsters:harpoon_iron"
   },
   "pattern": [
     "XX",
@@ -13,7 +13,7 @@
       "item": "minecraft:stick"
     },
     "X": {
-      "item": "minecraft:cobblestone"
+      "item": "minecraft:iron_ingot"
     },
     "F": {
       "item": "minecraft:flint"

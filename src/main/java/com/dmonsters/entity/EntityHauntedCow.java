@@ -15,7 +15,7 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.dmonsters.ai.EntityAIHauntedCowAttack;
+import com.dmonsters.ai.DeadlyMonsterAIMelee;
 import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
@@ -24,7 +24,7 @@ import com.dmonsters.network.PacketHandler;
 
 public class EntityHauntedCow extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "hauntedcow");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "haunted_cow");
 
     public EntityHauntedCow(World worldIn)
     {
@@ -35,7 +35,7 @@ public class EntityHauntedCow extends EntityMob
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIHauntedCowAttack(this, 1.0D, false));
+        this.tasks.addTask(2, new DeadlyMonsterAIMelee(this, 1.0D, false));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -45,7 +45,7 @@ public class EntityHauntedCow extends EntityMob
 
     protected SoundEvent getAmbientSound()
     {
-        return ModSounds.HAUNTEDCOW_AMBINET;
+        return ModSounds.HAUNTEDCOW_AMBIENT;
     }
 
     @Override
@@ -74,8 +74,8 @@ public class EntityHauntedCow extends EntityMob
     public boolean attackEntityAsMob(Entity entityIn)
     {
         super.attackEntityAsMob(entityIn);
-        this.playSound(ModSounds.HAUNTEDCOW_AMBINET, 1, 1);
-        if (ModConfig.hauntedCowDisableTimeChange)
+        this.playSound(ModSounds.HAUNTEDCOW_AMBIENT, 1, 1);
+        if (ModConfig.CATEGORY_HAUNTED_COW.hauntedCowDisableTimeChange)
             return true;
         Random random = new Random();
         float rndNum = random.nextFloat();
@@ -96,10 +96,10 @@ public class EntityHauntedCow extends EntityMob
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D * ModConfig.speedMultiplier * ModConfig.hauntedCowSpeedMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12.0D * ModConfig.strengthMultiplier * ModConfig.hauntedCowStrengthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_HAUNTED_COW.hauntedCowSpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_HAUNTED_COW.hauntedCowStrengthMultiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(24.0D * ModConfig.healthMultiplier * ModConfig.hauntedCowHealthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(24.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_HAUNTED_COW.hauntedCowHealthMultiplier);
     }
 
     protected void playStepSound(BlockPos pos, Block blockIn)

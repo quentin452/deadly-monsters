@@ -25,8 +25,7 @@ import com.dmonsters.main.ModConfig;
 
 public class Harpoon extends Item
 {
-    private int attackDamage = 1;
-    private String harpoonType = "stone";
+    private final int attackDamage;
 
     public Harpoon(String _harpoonType, int maxDamage, int _attackDamage)
     {
@@ -35,7 +34,6 @@ public class Harpoon extends Item
         this.setCreativeTab(MainMod.MOD_CREATIVETAB);
         this.maxStackSize = 1;
         attackDamage = _attackDamage;
-        harpoonType = _harpoonType;
         if (maxDamage > -1)
             this.setMaxDamage(maxDamage);
     }
@@ -83,18 +81,18 @@ public class Harpoon extends Item
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn)
     {
-        TextComponentTranslation msg = new TextComponentTranslation("item.dmonsters.addInformation.harpoon_1");
+        TextComponentTranslation msg = new TextComponentTranslation("item.dmonsters.add_information.harpoon_1");
         tooltip.add(msg.getUnformattedText());
-        if (ModConfig.topielecHarpoonOnly)
+        if (ModConfig.CATEGORY_TOPIELEC.topielecHarpoonOnly)
         {
-            msg = new TextComponentTranslation("item.dmonsters.addInformation.harpoon_2");
+            msg = new TextComponentTranslation("item.dmonsters.add_information.harpoon_2");
             tooltip.add(msg.getUnformattedText());
         }
     }
 
     private List<Item> createDropTable()
     {
-        List<Item> items = new ArrayList<Item>();
+        List<Item> items = new ArrayList<>();
         items.add(new ItemStack(Items.FISH, 1, 0).getItem());
         items.add(new ItemStack(Items.FISH, 1, 1).getItem());
         items.add(new ItemStack(Items.FISH, 1, 2).getItem());

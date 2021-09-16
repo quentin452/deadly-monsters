@@ -1,10 +1,11 @@
 package com.dmonsters.entity;
 
-import java.util.List;
-import java.util.PriorityQueue;
 import javax.annotation.Nullable;
 
-import net.minecraft.entity.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
@@ -21,14 +22,13 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.dmonsters.ai.EntityAIFreezerAttack;
+import com.dmonsters.ai.DeadlyMonsterAIMelee;
+import com.dmonsters.ai.EntityAIFreezeEnvironment;
 import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
@@ -38,8 +38,6 @@ public class EntityFreezer extends EntityMob
     public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "freezer");
     private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityFreezer.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EntityFreezer.class, DataSerializers.BOOLEAN);
-    private final PriorityQueue<BlockPos> freezedBlocks = new PriorityQueue(10);
-    private int AABBckeckTicks = 0;
 
     public EntityFreezer(World worldIn)
     {
@@ -66,7 +64,6 @@ public class EntityFreezer extends EntityMob
     {
         super.onUpdate();
         spawnParticle();
-        //dealFreezDamage();
     }
 
     @Override
@@ -101,10 +98,10 @@ public class EntityFreezer extends EntityMob
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.13D * ModConfig.speedMultiplier * ModConfig.freezerSpeedMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(16.0D * ModConfig.strengthMultiplier * ModConfig.freezerStrengthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.13D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_FREEZER.freezerSpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(16.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_FREEZER.freezerStrengthMultiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(45.0D * ModConfig.healthMultiplier * ModConfig.freezerHealthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(45.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_FREEZER.freezerHealthMultiplier);
     }
 
     @SideOnly(Side.CLIENT)
@@ -136,9 +133,9 @@ public class EntityFreezer extends EntityMob
     @Override
     protected void initEntityAI()
     {
-        //this.tasks.addTask(0, new MakeEnviroFreezed(this));
+        this.tasks.addTask(0, new EntityAIFreezeEnvironment(this));
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIFreezerAttack(this, 1.0D, true));
+        this.tasks.addTask(2, new DeadlyMonsterAIMelee(this, 1.0D, true));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.applyEntityAI();
@@ -169,39 +166,6 @@ public class EntityFreezer extends EntityMob
     public int getMaxSpawnedInChunk()
     {
         return 1;
-    }
-
-    private void dealFreezDamage()
-    {
-        if (!this.world.isRemote)
-        {
-            AABBckeckTicks++;
-            if (AABBckeckTicks < 40)
-                return;
-            AABBckeckTicks = 0;
-            BlockPos AABB_01 = new BlockPos(this.posX - 4, this.posY, this.posZ - 4);
-            BlockPos AABB_02 = new BlockPos(this.posX + 4, this.posY + 4, this.posZ + 4);
-            AxisAlignedBB AABB = new AxisAlignedBB(AABB_01, AABB_02);
-            List<Entity> entities = this.world.getEntitiesWithinAABBExcludingEntity(this, AABB);
-            RayTraceResult raytraceresult;
-            for (Entity entity : entities)
-            {
-                if (entity instanceof EntityLiving && ((EntityLiving) entity).getCreatureAttribute() != EnumCreatureAttribute.UNDEAD)
-                {
-                    entity.attackEntityFrom(DamageSource.GENERIC, 1);
-					/*
-					//spr�bujemy podnie�� pozyc� wekotra wy�ej
-					raytraceresult = this.world.rayTraceBlocks(this.getPositionVector(), entity.getPositionVector());
-					if (raytraceresult == null)
-						continue;
-					if (raytraceresult.typeOfHit == RayTraceResult.Type.ENTITY) {
-						if (raytraceresult.entityHit instanceof EntityLiving)
-							entity.attackEntityFrom(DamageSource.GENERIC, 1);
-					}
-					*/
-                }
-            }
-        }
     }
 
     private void spawnParticle()

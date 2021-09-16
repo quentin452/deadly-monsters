@@ -7,23 +7,21 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.dmonsters.main.IMetaBlockName;
 import com.dmonsters.main.MainMod;
 
-public class PresentBlock extends Block implements IMetaBlockName
+public class PresentBlock extends Block
 {
-    public static final PropertyEnum COLOR = PropertyEnum.create("color", EnumMode.class);
+    public static final PropertyEnum<EnumMode> COLOR = PropertyEnum.create("color", EnumMode.class);
 
     public PresentBlock()
     {
         super(Material.IRON);
-        setUnlocalizedName(MainMod.MODID + ".presentblock");
-        setRegistryName("presentblock");
+        setUnlocalizedName(MainMod.MODID + ".present_block");
+        setRegistryName("present_block");
         this.setHardness(3);
         this.setResistance(50);
         this.setTickRandomly(true);
@@ -36,13 +34,11 @@ public class PresentBlock extends Block implements IMetaBlockName
 
     public int getMetaFromState(IBlockState state)
     {
-        return ((EnumMode) state.getValue(COLOR)).getID();
+        return state.getValue(COLOR).getID();
     }
 
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
     {
-        Random random = new Random();
-        float rndNum = random.nextFloat();
         worldIn.setBlockToAir(pos);
     }
 
@@ -55,12 +51,6 @@ public class PresentBlock extends Block implements IMetaBlockName
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, COLOR);
-    }
-
-    @Override
-    public String getSpecialName(ItemStack stack)
-    {
-        return EnumMode.getColorFromMeta(stack.getMetadata());
     }
 
     public enum EnumMode implements IStringSerializable
@@ -89,7 +79,6 @@ public class PresentBlock extends Block implements IMetaBlockName
             switch (meta)
             {
                 case 0:
-                    mode = EnumMode.GREEN;
                     break;
                 case 1:
                     mode = EnumMode.YELLOW;

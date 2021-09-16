@@ -13,29 +13,29 @@ import com.dmonsters.blocks.*;
 
 public class ModBlocks
 {
-    public static StrengthenedStone strengthenedStone;
-    public static StrengthenedCobblestone strengthenedCobblestone;
-    public static BarbedWire barbedWire;
-    public static MeshFence meshFence;
-    public static MeshFencePole meshFencePole;
+    public static StrengthenedStone strengthened_stone;
+    public static StrengthenedCobblestone strengthened_cobblestone;
+    public static BarbedWire barbed_wire;
+    public static MeshFence mesh_fence;
+    public static MeshFencePole mesh_fence_pole;
     public static Dump dump;
-    public static SoulEye souleye;
-    public static PresentBlock presentBlock;
-    public static ChristmasTree christmasTree;
-    public static PresentBox presentBox;
+    public static SoulEye soul_eye;
+    public static PresentBlock present_block;
+    public static ChristmasTree christmas_tree;
+    public static PresentBox present_box;
 
     public static void init()
     {
-        strengthenedStone = new StrengthenedStone();
-        strengthenedCobblestone = new StrengthenedCobblestone();
-        barbedWire = new BarbedWire();
-        meshFence = new MeshFence();
-        meshFencePole = new MeshFencePole();
+        strengthened_stone = new StrengthenedStone();
+        strengthened_cobblestone = new StrengthenedCobblestone();
+        barbed_wire = new BarbedWire();
+        mesh_fence = new MeshFence();
+        mesh_fence_pole = new MeshFencePole();
         dump = new Dump();
-        souleye = new SoulEye();
-        presentBlock = new PresentBlock();
-        christmasTree = new ChristmasTree();
-        presentBox = new PresentBox();
+        soul_eye = new SoulEye();
+        present_block = new PresentBlock();
+        christmas_tree = new ChristmasTree();
+        present_box = new PresentBox();
     }
 
     @Mod.EventBusSubscriber(modid = MainMod.MODID)
@@ -49,32 +49,32 @@ public class ModBlocks
         {
             final IForgeRegistry<Block> registry = event.getRegistry();
             init();
-            registry.register(strengthenedStone);
-            registry.register(strengthenedCobblestone);
-            registry.register(souleye);
-            registry.register(christmasTree);
+            registry.register(strengthened_stone);
+            registry.register(strengthened_cobblestone);
+            registry.register(soul_eye);
+            registry.register(christmas_tree);
             registry.register(dump);
-            registry.register(barbedWire);
-            registry.register(meshFence);
-            registry.register(meshFencePole);
-            registry.register(presentBlock);
-            registry.register(presentBox);
+            registry.register(barbed_wire);
+            registry.register(mesh_fence);
+            registry.register(mesh_fence_pole);
+            registry.register(present_block);
+            registry.register(present_box);
         }
 
         @SubscribeEvent
         public static void registerItemBlocks(final RegistryEvent.Register<Item> event)
         {
             itemRegistry = event.getRegistry();
-            registerItemBlock(strengthenedStone);
-            registerItemBlock(strengthenedCobblestone);
-            registerItemBlock(souleye);
-            registerItemBlock(christmasTree);
+            registerItemBlock(strengthened_stone);
+            registerItemBlock(strengthened_cobblestone);
+            registerItemBlock(soul_eye);
+            registerItemBlock(christmas_tree);
             registerItemBlock(dump);
-            registerItemBlock(barbedWire);
-            registerItemBlock(meshFence);
-            registerItemBlock(meshFencePole);
-            registerItemBlock(presentBlock);
-            registerItemBlock(presentBox);
+            registerItemBlock(barbed_wire);
+            registerItemBlock(mesh_fence);
+            registerItemBlock(mesh_fence_pole);
+            registerItemBlock(present_block);
+            registerItemBlock(present_box);
         }
 
         private static void registerItemBlock(Block block)

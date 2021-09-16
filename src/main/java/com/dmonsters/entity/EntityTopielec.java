@@ -2,7 +2,7 @@ package com.dmonsters.entity;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.entity.MoverType;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
@@ -14,6 +14,7 @@ import com.dmonsters.ai.EntityAITopielecFollow;
 import com.dmonsters.ai.EntityAITopielecIdle;
 import com.dmonsters.ai.EntityAIWaterMobNearestPlayer;
 import com.dmonsters.main.MainMod;
+import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
 
 public class EntityTopielec extends EntityMob
@@ -35,11 +36,6 @@ public class EntityTopielec extends EntityMob
     public boolean canBreatheUnderwater()
     {
         return true;
-    }
-
-    public void moveEntityWithHeading(float strafe, float forward)
-    {
-        this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
     }
 
     public void setMovementVector(float randomMotionVecXIn, float randomMotionVecYIn, float randomMotionVecZIn)
@@ -69,7 +65,6 @@ public class EntityTopielec extends EntityMob
     @Override
     protected void initEntityAI()
     {
-        //this.tasks.addTask(0, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(1, new EntityAITopielecAttack(this, 0.5F));
         this.tasks.addTask(2, new EntityAITopielecFollow(this, 0.5F));
         this.tasks.addTask(3, new EntityAITopielecIdle(this));
@@ -115,7 +110,7 @@ public class EntityTopielec extends EntityMob
     @Override
     protected SoundEvent getAmbientSound()
     {
-        return ModSounds.TOPIELEC_AMBINET;
+        return ModSounds.TOPIELEC_AMBIENT;
     }
 
     @Override
@@ -152,8 +147,19 @@ public class EntityTopielec extends EntityMob
         return this.posY > 45.0D && this.posY < (double) this.world.getSeaLevel() && super.getCanSpawnHere();
     }
 
+    @Override
+    protected void applyEntityAttributes()
+    {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_TOPIELEC.topielecSpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_TOPIELEC.topielecStrengthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_TOPIELEC.topielecHealthMultiplier);
+    }
+
     private void applyEntityAI()
     {
-        this.targetTasks.addTask(0, new EntityAIWaterMobNearestPlayer(this, 20));
+        this.targetTasks.addTask(0, new EntityAIWaterMobNearestPlayer(this, ModConfig.CATEGORY_TOPIELEC.topielecSearchDistance));
     }
 }

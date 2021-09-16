@@ -20,7 +20,6 @@ import com.dmonsters.main.ModBlocks;
 
 public class ChristmasTree extends Block
 {
-    protected static final AxisAlignedBB BLOCK_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 1.9375D, 0.9375D);
     protected static final AxisAlignedBB BLOCK_COLLISION_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 1.0D, 0.9375D);
 
     public ChristmasTree()
@@ -32,11 +31,6 @@ public class ChristmasTree extends Block
         this.setTickRandomly(true);
         this.setHardness(2);
         this.setResistance(50);
-    }
-
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
-    {
-        return BLOCK_AABB;
     }
 
     public boolean isFullCube(IBlockState state)
@@ -65,7 +59,7 @@ public class ChristmasTree extends Block
             BlockPos spawnPos = selectPos(worldIn, pos);
             if (spawnPos != null)
             {
-                worldIn.setBlockState(spawnPos, ModBlocks.presentBox.getDefaultState());
+                worldIn.setBlockState(spawnPos, ModBlocks.present_box.getDefaultState());
             }
         }
     }

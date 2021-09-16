@@ -22,25 +22,25 @@ public class ModelEntrail extends ModelBase
         middle.setRotationPoint(0F, 19F, -1F);
         middle.setTextureSize(64, 32);
         middle.mirror = true;
-        setRotation(middle, 0F, 0F, 0F);
+        setRotation(middle);
         bottom = new ModelRenderer(this, 46, 0);
         bottom.addBox(-2F, -2F, 2F, 4, 4, 5);
         bottom.setRotationPoint(0F, 19F, 3F);
         bottom.setTextureSize(64, 32);
         bottom.mirror = true;
-        setRotation(bottom, 0F, 0F, 0F);
+        setRotation(bottom);
         head = new ModelRenderer(this, 0, 14);
         head.addBox(-4F, -8F, -7F, 8, 8, 8);
         head.setRotationPoint(0F, 9F, -1F);
         head.setTextureSize(64, 64);
         head.mirror = true;
-        setRotation(head, 0F, 0F, 0F);
+        setRotation(head);
         end = new ModelRenderer(this, 2, 2);
         end.addBox(-1F, -1F, 4.5F, 2, 2, 4);
         end.setRotationPoint(0F, 19F, 5F);
         end.setTextureSize(64, 64);
         end.mirror = true;
-        setRotation(end, 0F, 0F, 0F);
+        setRotation(end);
     }
 
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
@@ -56,9 +56,6 @@ public class ModelEntrail extends ModelBase
 
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
-        //if (entityIn.getDistance(entityIn.prevPosX, entityIn.prevPosY, entityIn.prevPosZ) == 0)
-        //  return;
-
         this.middle.rotateAngleX = MathHelper.cos(ageInTicks * 0.2F + 2 * 0.15F * (float) Math.PI) * (float) Math.PI * 0.05F * (float) (1);
         this.middle.rotationPointY = MathHelper.sin(ageInTicks * 0.2F + 2 * 0.15F * (float) Math.PI) * (float) Math.PI * 0.2F * (float) 0;
         this.middle.rotationPointY += 5;
@@ -75,10 +72,10 @@ public class ModelEntrail extends ModelBase
         this.head.rotateAngleX = headPitch * 0.017453292F;
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
+    private void setRotation(ModelRenderer model)
     {
-        model.rotateAngleX = x;
-        model.rotateAngleY = y;
-        model.rotateAngleZ = z;
+        model.rotateAngleX = (float) 0.0;
+        model.rotateAngleY = (float) 0.0;
+        model.rotateAngleZ = (float) 0.0;
     }
 }

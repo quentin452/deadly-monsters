@@ -1,0 +1,13 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "dmonsters:soul_eye_awake"
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}],
+    "mode=sleep": {"model": "dmonsters:soul_eye_sleeping"},
+    "mode=awaking": {"model": "dmonsters:soul_eye_awaking"},
+    "mode=awake": {"model": "dmonsters:soul_eye_awake"}
+  }
+}

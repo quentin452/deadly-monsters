@@ -26,14 +26,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.dmonsters.ai.EntityAIMutantSteveAttack;
+import com.dmonsters.ai.DeadlyMonsterAIMelee;
 import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
 
 public class EntityMutantSteve extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "steve_zombie");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "mutant_steve");
     private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityMutantSteve.class, DataSerializers.BOOLEAN);
 
     public EntityMutantSteve(World worldIn)
@@ -102,10 +102,10 @@ public class EntityMutantSteve extends EntityMob
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.13D * ModConfig.speedMultiplier * ModConfig.mutantSteveSpeedMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(16.0D * ModConfig.strengthMultiplier * ModConfig.mutantSteveStrengthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.13D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_MUTANT_STEVE.mutantSteveSpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(16.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_MUTANT_STEVE.mutantSteveStrengthMultiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D * ModConfig.healthMultiplier * ModConfig.mutantSteveHealthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_MUTANT_STEVE.mutantSteveHealthMultiplier);
     }
 
     public EnumCreatureAttribute getCreatureAttribute()
@@ -116,26 +116,24 @@ public class EntityMutantSteve extends EntityMob
     @Override
     protected void initEntityAI()
     {
-        this.tasks.addTask(1, new EntityAIMutantSteveAttack(this, 2.0D, false));
+        this.tasks.addTask(1, new DeadlyMonsterAIMelee(this, 2.0D, false));
         this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(8, new EntityAILookIdle(this));
         this.applyEntityAI();
     }
-    
-    /*
-    @Override
-    protected SoundEvent getAmbientSound()
-    {
-    	return ModSounds.MUTANT_AMBIENT;
-    }
-    */
 
     @Override
     protected void entityInit()
     {
         super.entityInit();
         this.getDataManager().register(ARMS_RAISED, Boolean.FALSE);
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound()
+    {
+        return ModSounds.MUTANT_AMBIENT;
     }
 
     @Override

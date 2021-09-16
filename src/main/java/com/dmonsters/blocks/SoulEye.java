@@ -29,13 +29,13 @@ import com.dmonsters.network.PacketHandler;
 
 public class SoulEye extends Block
 {
-    public static final PropertyEnum MODE = PropertyEnum.create("mode", EnumMode.class);
+    public static final PropertyEnum<EnumMode> MODE = PropertyEnum.create("mode", EnumMode.class);
 
     public SoulEye()
     {
         super(Material.IRON);
-        setUnlocalizedName(MainMod.MODID + ".souleye");
-        setRegistryName("souleye");
+        setUnlocalizedName(MainMod.MODID + ".soul_eye");
+        setRegistryName("soul_eye");
         setCreativeTab(MainMod.MOD_CREATIVETAB);
         this.setHardness(3);
         this.setResistance(3);
@@ -50,7 +50,7 @@ public class SoulEye extends Block
 
     public int getMetaFromState(IBlockState state)
     {
-        return ((EnumMode) state.getValue(MODE)).getID();
+        return state.getValue(MODE).getID();
     }
 
     public boolean isFullCube(IBlockState state)
@@ -68,30 +68,30 @@ public class SoulEye extends Block
         if (!(state.getBlock() instanceof SoulEye))
             return;
         float lightLevel = worldIn.getLight(pos);
-        int meta = ((EnumMode) state.getValue(MODE)).getID();
+        int meta = state.getValue(MODE).getID();
         EnumMode mode = EnumMode.getStateFromMeta(meta);
         if (lightLevel <= 12)
         {
             if (mode == EnumMode.SLEEP)
-                worldIn.setBlockState(pos, ModBlocks.souleye.getStateFromMeta(1));
+                worldIn.setBlockState(pos, ModBlocks.soul_eye.getStateFromMeta(1));
             else if (mode == EnumMode.AWAKING)
-                worldIn.setBlockState(pos, ModBlocks.souleye.getStateFromMeta(2));
+                worldIn.setBlockState(pos, ModBlocks.soul_eye.getStateFromMeta(2));
             else if (mode == EnumMode.AWAKE)
-                killLivingNearby(worldIn, pos, 4);
+                killLivingNearby(worldIn, pos);
         }
         else
         {
             if (mode == EnumMode.AWAKING)
-                worldIn.setBlockState(pos, ModBlocks.souleye.getStateFromMeta(0));
+                worldIn.setBlockState(pos, ModBlocks.soul_eye.getStateFromMeta(0));
             else if (mode == EnumMode.AWAKE)
-                worldIn.setBlockState(pos, ModBlocks.souleye.getStateFromMeta(1));
+                worldIn.setBlockState(pos, ModBlocks.soul_eye.getStateFromMeta(1));
         }
     }
 
     @SideOnly(Side.CLIENT)
     public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
     {
-        int meta = ((EnumMode) stateIn.getValue(MODE)).getID();
+        int meta = stateIn.getValue(MODE).getID();
         EnumMode mode = EnumMode.getStateFromMeta(meta);
         if (mode != EnumMode.AWAKE)
             return;
@@ -138,17 +138,16 @@ public class SoulEye extends Block
         return new BlockStateContainer(this, MODE);
     }
 
-    private void killLivingNearby(World worldIn, BlockPos pos, int range)
+    private void killLivingNearby(World worldIn, BlockPos pos)
     {
         if (!worldIn.isRemote)
         {
-            BlockPos AABB_01 = new BlockPos(pos.getX() - range, pos.getY(), pos.getZ() - range);
-            BlockPos AABB_02 = new BlockPos(pos.getX() + range, pos.getY() + range, pos.getZ() + range);
+            BlockPos AABB_01 = new BlockPos(pos.getX() - 4, pos.getY(), pos.getZ() - 4);
+            BlockPos AABB_02 = new BlockPos(pos.getX() + 4, pos.getY() + 4, pos.getZ() + 4);
             AxisAlignedBB AABB = new AxisAlignedBB(AABB_01, AABB_02);
             List<EntityLiving> entities = worldIn.getEntitiesWithinAABB(EntityLiving.class, AABB);
-            for (int i = 0; i < entities.size(); i++)
+            for (Entity entity : entities)
             {
-                Entity entity = entities.get(i);
                 spawnItem(entity);
                 entity.setDead();
                 PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(entity.getPosition(), PacketClientFXUpdate.Type.SOULEYE));
@@ -169,7 +168,7 @@ public class SoulEye extends Block
 
     private List<Item> createDropTable()
     {
-        List<Item> items = new ArrayList<Item>();
+        List<Item> items = new ArrayList<>();
         items.add(Items.EMERALD);
         items.add(Items.GOLD_NUGGET);
         items.add(Items.GUNPOWDER);
@@ -199,7 +198,6 @@ public class SoulEye extends Block
             switch (meta)
             {
                 case 0:
-                    mode = EnumMode.SLEEP;
                     break;
                 case 1:
                     mode = EnumMode.AWAKING;

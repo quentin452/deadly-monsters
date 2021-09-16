@@ -16,7 +16,6 @@ public final class ModCreativeTabs extends CreativeTabs
     @SideOnly(Side.CLIENT)
     public ItemStack getTabIconItem()
     {
-        return new ItemStack(ModItems.modItem);
-        //return ModItems.modItem;
+        return new ItemStack(ModItems.mod_item);
     }
 }

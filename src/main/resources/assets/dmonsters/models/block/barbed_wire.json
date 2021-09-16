@@ -1,7 +1,7 @@
 {
   "textures": {
-    "0": "dmonsters:blocks/barbedWire",
-    "particle": "dmonsters:blocks/barbedWire"
+    "0": "dmonsters:blocks/barbed_wire",
+    "particle": "dmonsters:blocks/barbed_wire"
   },
   "parent": "block/block",
   "elements": [

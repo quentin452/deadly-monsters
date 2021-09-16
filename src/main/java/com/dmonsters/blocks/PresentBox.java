@@ -3,7 +3,6 @@ package com.dmonsters.blocks;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -41,12 +40,6 @@ public class PresentBox extends Block
         setCreativeTab(MainMod.MOD_CREATIVETAB);
         this.setHardness(1);
         this.setResistance(50);
-    }
-
-    @Nullable
-    public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, World worldIn, BlockPos pos)
-    {
-        return NULL_AABB;
     }
 
     public boolean isFullCube(IBlockState state)
@@ -114,13 +107,13 @@ public class PresentBox extends Block
 
     private Item spawnRandomItem()
     {
-        List<Item> itemsList = new ArrayList<Item>();
+        List<Item> itemsList = new ArrayList<>();
         itemsList.add(Items.APPLE);
         itemsList.add(Items.GOLD_NUGGET);
         itemsList.add(Items.LEATHER_HELMET);
         itemsList.add(Items.FISH);
         itemsList.add(Items.REDSTONE);
-        itemsList.add(ModItems.mobSpawnerItem_present);
+        itemsList.add(ModItems.mob_spawner_item_present);
         itemsList.add(Items.GUNPOWDER);
         itemsList.add(Items.REDSTONE);
         itemsList.add(Items.IRON_INGOT);
@@ -132,7 +125,7 @@ public class PresentBox extends Block
 
     private EntityLiving spawnMonster(World worldIn)
     {
-        List<EntityLiving> monstersList = new ArrayList<EntityLiving>();
+        List<EntityLiving> monstersList = new ArrayList<>();
         monstersList.add(new EntityCreeper(worldIn));
         monstersList.add(new EntityZombie(worldIn));
         monstersList.add(new EntitySkeleton(worldIn));

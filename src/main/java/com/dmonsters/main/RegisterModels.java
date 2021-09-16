@@ -22,28 +22,28 @@ public class RegisterModels
     private static void registerItemModels()
     {
         registerItemModel(ModItems.rebar);
-        registerItemModel(ModItems.luckyEgg);
-        registerItemModel(ModItems.babyEye);
-        registerItemModel(ModItems.womanHeart);
-        registerItemModel(ModItems.widemanSpine);
-        registerItemModel(ModItems.entrailFlesh);
-        registerItemModel(ModItems.purgePill);
+        registerItemModel(ModItems.lucky_egg);
+        registerItemModel(ModItems.unborn_baby_eye);
+        registerItemModel(ModItems.bloody_maiden_heart);
+        registerItemModel(ModItems.fallen_leader_spine);
+        registerItemModel(ModItems.entrail_flesh);
+        registerItemModel(ModItems.poopoo_pill);
         registerItemModel(ModItems.dagon);
-        registerItemModel(ModItems.flyingDagon);
-        registerItemModel(ModItems.modItem);
-        registerItemModel(ModItems.sunlightDrop);
-        registerItemModel(ModItems.mobSpawnerItem_baby);
-        registerItemModel(ModItems.mobSpawnerItem_climber);
-        registerItemModel(ModItems.mobSpawnerItem_entrail);
-        registerItemModel(ModItems.mobSpawnerItem_freezer);
-        registerItemModel(ModItems.mobSpawnerItem_mutantSteve);
-        registerItemModel(ModItems.mobSpawnerItem_wideman);
-        registerItemModel(ModItems.mobSpawnerItem_woman);
-        registerItemModel(ModItems.mobSpawnerItem_zombieChicken);
-        registerItemModel(ModItems.mobSpawnerItem_present);
-        registerItemModel(ModItems.mobSpawnerItem_stranger);
-        registerItemModel(ModItems.mobSpawnerItem_hauntedCow);
-        registerItemModel(ModItems.mobSpawnerItem_topielec);
+        registerItemModel(ModItems.flying_dagon);
+        registerItemModel(ModItems.mod_item);
+        registerItemModel(ModItems.sunlight_drop);
+        registerItemModel(ModItems.mob_spawner_item_unborn_baby);
+        registerItemModel(ModItems.mob_spawner_item_climber);
+        registerItemModel(ModItems.mob_spawner_item_entrail);
+        registerItemModel(ModItems.mob_spawner_item_freezer);
+        registerItemModel(ModItems.mob_spawner_item_mutant_steve);
+        registerItemModel(ModItems.mob_spawner_item_fallen_leader);
+        registerItemModel(ModItems.mob_spawner_item_bloody_maiden);
+        registerItemModel(ModItems.mob_spawner_item_zombie_chicken);
+        registerItemModel(ModItems.mob_spawner_item_present);
+        registerItemModel(ModItems.mob_spawner_item_stranger);
+        registerItemModel(ModItems.mob_spawner_item_haunted_cow);
+        registerItemModel(ModItems.mob_spawner_item_topielec);
         registerItemModel(ModItems.harpoon_stone);
         registerItemModel(ModItems.harpoon_iron);
         registerItemModel(ModItems.harpoon_diamond);
@@ -52,16 +52,16 @@ public class RegisterModels
 
     private static void registerBlockItemModels()
     {
-        registerBlockItemModel(ModBlocks.strengthenedStone);
-        registerBlockItemModel(ModBlocks.strengthenedCobblestone);
-        registerBlockItemModel(ModBlocks.souleye);
-        registerBlockItemModel(ModBlocks.christmasTree);
+        registerBlockItemModel(ModBlocks.strengthened_stone);
+        registerBlockItemModel(ModBlocks.strengthened_cobblestone);
+        registerBlockItemModel(ModBlocks.soul_eye);
+        registerBlockItemModel(ModBlocks.christmas_tree);
         registerBlockItemModel(ModBlocks.dump);
-        registerBlockItemModel(ModBlocks.barbedWire);
-        registerBlockItemModel(ModBlocks.meshFence);
-        registerBlockItemModel(ModBlocks.meshFencePole);
-        registerBlockItemModel(ModBlocks.presentBlock);
-        registerBlockItemModel(ModBlocks.presentBox);
+        registerBlockItemModel(ModBlocks.barbed_wire);
+        registerBlockItemModel(ModBlocks.mesh_fence);
+        registerBlockItemModel(ModBlocks.mesh_fence_pole);
+        registerBlockItemModel(ModBlocks.present_block);
+        registerBlockItemModel(ModBlocks.present_box);
     }
 
     private static void registerItemModel(Item item)

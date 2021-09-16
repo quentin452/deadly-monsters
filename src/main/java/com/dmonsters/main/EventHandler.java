@@ -30,19 +30,19 @@ public class EventHandler
         Entity entity = e.getTarget();
         if (!e.getEntity().getEntityWorld().isRemote)
         {
-            if (!ModConfig.hauntedCowDisabled && entity instanceof EntityHauntedCow)
+            if (!ModConfig.CATEGORY_HAUNTED_COW.hauntedCowDisabled && entity instanceof EntityHauntedCow)
             {
                 World world = entity.getEntityWorld();
                 EntityPlayer player = e.getEntityPlayer();
                 Item itemClass = player.getHeldItemMainhand().getItem();
-                if (ModConfig.hauntedCowDisableTimeChange || itemClass instanceof ItemSword || itemClass instanceof ItemBow || (Loader.isModLoaded("tconstruct") && itemClass instanceof SwordCore) || (Loader.isModLoaded("tconstruct") && itemClass instanceof BowCore))
+                if (ModConfig.CATEGORY_HAUNTED_COW.hauntedCowDisableTimeChange || itemClass instanceof ItemSword || itemClass instanceof ItemBow || (Loader.isModLoaded("tconstruct") && itemClass instanceof SwordCore) || (Loader.isModLoaded("tconstruct") && itemClass instanceof BowCore))
                 {
                     return;
                 }
                 if (player.world.isDaytime())
                 {
                     Style red = new Style().setColor(TextFormatting.DARK_RED);
-                    TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.hauntedcow");
+                    TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.haunted_cow");
                     msg.setStyle(red);
                     PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(player.getPosition(), PacketClientFXUpdate.Type.TIME_CHANGE));
                     long worldTime = world.getWorldTime();
@@ -55,7 +55,7 @@ public class EventHandler
                 }
             }
         }
-        if (!ModConfig.topielecDisabled && ModConfig.topielecHarpoonOnly && entity instanceof EntityTopielec)
+        if (!ModConfig.CATEGORY_TOPIELEC.topielecDisabled && ModConfig.CATEGORY_TOPIELEC.topielecHarpoonOnly && entity instanceof EntityTopielec)
         {
             EntityPlayer player = e.getEntityPlayer();
             Item itemClass = player.getHeldItemMainhand().getItem();

@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "dmonsters:poopoo_pill"
+  },
+  "pattern": [
+    "W",
+    "C",
+    "P"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "W": {
+      "item": "minecraft:wheat"
+    },
+    "C": {
+      "item": "minecraft:dye",
+      "data": 2
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  }
+}

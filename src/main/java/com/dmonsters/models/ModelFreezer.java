@@ -17,7 +17,6 @@ public class ModelFreezer extends ModelBase
     ModelRenderer upperhead;
     ModelRenderer body;
     ModelRenderer hips;
-    ModelRenderer meat;
     ModelRenderer torso;
 
     public ModelFreezer()
@@ -30,50 +29,50 @@ public class ModelFreezer extends ModelBase
         head.setRotationPoint(0F, 1F, 0F);
         head.setTextureSize(64, 64);
         head.mirror = true;
-        setRotation(head, 0F, 0F, 0F);
+        setRotation(head);
         neck = new ModelRenderer(this, 16, 16);
         neck.addBox(-4F, 0F, -2F, 4, 1, 4);
         neck.setRotationPoint(2F, 1F, 0F);
         neck.setTextureSize(64, 64);
         neck.mirror = true;
-        setRotation(neck, 0F, 0F, 0F);
+        setRotation(neck);
         torso = new ModelRenderer(this, 33, 7);
         torso.addBox(0F, 0F, 0F, 4, 5, 3);
         torso.setRotationPoint(-2F, 6F, -2F);
         torso.setTextureSize(64, 64);
         torso.mirror = true;
-        setRotation(torso, 0F, 0F, 0F);
+        setRotation(torso);
         rightarm = new ModelRenderer(this, 51, 16);
         rightarm.addBox(-3F, -2F, -2F, 3, 12, 3);
         rightarm.setRotationPoint(-4F, 5F, 0F);
         rightarm.setTextureSize(64, 64);
         rightarm.mirror = true;
-        setRotation(rightarm, 0F, 0F, 0F);
+        setRotation(rightarm);
         leftarm = new ModelRenderer(this, 38, 16);
         leftarm.addBox(-1F, -2F, -2F, 3, 12, 3);
         leftarm.setRotationPoint(5F, 5F, 0F);
         leftarm.setTextureSize(64, 64);
         leftarm.mirror = true;
-        setRotation(leftarm, 0F, 0F, 0F);
+        setRotation(leftarm);
         upperhead = new ModelRenderer(this, 0, 22);
         upperhead.addBox(0F, 0F, 0F, 6, 6, 6);
         upperhead.setRotationPoint(-3F, -13F, -3F);
         upperhead.setTextureSize(64, 64);
         upperhead.mirror = true;
-        setRotation(upperhead, 0F, 0F, 0F);
+        setRotation(upperhead);
         head.addChild(upperhead);
         body = new ModelRenderer(this, 33, 0);
         body.addBox(0F, 0F, 0F, 8, 4, 3);
         body.setRotationPoint(-4F, 2F, -2F);
         body.setTextureSize(64, 64);
         body.mirror = true;
-        setRotation(body, 0F, 0F, 0F);
+        setRotation(body);
         hips = new ModelRenderer(this, 0, 35);
         hips.addBox(-4F, 0F, -4F, 8, 8, 8);
         hips.setRotationPoint(0F, 11F, 0F);
         hips.setTextureSize(64, 64);
         hips.mirror = true;
-        setRotation(hips, 0F, 0F, 0F);
+        setRotation(hips);
     }
 
     public void render(Entity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scale)
@@ -104,7 +103,7 @@ public class ModelFreezer extends ModelBase
         if (isAttaking)
         {
             super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
-            boolean flag = entityIn instanceof EntityFreezer && ((EntityFreezer) entityIn).isArmsRaised();
+            boolean flag = ((EntityFreezer) entityIn).isArmsRaised();
 
             this.head.rotateAngleY = netHeadYaw * 0.017453292F;
             this.head.rotateAngleX = headPitch * 0.017453292F;
@@ -142,10 +141,10 @@ public class ModelFreezer extends ModelBase
 
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z)
+    private void setRotation(ModelRenderer model)
     {
-        model.rotateAngleX = x;
-        model.rotateAngleY = y;
-        model.rotateAngleZ = z;
+        model.rotateAngleX = (float) 0.0;
+        model.rotateAngleY = (float) 0.0;
+        model.rotateAngleZ = (float) 0.0;
     }
 }

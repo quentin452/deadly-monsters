@@ -1,6 +1,5 @@
 package com.dmonsters.items;
 
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,9 +10,6 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
@@ -24,25 +20,19 @@ public class SunlightDrop extends Item
 {
     public SunlightDrop()
     {
-        setRegistryName("sunlightdrop");
-        setUnlocalizedName(MainMod.MODID + ".sunlightdrop");
+        setRegistryName("sunlight_drop");
+        setUnlocalizedName(MainMod.MODID + ".sunlight_drop");
         this.setCreativeTab(MainMod.MOD_CREATIVETAB);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public void initModel()
-    {
-        ModelLoader.setCustomModelResourceLocation(this, 0, new ModelResourceLocation(getRegistryName(), "inventory"));
     }
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
     {
         ItemStack itemStackIn = playerIn.getHeldItem(hand);
-        if (ModConfig.hauntedCowDisableTimeChange)
+        if (ModConfig.CATEGORY_HAUNTED_COW.hauntedCowDisableTimeChange)
         {
             Style red = new Style().setColor(TextFormatting.DARK_RED);
-            TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.hauntedcowTimeDisabled");
+            TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.haunted_cow_time_disabled");
             msg.setStyle(red);
             playerIn.sendMessage(msg);
             return new ActionResult(EnumActionResult.FAIL, itemStackIn);

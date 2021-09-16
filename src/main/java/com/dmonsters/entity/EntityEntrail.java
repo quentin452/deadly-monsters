@@ -1,6 +1,5 @@
 package com.dmonsters.entity;
 
-import java.util.PriorityQueue;
 import javax.annotation.Nullable;
 
 import net.minecraft.entity.Entity;
@@ -11,16 +10,13 @@ import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.dmonsters.ai.EntityAIEntrailAttack;
+import com.dmonsters.ai.DeadlyMonsterAIMelee;
 import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
@@ -28,9 +24,6 @@ import com.dmonsters.main.ModSounds;
 public class EntityEntrail extends EntityMob
 {
     public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "entrail");
-    private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityEntrail.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EntityEntrail.class, DataSerializers.BOOLEAN);
-    private final PriorityQueue<BlockPos> freezedBlocks = new PriorityQueue(10);
 
     public EntityEntrail(World worldIn)
     {
@@ -70,8 +63,7 @@ public class EntityEntrail extends EntityMob
             slime.setPosition(x, y, z);
             this.world.spawnEntity(slime);
         }
-        boolean value = super.attackEntityFrom(source, amount);
-        return value;
+        return super.attackEntityFrom(source, amount);
     }
 
     @Override
@@ -105,10 +97,10 @@ public class EntityEntrail extends EntityMob
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D * ModConfig.speedMultiplier * ModConfig.entrailSpeedMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D * ModConfig.strengthMultiplier * ModConfig.entrailStrengthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_ENTRAIL.entrailSpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(10.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_ENTRAIL.entrailStrengthMultiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D * ModConfig.healthMultiplier * ModConfig.entrailHealthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(30.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_ENTRAIL.entrailHealthMultiplier);
     }
 
     public EnumCreatureAttribute getCreatureAttribute()
@@ -120,7 +112,7 @@ public class EntityEntrail extends EntityMob
     protected void initEntityAI()
     {
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIEntrailAttack(this, 1.0D, true));
+        this.tasks.addTask(2, new DeadlyMonsterAIMelee(this, 1.0D, true));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));

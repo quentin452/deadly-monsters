@@ -20,14 +20,6 @@ public class PacketClientSetVelocity implements IMessage
     {
     }
 
-    public PacketClientSetVelocity(float _x, float _y, float _z, int id)
-    {
-        entityID = id;
-        x = _x;
-        y = _y;
-        z = _z;
-    }
-
     @Override
     public void fromBytes(ByteBuf buf)
     {
@@ -51,11 +43,11 @@ public class PacketClientSetVelocity implements IMessage
         @Override
         public IMessage onMessage(PacketClientSetVelocity message, MessageContext ctx)
         {
-            FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> handle(message, ctx));
+            FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> handle(message));
             return null;
         }
 
-        private void handle(PacketClientSetVelocity message, MessageContext ctx)
+        private void handle(PacketClientSetVelocity message)
         {
             World world = Minecraft.getMinecraft().world;
             Entity entity = world.getEntityByID(message.entityID);

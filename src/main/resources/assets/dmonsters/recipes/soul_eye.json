@@ -1,0 +1,25 @@
+{
+  "result": {
+    "item": "dmonsters:soul_eye"
+  },
+  "pattern": [
+    "FEF",
+    "FHF",
+    "FSF"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "E": {
+      "item": "dmonsters:unborn_baby_eye"
+    },
+    "F": {
+      "item": "dmonsters:entrail_flesh"
+    },
+    "S": {
+      "item": "dmonsters:fallen_leader_spine"
+    },
+    "H": {
+      "item": "dmonsters:bloody_maiden_heart"
+    }
+  }
+}

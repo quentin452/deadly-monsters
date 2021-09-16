@@ -45,8 +45,6 @@ public class EntityDagon extends EntityThrowable
             world.spawnEntity(item);
         }
 
-        double d0 = 0.08D;
-
         for (int k = 0; k < 8; ++k)
         {
             this.world.spawnParticle(EnumParticleTypes.CRIT_MAGIC, this.posX, this.posY, this.posZ, ((double) this.rand.nextFloat() - 0.5D) * 0.08D, ((double) this.rand.nextFloat() - 0.5D) * 0.08D, ((double) this.rand.nextFloat() - 0.5D) * 0.08D, Item.getIdFromItem(Items.EGG));

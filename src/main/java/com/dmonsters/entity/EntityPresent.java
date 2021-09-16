@@ -1,6 +1,5 @@
 package com.dmonsters.entity;
 
-import java.util.PriorityQueue;
 import javax.annotation.Nullable;
 
 import net.minecraft.block.Block;
@@ -11,16 +10,13 @@ import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.dmonsters.ai.EntityAIPresent;
+import com.dmonsters.ai.DeadlyMonsterAIMelee;
 import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModBlocks;
 import com.dmonsters.main.ModConfig;
@@ -29,9 +25,6 @@ import com.dmonsters.main.ModSounds;
 public class EntityPresent extends EntityMob
 {
     public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "present");
-    private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityPresent.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EntityPresent.class, DataSerializers.BOOLEAN);
-    private final PriorityQueue<BlockPos> freezedBlocks = new PriorityQueue(10);
     private int cageTicks = 0;
     private boolean debugCage;
 
@@ -98,17 +91,17 @@ public class EntityPresent extends EntityMob
     {
         super.applyEntityAttributes();
         this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D * ModConfig.speedMultiplier * ModConfig.entrailSpeedMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D * ModConfig.strengthMultiplier * ModConfig.entrailStrengthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_PRESENT.presentSpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_PRESENT.presentStrengthMultiplier);
         this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(26.0D * ModConfig.healthMultiplier * ModConfig.entrailHealthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(26.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_PRESENT.presentHealthMultiplier);
     }
 
     @Override
     protected void initEntityAI()
     {
         this.tasks.addTask(1, new EntityAISwimming(this));
-        this.tasks.addTask(2, new EntityAIPresent(this, 1.0D, true));
+        this.tasks.addTask(2, new DeadlyMonsterAIMelee(this, 1.0D, true));
         this.tasks.addTask(5, new EntityAIMoveTowardsRestriction(this, 1.0D));
         this.tasks.addTask(7, new EntityAIWander(this, 1.0D));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
@@ -167,9 +160,9 @@ public class EntityPresent extends EntityMob
                         {
                             if (x == hCenter ||
                                 z == hCenter)
-                                this.world.setBlockState(pos, ModBlocks.presentBlock.getStateFromMeta(1));
+                                this.world.setBlockState(pos, ModBlocks.present_block.getStateFromMeta(1));
                             else
-                                this.world.setBlockState(pos, ModBlocks.presentBlock.getStateFromMeta(0));
+                                this.world.setBlockState(pos, ModBlocks.present_block.getStateFromMeta(0));
                         }
                     }
                     else if (i == 0 || i == vSize - 1)
@@ -192,9 +185,9 @@ public class EntityPresent extends EntityMob
                                 }
                             }
                             if (x == 0 || z == 0)
-                                this.world.setBlockState(pos, ModBlocks.presentBlock.getStateFromMeta(1));
+                                this.world.setBlockState(pos, ModBlocks.present_block.getStateFromMeta(1));
                             else
-                                this.world.setBlockState(pos, ModBlocks.presentBlock.getStateFromMeta(0));
+                                this.world.setBlockState(pos, ModBlocks.present_block.getStateFromMeta(0));
                         }
                     }
                 }

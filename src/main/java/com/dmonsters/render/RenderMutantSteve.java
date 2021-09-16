@@ -11,18 +11,16 @@ import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.entity.EntityMutantSteve;
 import com.dmonsters.main.MainMod;
-import com.dmonsters.models.ModelZombieSteve;
+import com.dmonsters.models.ModelMutantSteve;
 
 public class RenderMutantSteve extends RenderLiving<EntityMutantSteve>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/mutantSteve.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/mutant_steve.png");
 
     public RenderMutantSteve(RenderManager rendermanagerIn)
     {
-        // We use the vanilla zombie model here and we simply
-        // retexture it. Of course you can make your own model
-        super(rendermanagerIn, new ModelZombieSteve(), 0.5F);
+        super(rendermanagerIn, new ModelMutantSteve(), 0.5F);
     }
 
     protected void preRenderCallback(EntityMutantSteve entity, float f)

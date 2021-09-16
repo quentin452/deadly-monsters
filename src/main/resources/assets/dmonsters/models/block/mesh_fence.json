@@ -1,7 +1,7 @@
 {
   "textures": {
-    "0": "dmonsters:blocks/meshFence",
-    "particle": "dmonsters:blocks/meshFence"
+    "0": "dmonsters:blocks/mesh_fence",
+    "particle": "dmonsters:blocks/mesh_fence"
   },
   "parent": "block/block",
   "elements": [

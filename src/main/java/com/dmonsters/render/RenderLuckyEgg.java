@@ -20,7 +20,7 @@ public class RenderLuckyEgg<T extends Entity> extends Render<T>
 {
     protected final Item item;
     private final RenderItem itemRenderer;
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/items/luckyEgg.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/items/lucky_egg.png");
 
     public RenderLuckyEgg(RenderManager renderManagerIn, Item itemIn, RenderItem itemRendererIn)
     {
@@ -29,9 +29,6 @@ public class RenderLuckyEgg<T extends Entity> extends Render<T>
         this.itemRenderer = itemRendererIn;
     }
 
-    /**
-     * Renders the desired {@code T} type Entity.
-     */
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         GlStateManager.pushMatrix();
@@ -61,9 +58,6 @@ public class RenderLuckyEgg<T extends Entity> extends Render<T>
         super.doRender(entity, x, y, z, entityYaw, partialTicks);
     }
 
-    /**
-     * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
-     */
     protected ResourceLocation getEntityTexture(Entity entity)
     {
         return mobTexture;

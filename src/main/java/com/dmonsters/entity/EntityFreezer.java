@@ -115,7 +115,7 @@ public class EntityFreezer extends EntityMob
         this.getDataManager().set(ARMS_RAISED, armsRaised);
     }
 
-    public boolean getAttaking()
+    public boolean getAttacking()
     {
         return this.getDataManager().get(ATTACKING);
     }

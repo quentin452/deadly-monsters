@@ -98,7 +98,7 @@ public class ModelFreezer extends ModelBase
 
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
-        boolean isAttaking = entityIn instanceof EntityFreezer && ((EntityFreezer) entityIn).getAttaking();
+        boolean isAttaking = entityIn instanceof EntityFreezer && ((EntityFreezer) entityIn).getAttacking();
         float bottomRotSpeed = -.005F;
         if (isAttaking)
         {

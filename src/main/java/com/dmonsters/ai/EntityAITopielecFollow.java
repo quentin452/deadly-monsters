@@ -10,10 +10,10 @@ public class EntityAITopielecFollow extends EntityAIBase
     private final EntityTopielec topielec;
     private final float speed;
 
-    public EntityAITopielecFollow(EntityTopielec _owner, float _speed)
+    public EntityAITopielecFollow(EntityTopielec owner, float speed)
     {
-        this.topielec = _owner;
-        this.speed = _speed;
+        this.topielec = owner;
+        this.speed = speed;
     }
 
     public boolean shouldExecute()

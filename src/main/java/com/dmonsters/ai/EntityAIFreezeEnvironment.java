@@ -1,7 +1,5 @@
 package com.dmonsters.ai;
 
-import java.util.Random;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
@@ -47,13 +45,8 @@ public class EntityAIFreezeEnvironment extends EntityAIBase
         BlockPos blockToFreezePos;
         World worldin = this.theEntity.world;
         double y = this.theEntity.posY;
-        float hardness;
-        float hardnessTreshold = 5;
-        boolean destroyedBlock = false;
-        float randomChance = 0;
-        Random random = new Random();
         int freezingArea = 0;
-        if (freezerEntity.getAttaking())
+        if (freezerEntity.getAttacking())
             freezingArea = 2;
 
         for (int dx = -freezingArea; dx <= freezingArea; ++dx)
@@ -66,7 +59,6 @@ public class EntityAIFreezeEnvironment extends EntityAIBase
                 {
                     worldin.setBlockState(blockToFreezePos, Blocks.ICE.getDefaultState());
                 }
-                //snow layer
                 for (int l = 0; l < 4; ++l)
                 {
                     int i = MathHelper.floor(this.theEntity.posX + dx + (double) ((float) (l % 2 * 2 - 1) * 0.25F));

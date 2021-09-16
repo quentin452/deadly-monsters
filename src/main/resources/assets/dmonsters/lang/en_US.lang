@@ -68,6 +68,6 @@ msg.dmonsters.mesh_fence.too_far_from_pole=Iron Fences must be placed at a max d
 msg.dmonsters.barbed_wire.error=Barbed Wire can only be placed on Iron Fences.
 msg.dmonsters.poopoo_pill.error=You must not be hungry.
 msg.dmonsters.haunted_cow=Use sword or bow, otherwise the moon will glow!
-msg.dmonsters.haunted_cow_time_disabled=Changing time is disabled on this server.
+msg.dmonsters.haunted_cow_time_disabled=Changing time is disabled.
 
 itemGroup.dmonsters_tab=Deadly Monsters

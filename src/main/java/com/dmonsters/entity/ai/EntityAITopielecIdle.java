@@ -1,17 +1,16 @@
 package com.dmonsters.entity.ai;
 
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.MathHelper;
 
 import com.dmonsters.entity.EntityTopielec;
 
-public class EntityAITopielecIdle extends EntityAIBase
+public class EntityAITopielecIdle extends DeadlyMonsterAIBase
 {
     private final EntityTopielec topielec;
 
-    public EntityAITopielecIdle(EntityTopielec _topielec)
+    public EntityAITopielecIdle(EntityTopielec topielec)
     {
-        this.topielec = _topielec;
+        this.topielec = topielec;
     }
 
     public boolean shouldExecute()

@@ -3,7 +3,6 @@ package com.dmonsters.entity.ai;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -11,7 +10,7 @@ import net.minecraft.world.World;
 
 import com.dmonsters.entity.EntityFreezer;
 
-public class EntityAIFreezeEnvironment extends EntityAIBase
+public class EntityAIFreezeEnvironment extends DeadlyMonsterAIBase
 {
     private final EntityLiving theEntity;
     private final EntityFreezer freezerEntity;

@@ -1,11 +1,10 @@
 package com.dmonsters.entity.ai;
 
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.util.math.BlockPos;
 
 import com.dmonsters.entity.EntityTopielec;
 
-public class EntityAITopielecFollow extends EntityAIBase
+public class EntityAITopielecFollow extends DeadlyMonsterAIBase
 {
     private final EntityTopielec topielec;
     private final float speed;

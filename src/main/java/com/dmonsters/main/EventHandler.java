@@ -39,18 +39,17 @@ public class EventHandler
                 {
                     return;
                 }
-                if (player.world.isDaytime())
+                if (world.isDaytime())
                 {
+                    PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(player.getPosition(), PacketClientFXUpdate.Type.TIME_CHANGE));
+                    if (world.getGameRules().getBoolean("doDaylightCycle"))
+                    {
+                        long i = world.getWorldTime() + 24000L;
+                        world.setWorldTime((i - i % 24000L) - 6000L);
+                    }
                     Style red = new Style().setColor(TextFormatting.DARK_RED);
                     TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.haunted_cow");
                     msg.setStyle(red);
-                    PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(player.getPosition(), PacketClientFXUpdate.Type.TIME_CHANGE));
-                    long worldTime = world.getWorldTime();
-                    while (worldTime % 18000 != 0)
-                    {
-                        worldTime++;
-                    }
-                    world.setWorldTime(worldTime);
                     player.sendMessage(msg);
                 }
             }

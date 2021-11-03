@@ -76,13 +76,24 @@ public class EntityHauntedCow extends EntityMob
         super.attackEntityAsMob(entityIn);
         this.playSound(ModSounds.HAUNTEDCOW_AMBIENT, 1, 1);
         if (ModConfig.CATEGORY_HAUNTED_COW.hauntedCowDisableTimeChange)
+        {
             return true;
+        }
         Random random = new Random();
         float rndNum = random.nextFloat();
         if (rndNum < 0.5f)
+        {
             return true;
-        PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(entityIn.getPosition(), PacketClientFXUpdate.Type.TIME_CHANGE));
-        entityIn.world.setWorldTime(18000);
+        }
+        if (entityIn.world.isDaytime())
+        {
+            PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(entityIn.getPosition(), PacketClientFXUpdate.Type.TIME_CHANGE));
+            if (entityIn.world.getGameRules().getBoolean("doDaylightCycle"))
+            {
+                long i = world.getWorldTime() + 24000L;
+                world.setWorldTime((i - i % 24000L) - 6000L);
+            }
+        }
         return true;
     }
 

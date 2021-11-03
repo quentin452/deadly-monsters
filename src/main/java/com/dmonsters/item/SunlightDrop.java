@@ -29,17 +29,31 @@ public class SunlightDrop extends Item
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
     {
         ItemStack itemStackIn = playerIn.getHeldItem(hand);
-        if (ModConfig.CATEGORY_HAUNTED_COW.hauntedCowDisableTimeChange)
+        if (!worldIn.isDaytime())
         {
-            Style red = new Style().setColor(TextFormatting.DARK_RED);
-            TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.haunted_cow_time_disabled");
-            msg.setStyle(red);
-            playerIn.sendMessage(msg);
+            if (ModConfig.CATEGORY_HAUNTED_COW.hauntedCowDisableTimeChange)
+            {
+                Style red = new Style().setColor(TextFormatting.DARK_RED);
+                TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.haunted_cow_time_disabled");
+                msg.setStyle(red);
+                playerIn.sendMessage(msg);
+                return new ActionResult(EnumActionResult.FAIL, itemStackIn);
+            }
+            else
+            {
+                PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(playerIn.getPosition(), PacketClientFXUpdate.Type.SUNLIGHT_USE));
+                if (worldIn.getGameRules().getBoolean("doDaylightCycle"))
+                {
+                    long i = worldIn.getWorldTime() + 24000L;
+                    worldIn.setWorldTime(i - i % 24000L);
+                }
+                itemStackIn.shrink(1);
+                return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
+            }
+        }
+        else
+        {
             return new ActionResult(EnumActionResult.FAIL, itemStackIn);
         }
-        PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(playerIn.getPosition(), PacketClientFXUpdate.Type.SUNLIGHT_USE));
-        worldIn.setWorldTime(0);
-        itemStackIn.shrink(1);
-        return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
     }
 }

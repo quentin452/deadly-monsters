@@ -1,5 +1,6 @@
 package com.dmonsters.main;
 
+import net.minecraft.item.Item;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.Name;
@@ -120,6 +121,9 @@ public class ModConfig
 
     public static class CategoryHauntedCow
     {
+        @Name("Valid Weapons")
+        @Comment("Custom valid weapons against haunted cows")
+        public String[] validWeapons = {"thaumicaugmentation:morphic_tool"};
         @Name("Health Multiplier")
         public float hauntedCowHealthMultiplier = 1.0F;
         @Name("Strength Multiplier")
@@ -133,6 +137,19 @@ public class ModConfig
         @Name("Time Change Disabled?")
         @Comment("Whether or not the time changing feature on wrong weapon hits should be disabled")
         public boolean hauntedCowDisableTimeChange = false;
+
+        public boolean isValidWeapon(Item item)
+        {
+            String regName = item.getRegistryName().toString();
+            for (String s : validWeapons)
+            {
+                if (regName.equals(s))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     public static class CategoryMutantSteve

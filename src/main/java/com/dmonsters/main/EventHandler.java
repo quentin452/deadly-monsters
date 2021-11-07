@@ -34,8 +34,8 @@ public class EventHandler
             {
                 World world = entity.getEntityWorld();
                 EntityPlayer player = e.getEntityPlayer();
-                Item itemClass = player.getHeldItemMainhand().getItem();
-                if (ModConfig.CATEGORY_HAUNTED_COW.hauntedCowDisableTimeChange || itemClass instanceof ItemSword || itemClass instanceof ItemBow || (Loader.isModLoaded("tconstruct") && itemClass instanceof SwordCore) || (Loader.isModLoaded("tconstruct") && itemClass instanceof BowCore))
+                Item item = player.getHeldItemMainhand().getItem();
+                if (ModConfig.CATEGORY_HAUNTED_COW.hauntedCowDisableTimeChange || ModConfig.CATEGORY_HAUNTED_COW.isValidWeapon(item) || item instanceof ItemSword || item instanceof ItemBow || (Loader.isModLoaded("tconstruct") && item instanceof SwordCore) || (Loader.isModLoaded("tconstruct") && item instanceof BowCore))
                 {
                     return;
                 }

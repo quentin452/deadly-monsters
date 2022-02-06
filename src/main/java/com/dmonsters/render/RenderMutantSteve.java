@@ -16,7 +16,7 @@ import com.dmonsters.model.ModelMutantSteve;
 public class RenderMutantSteve extends RenderLiving<EntityMutantSteve>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/mutant_steve.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/mutant_steve.png");
 
     public RenderMutantSteve(RenderManager rendermanagerIn)
     {

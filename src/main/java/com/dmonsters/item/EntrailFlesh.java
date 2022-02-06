@@ -13,8 +13,8 @@ public class EntrailFlesh extends Item
     public EntrailFlesh()
     {
         setRegistryName("entrail_flesh");
-        setUnlocalizedName(MainMod.MODID + ".entrail_flesh");
-        this.setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setUnlocalizedName(MainMod.MOD_ID + ".entrail_flesh");
+        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
     }
 
     @Override

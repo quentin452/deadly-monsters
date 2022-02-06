@@ -24,7 +24,7 @@ import com.dmonsters.network.PacketHandler;
 
 public class EntityHauntedCow extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "haunted_cow");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "haunted_cow");
 
     public EntityHauntedCow(World worldIn)
     {

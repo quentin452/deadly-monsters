@@ -35,9 +35,9 @@ public class PresentBox extends Block
     public PresentBox()
     {
         super(Material.CACTUS);
-        setUnlocalizedName(MainMod.MODID + ".present_box");
+        setUnlocalizedName(MainMod.MOD_ID + ".present_box");
         setRegistryName("present_box");
-        setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
         this.setHardness(1);
         this.setResistance(50);
     }

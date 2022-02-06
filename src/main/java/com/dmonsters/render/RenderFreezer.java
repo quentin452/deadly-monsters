@@ -16,8 +16,8 @@ import com.dmonsters.model.ModelFreezer;
 public class RenderFreezer extends RenderLiving<EntityFreezer>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/freezer_idle.png");
-    private final ResourceLocation mobTextureAttaking = new ResourceLocation(MainMod.MODID + ":textures/entity/freezer_angry.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/freezer_idle.png");
+    private final ResourceLocation mobTextureAttaking = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/freezer_angry.png");
 
     public RenderFreezer(RenderManager rendermanagerIn)
     {

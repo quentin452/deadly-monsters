@@ -9,7 +9,7 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Config(modid = MainMod.MODID, name = "DeadlyMonsters")
+@Config(modid = MainMod.MOD_ID, name = "DeadlyMonsters")
 public class ModConfig
 {
     @Comment("General")
@@ -245,15 +245,15 @@ public class ModConfig
         public boolean zombieChickenDisabled = false;
     }
 
-    @Mod.EventBusSubscriber(modid = MainMod.MODID)
+    @Mod.EventBusSubscriber(modid = MainMod.MOD_ID)
     public static class EventHandler
     {
         @SubscribeEvent
         public static void onConfigChanged(final ConfigChangedEvent.OnConfigChangedEvent event)
         {
-            if (event.getModID().equals(MainMod.MODID))
+            if (event.getModID().equals(MainMod.MOD_ID))
             {
-                ConfigManager.sync(MainMod.MODID, Config.Type.INSTANCE);
+                ConfigManager.sync(MainMod.MOD_ID, Config.Type.INSTANCE);
             }
         }
     }

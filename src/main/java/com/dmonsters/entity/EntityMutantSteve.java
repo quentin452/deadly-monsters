@@ -33,7 +33,7 @@ import com.dmonsters.main.ModSounds;
 
 public class EntityMutantSteve extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "mutant_steve");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "mutant_steve");
     private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityMutantSteve.class, DataSerializers.BOOLEAN);
 
     public EntityMutantSteve(World worldIn)

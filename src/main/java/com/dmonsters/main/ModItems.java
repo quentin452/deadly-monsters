@@ -69,7 +69,7 @@ public class ModItems
         harpoon_obsidian = new Harpoon("obsidian", 80, 6);
     }
 
-    @Mod.EventBusSubscriber(modid = MainMod.MODID)
+    @Mod.EventBusSubscriber(modid = MainMod.MOD_ID)
     public static class RegistrationHandler
     {
         @SubscribeEvent

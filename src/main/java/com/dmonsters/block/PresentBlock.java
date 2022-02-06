@@ -20,7 +20,7 @@ public class PresentBlock extends Block
     public PresentBlock()
     {
         super(Material.IRON);
-        setUnlocalizedName(MainMod.MODID + ".present_block");
+        setUnlocalizedName(MainMod.MOD_ID + ".present_block");
         setRegistryName("present_block");
         this.setHardness(3);
         this.setResistance(50);

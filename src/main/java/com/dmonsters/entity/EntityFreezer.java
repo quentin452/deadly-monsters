@@ -35,7 +35,7 @@ import com.dmonsters.main.ModSounds;
 
 public class EntityFreezer extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "freezer");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "freezer");
     private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityFreezer.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EntityFreezer.class, DataSerializers.BOOLEAN);
 

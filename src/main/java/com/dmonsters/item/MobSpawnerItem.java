@@ -25,8 +25,8 @@ public class MobSpawnerItem extends Item
     public MobSpawnerItem(String name)
     {
         setRegistryName("mob_spawner_item_" + name);
-        setUnlocalizedName(MainMod.MODID + ".mob_spawner_item_" + name);
-        this.setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setUnlocalizedName(MainMod.MOD_ID + ".mob_spawner_item_" + name);
+        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
         mobName = name;
     }
 

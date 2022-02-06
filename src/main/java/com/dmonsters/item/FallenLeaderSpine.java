@@ -11,8 +11,8 @@ public class FallenLeaderSpine extends Item
     public FallenLeaderSpine()
     {
         setRegistryName("fallen_leader_spine");
-        setUnlocalizedName(MainMod.MODID + ".fallen_leader_spine");
-        this.setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setUnlocalizedName(MainMod.MOD_ID + ".fallen_leader_spine");
+        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
         this.maxStackSize = 1;
     }
 

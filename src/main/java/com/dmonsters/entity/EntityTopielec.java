@@ -19,7 +19,7 @@ import com.dmonsters.main.ModSounds;
 
 public class EntityTopielec extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "topielec");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "topielec");
     private float targetVectorX;
     private float targetVectorY;
     private float targetVectorZ;

@@ -25,9 +25,9 @@ public class ChristmasTree extends Block
     public ChristmasTree()
     {
         super(Material.CACTUS);
-        setUnlocalizedName(MainMod.MODID + ".christmas_tree");
+        setUnlocalizedName(MainMod.MOD_ID + ".christmas_tree");
         setRegistryName("christmas_tree");
-        setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
         this.setTickRandomly(true);
         this.setHardness(2);
         this.setResistance(50);

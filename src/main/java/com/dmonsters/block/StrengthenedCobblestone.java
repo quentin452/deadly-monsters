@@ -23,9 +23,9 @@ public class StrengthenedCobblestone extends Block
     public StrengthenedCobblestone()
     {
         super(Material.IRON);
-        setUnlocalizedName(MainMod.MODID + ".strengthened_cobblestone");
+        setUnlocalizedName(MainMod.MOD_ID + ".strengthened_cobblestone");
         setRegistryName("strengthened_cobblestone");
-        setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
         this.setHardness(10);
         this.setResistance(25);
     }

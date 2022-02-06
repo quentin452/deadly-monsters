@@ -31,9 +31,9 @@ public class BarbedWire extends Block
     public BarbedWire()
     {
         super(Material.CACTUS);
-        setUnlocalizedName(MainMod.MODID + ".barbed_wire");
+        setUnlocalizedName(MainMod.MOD_ID + ".barbed_wire");
         setRegistryName("barbed_wire");
-        setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
         this.setHardness(1);
         this.setResistance(1);
     }

@@ -30,7 +30,7 @@ import com.dmonsters.main.ModSounds;
 
 public class EntityUnbornBaby extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "unborn_baby");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "unborn_baby");
     private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityUnbornBaby.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EntityUnbornBaby.class, DataSerializers.BOOLEAN);
     private int blindRefreshTick = 0;

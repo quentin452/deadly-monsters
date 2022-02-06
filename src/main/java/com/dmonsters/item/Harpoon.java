@@ -30,8 +30,8 @@ public class Harpoon extends Item
     public Harpoon(String _harpoonType, int maxDamage, int _attackDamage)
     {
         setRegistryName("harpoon_" + _harpoonType);
-        setUnlocalizedName(MainMod.MODID + ".harpoon_" + _harpoonType);
-        this.setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setUnlocalizedName(MainMod.MOD_ID + ".harpoon_" + _harpoonType);
+        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
         this.maxStackSize = 1;
         attackDamage = _attackDamage;
         if (maxDamage > -1)

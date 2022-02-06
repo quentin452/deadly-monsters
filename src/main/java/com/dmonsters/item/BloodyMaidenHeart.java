@@ -19,8 +19,8 @@ public class BloodyMaidenHeart extends Item
     public BloodyMaidenHeart()
     {
         setRegistryName("bloody_maiden_heart");
-        setUnlocalizedName(MainMod.MODID + ".bloody_maiden_heart");
-        this.setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setUnlocalizedName(MainMod.MOD_ID + ".bloody_maiden_heart");
+        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
         this.maxStackSize = 1;
         this.setMaxDamage(11);
     }

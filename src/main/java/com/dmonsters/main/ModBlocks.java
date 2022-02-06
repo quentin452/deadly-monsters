@@ -38,7 +38,7 @@ public class ModBlocks
         present_box = new PresentBox();
     }
 
-    @Mod.EventBusSubscriber(modid = MainMod.MODID)
+    @Mod.EventBusSubscriber(modid = MainMod.MOD_ID)
     public static class RegistrationHandler
     {
 

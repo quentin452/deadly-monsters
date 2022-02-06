@@ -9,13 +9,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import com.dmonsters.proxy.CommonProxy;
 
-@Mod(modid = MainMod.MODID, name = MainMod.MODNAME, version = MainMod.MODVERSION)
+@Mod(modid = MainMod.MOD_ID, name = MainMod.MOD_NAME, version = MainMod.MOD_VERSION)
 public class MainMod
 {
-    public static final String MODID = "dmonsters";
-    public static final String MODNAME = "Deadly Monsters";
-    public static final String MODVERSION = "1.9.0";
-    public static final ModCreativeTabs MOD_CREATIVETAB = new ModCreativeTabs("dmonsters_tab");
+    public static final String MOD_ID = "dmonsters";
+    public static final String MOD_NAME = "Deadly Monsters";
+    public static final String MOD_VERSION = "1.9.3";
+    public static final ModCreativeTabs MOD_CREATIVE_TAB = new ModCreativeTabs("dmonsters_tab");
 
     @SidedProxy(clientSide = "com.dmonsters.proxy.ClientProxy", serverSide = "com.dmonsters.proxy.ServerProxy")
     public static CommonProxy proxy;

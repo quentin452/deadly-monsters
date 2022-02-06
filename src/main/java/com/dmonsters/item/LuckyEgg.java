@@ -19,8 +19,8 @@ public class LuckyEgg extends Item
     public LuckyEgg()
     {
         setRegistryName("lucky_egg");
-        setUnlocalizedName(MainMod.MODID + ".lucky_egg");
-        this.setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setUnlocalizedName(MainMod.MOD_ID + ".lucky_egg");
+        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
     }
 
     @Override

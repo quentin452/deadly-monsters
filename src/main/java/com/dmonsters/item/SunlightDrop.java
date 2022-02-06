@@ -21,8 +21,8 @@ public class SunlightDrop extends Item
     public SunlightDrop()
     {
         setRegistryName("sunlight_drop");
-        setUnlocalizedName(MainMod.MODID + ".sunlight_drop");
-        this.setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setUnlocalizedName(MainMod.MOD_ID + ".sunlight_drop");
+        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
     }
 
     @Override

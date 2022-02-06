@@ -31,7 +31,7 @@ import com.dmonsters.main.ModSounds;
 
 public class EntityClimber extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "climber");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "climber");
     private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(EntityClimber.class, DataSerializers.BYTE);
 
     public EntityClimber(World worldIn)

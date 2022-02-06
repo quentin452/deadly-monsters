@@ -16,7 +16,7 @@ import com.dmonsters.model.ModelTopielec;
 public class RenderTopielec extends RenderLiving<EntityTopielec>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/topielec.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/topielec.png");
 
     public RenderTopielec(RenderManager rendermanagerIn)
     {

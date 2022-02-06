@@ -20,7 +20,7 @@ public class RenderLuckyEgg<T extends Entity> extends Render<T>
 {
     protected final Item item;
     private final RenderItem itemRenderer;
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/items/lucky_egg.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/items/lucky_egg.png");
 
     public RenderLuckyEgg(RenderManager renderManagerIn, Item itemIn, RenderItem itemRendererIn)
     {

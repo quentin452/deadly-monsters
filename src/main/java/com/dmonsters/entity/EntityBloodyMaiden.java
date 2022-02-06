@@ -27,7 +27,7 @@ import com.dmonsters.main.ModSounds;
 
 public class EntityBloodyMaiden extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "bloody_maiden");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "bloody_maiden");
     private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityBloodyMaiden.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> TRIGGERED = EntityDataManager.createKey(EntityBloodyMaiden.class, DataSerializers.BOOLEAN);
 

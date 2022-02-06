@@ -27,7 +27,7 @@ import com.dmonsters.main.ModSounds;
 
 public class EntityFallenLeader extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "fallen_leader");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "fallen_leader");
     private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityFallenLeader.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EntityFallenLeader.class, DataSerializers.BOOLEAN);
 

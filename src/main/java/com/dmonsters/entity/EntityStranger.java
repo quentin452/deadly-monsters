@@ -22,7 +22,7 @@ import com.dmonsters.main.ModSounds;
 
 public class EntityStranger extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "stranger");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "stranger");
 
     public EntityStranger(World worldIn)
     {

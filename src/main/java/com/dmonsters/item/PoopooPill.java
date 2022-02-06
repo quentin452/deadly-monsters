@@ -29,8 +29,8 @@ public class PoopooPill extends Item
     public PoopooPill()
     {
         setRegistryName("poopoo_pill");
-        setUnlocalizedName(MainMod.MODID + ".poopoo_pill");
-        this.setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setUnlocalizedName(MainMod.MOD_ID + ".poopoo_pill");
+        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
     }
 
     @Override

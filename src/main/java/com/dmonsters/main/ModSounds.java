@@ -129,11 +129,11 @@ public class ModSounds
 
     private static SoundEvent registerSound(String id)
     {
-        ResourceLocation soundID = new ResourceLocation(MainMod.MODID, id);
+        ResourceLocation soundID = new ResourceLocation(MainMod.MOD_ID, id);
         return new SoundEvent(soundID).setRegistryName(soundID);
     }
 
-    @Mod.EventBusSubscriber(modid = MainMod.MODID)
+    @Mod.EventBusSubscriber(modid = MainMod.MOD_ID)
     public static class RegistrationHandler
     {
         @SubscribeEvent

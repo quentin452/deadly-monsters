@@ -61,9 +61,9 @@ public class MeshFencePole extends Block
     public MeshFencePole()
     {
         super(Material.ROCK);
-        setUnlocalizedName(MainMod.MODID + ".mesh_fence_pole");
+        setUnlocalizedName(MainMod.MOD_ID + ".mesh_fence_pole");
         setRegistryName("mesh_fence_pole");
-        setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
         this.setHardness(5);
         this.setResistance(5);
         this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.FALSE).withProperty(EAST, Boolean.FALSE).withProperty(SOUTH, Boolean.FALSE).withProperty(WEST, Boolean.FALSE));

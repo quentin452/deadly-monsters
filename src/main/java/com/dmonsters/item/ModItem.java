@@ -9,6 +9,6 @@ public class ModItem extends Item
     public ModItem()
     {
         setRegistryName("mod_item");
-        setUnlocalizedName(MainMod.MODID + ".mod_item");
+        setUnlocalizedName(MainMod.MOD_ID + ".mod_item");
     }
 }

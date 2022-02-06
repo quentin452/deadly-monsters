@@ -16,7 +16,7 @@ import com.dmonsters.model.ModelPresent;
 public class RenderPresent extends RenderLiving<EntityPresent>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/present.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/present.png");
 
     public RenderPresent(RenderManager rendermanagerIn)
     {

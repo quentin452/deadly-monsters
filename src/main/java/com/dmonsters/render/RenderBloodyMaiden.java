@@ -16,8 +16,8 @@ import com.dmonsters.model.ModelBloodyMaiden;
 public class RenderBloodyMaiden extends RenderLiving<EntityBloodyMaiden>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/bloody_maiden.png");
-    private final ResourceLocation mobTextureTriggered = new ResourceLocation(MainMod.MODID + ":textures/entity/bloody_maiden_triggered.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/bloody_maiden.png");
+    private final ResourceLocation mobTextureTriggered = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/bloody_maiden_triggered.png");
 
     public RenderBloodyMaiden(RenderManager rendermanagerIn)
     {

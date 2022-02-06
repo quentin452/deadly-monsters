@@ -9,6 +9,6 @@ public class FlyingDagon extends Item
     public FlyingDagon()
     {
         setRegistryName("flying_dagon");
-        setUnlocalizedName(MainMod.MODID + ".flying_dagon");
+        setUnlocalizedName(MainMod.MOD_ID + ".flying_dagon");
     }
 }

@@ -16,7 +16,7 @@ import com.dmonsters.model.ModelStranger;
 public class RenderStranger extends RenderLiving<EntityStranger>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/stranger.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/stranger.png");
 
     public RenderStranger(RenderManager rendermanagerIn)
     {

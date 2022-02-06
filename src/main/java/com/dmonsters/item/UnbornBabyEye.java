@@ -19,8 +19,8 @@ public class UnbornBabyEye extends Item
     public UnbornBabyEye()
     {
         setRegistryName("unborn_baby_eye");
-        setUnlocalizedName(MainMod.MODID + ".unborn_baby_eye");
-        this.setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setUnlocalizedName(MainMod.MOD_ID + ".unborn_baby_eye");
+        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
     }
 
     @Override

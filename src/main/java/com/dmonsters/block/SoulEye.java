@@ -34,9 +34,9 @@ public class SoulEye extends Block
     public SoulEye()
     {
         super(Material.IRON);
-        setUnlocalizedName(MainMod.MODID + ".soul_eye");
+        setUnlocalizedName(MainMod.MOD_ID + ".soul_eye");
         setRegistryName("soul_eye");
-        setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
         this.setHardness(3);
         this.setResistance(3);
         this.setTickRandomly(true);

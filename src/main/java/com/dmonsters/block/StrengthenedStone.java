@@ -23,9 +23,9 @@ public class StrengthenedStone extends Block
     public StrengthenedStone()
     {
         super(Material.IRON);
-        setUnlocalizedName(MainMod.MODID + ".strengthened_stone");
+        setUnlocalizedName(MainMod.MOD_ID + ".strengthened_stone");
         setRegistryName("strengthened_stone");
-        setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
         this.setHardness(10);
         this.setResistance(25);
     }

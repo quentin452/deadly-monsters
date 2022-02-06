@@ -19,8 +19,8 @@ public class Dagon extends Item
     public Dagon()
     {
         setRegistryName("dagon");
-        setUnlocalizedName(MainMod.MODID + ".dagon");
-        this.setCreativeTab(MainMod.MOD_CREATIVETAB);
+        setUnlocalizedName(MainMod.MOD_ID + ".dagon");
+        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
     }
 
     @Override

@@ -24,7 +24,7 @@ import com.dmonsters.main.ModSounds;
 
 public class EntityPresent extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "present");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "present");
     private int cageTicks = 0;
     private boolean debugCage;
 

@@ -23,7 +23,7 @@ import com.dmonsters.main.ModSounds;
 
 public class EntityEntrail extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MODID, "entrail");
+    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "entrail");
 
     public EntityEntrail(World worldIn)
     {

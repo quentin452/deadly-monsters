@@ -16,7 +16,7 @@ import com.dmonsters.model.ModelFallenLeader;
 public class RenderFallenLeader extends RenderLiving<EntityFallenLeader>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MODID + ":textures/entity/fallen_leader.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/fallen_leader.png");
 
     public RenderFallenLeader(RenderManager rendermanagerIn)
     {

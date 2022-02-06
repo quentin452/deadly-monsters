@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.block.*;
 
 public class ModBlocks
@@ -38,7 +39,7 @@ public class ModBlocks
         present_box = new PresentBox();
     }
 
-    @Mod.EventBusSubscriber(modid = MainMod.MOD_ID)
+    @Mod.EventBusSubscriber(modid = DeadlyMonsters.MOD_ID)
     public static class RegistrationHandler
     {
 

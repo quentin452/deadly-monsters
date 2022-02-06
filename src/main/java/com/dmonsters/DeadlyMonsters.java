@@ -1,4 +1,4 @@
-package com.dmonsters.main;
+package com.dmonsters;
 
 import org.apache.logging.log4j.Logger;
 import net.minecraftforge.fml.common.Mod;
@@ -7,10 +7,12 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+import com.dmonsters.main.ModCreativeTabs;
+import com.dmonsters.main.ModSounds;
 import com.dmonsters.proxy.CommonProxy;
 
-@Mod(modid = MainMod.MOD_ID, name = MainMod.MOD_NAME, version = MainMod.MOD_VERSION)
-public class MainMod
+@Mod(modid = DeadlyMonsters.MOD_ID, name = DeadlyMonsters.MOD_NAME, version = DeadlyMonsters.MOD_VERSION)
+public class DeadlyMonsters
 {
     public static final String MOD_ID = "dmonsters";
     public static final String MOD_NAME = "Deadly Monsters";
@@ -21,7 +23,7 @@ public class MainMod
     public static CommonProxy proxy;
 
     @Mod.Instance
-    public static MainMod instance;
+    public static DeadlyMonsters instance;
 
     public static Logger logger;
 

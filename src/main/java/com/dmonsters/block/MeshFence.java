@@ -20,7 +20,7 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModBlocks;
 
 public class MeshFence extends Block
@@ -66,9 +66,9 @@ public class MeshFence extends Block
     public MeshFence()
     {
         super(Material.ROCK);
-        setUnlocalizedName(MainMod.MOD_ID + ".mesh_fence");
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".mesh_fence");
         setRegistryName("mesh_fence");
-        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.setHardness(5);
         this.setResistance(5);
         this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.FALSE).withProperty(EAST, Boolean.FALSE).withProperty(SOUTH, Boolean.FALSE).withProperty(WEST, Boolean.FALSE));

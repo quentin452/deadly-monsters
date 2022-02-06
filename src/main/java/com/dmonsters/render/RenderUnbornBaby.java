@@ -9,14 +9,14 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityUnbornBaby;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.model.ModelUnbornBaby;
 
 public class RenderUnbornBaby extends RenderLiving<EntityUnbornBaby>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/unborn_baby.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/unborn_baby.png");
 
     public RenderUnbornBaby(RenderManager rendermanagerIn)
     {

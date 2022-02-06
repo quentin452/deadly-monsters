@@ -19,8 +19,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityTopielec;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 
 public class Harpoon extends Item
@@ -30,8 +30,8 @@ public class Harpoon extends Item
     public Harpoon(String _harpoonType, int maxDamage, int _attackDamage)
     {
         setRegistryName("harpoon_" + _harpoonType);
-        setUnlocalizedName(MainMod.MOD_ID + ".harpoon_" + _harpoonType);
-        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".harpoon_" + _harpoonType);
+        this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.maxStackSize = 1;
         attackDamage = _attackDamage;
         if (maxDamage > -1)

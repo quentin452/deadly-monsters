@@ -14,13 +14,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 
 public class EntityZombieChicken extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "zombie_chicken");
+    public static final ResourceLocation LOOT = new ResourceLocation(DeadlyMonsters.MOD_ID, "zombie_chicken");
 
     public EntityZombieChicken(World worldIn)
     {

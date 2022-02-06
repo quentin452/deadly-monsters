@@ -20,14 +20,14 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
 
 public class EntityFallenLeader extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "fallen_leader");
+    public static final ResourceLocation LOOT = new ResourceLocation(DeadlyMonsters.MOD_ID, "fallen_leader");
     private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityFallenLeader.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EntityFallenLeader.class, DataSerializers.BOOLEAN);
 

@@ -15,7 +15,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModItems;
 
 public class StrengthenedCobblestone extends Block
@@ -23,9 +23,9 @@ public class StrengthenedCobblestone extends Block
     public StrengthenedCobblestone()
     {
         super(Material.IRON);
-        setUnlocalizedName(MainMod.MOD_ID + ".strengthened_cobblestone");
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".strengthened_cobblestone");
         setRegistryName("strengthened_cobblestone");
-        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.setHardness(10);
         this.setResistance(25);
     }

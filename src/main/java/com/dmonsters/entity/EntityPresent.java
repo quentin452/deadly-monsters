@@ -16,15 +16,15 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModBlocks;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
 
 public class EntityPresent extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "present");
+    public static final ResourceLocation LOOT = new ResourceLocation(DeadlyMonsters.MOD_ID, "present");
     private int cageTicks = 0;
     private boolean debugCage;
 

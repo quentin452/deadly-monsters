@@ -9,14 +9,14 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityEntrail;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.model.ModelEntrail;
 
 public class RenderEntrail extends RenderLiving<EntityEntrail>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/entrail.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/entrail.png");
 
     public RenderEntrail(RenderManager rendermanagerIn)
     {

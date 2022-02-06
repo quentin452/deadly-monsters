@@ -19,7 +19,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModBlocks;
 import com.dmonsters.network.PacketClientFXUpdate;
 import com.dmonsters.network.PacketHandler;
@@ -29,8 +29,8 @@ public class PoopooPill extends Item
     public PoopooPill()
     {
         setRegistryName("poopoo_pill");
-        setUnlocalizedName(MainMod.MOD_ID + ".poopoo_pill");
-        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".poopoo_pill");
+        this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
     }
 
     @Override

@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModBlocks;
 
 public class MeshFencePole extends Block
@@ -61,9 +61,9 @@ public class MeshFencePole extends Block
     public MeshFencePole()
     {
         super(Material.ROCK);
-        setUnlocalizedName(MainMod.MOD_ID + ".mesh_fence_pole");
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".mesh_fence_pole");
         setRegistryName("mesh_fence_pole");
-        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.setHardness(5);
         this.setResistance(5);
         this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, Boolean.FALSE).withProperty(EAST, Boolean.FALSE).withProperty(SOUTH, Boolean.FALSE).withProperty(WEST, Boolean.FALSE));

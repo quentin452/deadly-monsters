@@ -12,15 +12,15 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 
 public class UnbornBabyEye extends Item
 {
     public UnbornBabyEye()
     {
         setRegistryName("unborn_baby_eye");
-        setUnlocalizedName(MainMod.MOD_ID + ".unborn_baby_eye");
-        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".unborn_baby_eye");
+        this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
     }
 
     @Override

@@ -9,17 +9,17 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.ai.EntityAITopielecAttack;
 import com.dmonsters.entity.ai.EntityAITopielecFollow;
 import com.dmonsters.entity.ai.EntityAITopielecIdle;
 import com.dmonsters.entity.ai.EntityAIWaterMobNearestPlayer;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
 
 public class EntityTopielec extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "topielec");
+    public static final ResourceLocation LOOT = new ResourceLocation(DeadlyMonsters.MOD_ID, "topielec");
     private float targetVectorX;
     private float targetVectorY;
     private float targetVectorZ;

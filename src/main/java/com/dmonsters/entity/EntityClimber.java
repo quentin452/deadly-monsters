@@ -24,14 +24,14 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
 
 public class EntityClimber extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "climber");
+    public static final ResourceLocation LOOT = new ResourceLocation(DeadlyMonsters.MOD_ID, "climber");
     private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(EntityClimber.class, DataSerializers.BYTE);
 
     public EntityClimber(World worldIn)

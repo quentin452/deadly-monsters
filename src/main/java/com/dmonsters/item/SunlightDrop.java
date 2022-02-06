@@ -11,7 +11,7 @@ import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.network.PacketClientFXUpdate;
 import com.dmonsters.network.PacketHandler;
@@ -21,8 +21,8 @@ public class SunlightDrop extends Item
     public SunlightDrop()
     {
         setRegistryName("sunlight_drop");
-        setUnlocalizedName(MainMod.MOD_ID + ".sunlight_drop");
-        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".sunlight_drop");
+        this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
     }
 
     @Override

@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModBlocks;
 
 public class ChristmasTree extends Block
@@ -25,9 +25,9 @@ public class ChristmasTree extends Block
     public ChristmasTree()
     {
         super(Material.CACTUS);
-        setUnlocalizedName(MainMod.MOD_ID + ".christmas_tree");
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".christmas_tree");
         setRegistryName("christmas_tree");
-        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.setTickRandomly(true);
         this.setHardness(2);
         this.setResistance(50);

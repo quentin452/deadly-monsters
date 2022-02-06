@@ -11,7 +11,7 @@ import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 
 public class PresentBlock extends Block
 {
@@ -20,7 +20,7 @@ public class PresentBlock extends Block
     public PresentBlock()
     {
         super(Material.IRON);
-        setUnlocalizedName(MainMod.MOD_ID + ".present_block");
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".present_block");
         setRegistryName("present_block");
         this.setHardness(3);
         this.setResistance(50);

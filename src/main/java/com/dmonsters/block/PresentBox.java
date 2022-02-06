@@ -24,7 +24,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModBlocks;
 import com.dmonsters.main.ModItems;
 
@@ -35,9 +35,9 @@ public class PresentBox extends Block
     public PresentBox()
     {
         super(Material.CACTUS);
-        setUnlocalizedName(MainMod.MOD_ID + ".present_box");
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".present_box");
         setRegistryName("present_box");
-        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.setHardness(1);
         this.setResistance(50);
     }

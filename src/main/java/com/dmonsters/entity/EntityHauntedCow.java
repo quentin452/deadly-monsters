@@ -15,8 +15,8 @@ import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
 import com.dmonsters.network.PacketClientFXUpdate;
@@ -24,7 +24,7 @@ import com.dmonsters.network.PacketHandler;
 
 public class EntityHauntedCow extends EntityMob
 {
-    public static final ResourceLocation LOOT = new ResourceLocation(MainMod.MOD_ID, "haunted_cow");
+    public static final ResourceLocation LOOT = new ResourceLocation(DeadlyMonsters.MOD_ID, "haunted_cow");
 
     public EntityHauntedCow(World worldIn)
     {

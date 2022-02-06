@@ -11,7 +11,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.projectile.EntityLuckyEgg;
 
 public class LuckyEgg extends Item
@@ -19,8 +19,8 @@ public class LuckyEgg extends Item
     public LuckyEgg()
     {
         setRegistryName("lucky_egg");
-        setUnlocalizedName(MainMod.MOD_ID + ".lucky_egg");
-        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".lucky_egg");
+        this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
     }
 
     @Override

@@ -9,14 +9,14 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityClimber;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.model.ModelClimber;
 
 public class RenderClimber extends RenderLiving<EntityClimber>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/climber.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/climber.png");
 
     public RenderClimber(RenderManager rendermanagerIn)
     {

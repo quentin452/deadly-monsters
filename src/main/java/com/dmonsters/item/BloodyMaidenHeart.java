@@ -10,7 +10,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.network.PacketClientFXUpdate;
 import com.dmonsters.network.PacketHandler;
 
@@ -19,8 +19,8 @@ public class BloodyMaidenHeart extends Item
     public BloodyMaidenHeart()
     {
         setRegistryName("bloody_maiden_heart");
-        setUnlocalizedName(MainMod.MOD_ID + ".bloody_maiden_heart");
-        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".bloody_maiden_heart");
+        this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.maxStackSize = 1;
         this.setMaxDamage(11);
     }

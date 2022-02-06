@@ -5,16 +5,16 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityEntrail;
-import com.dmonsters.main.MainMod;
 
 public class EntrailFlesh extends Item
 {
     public EntrailFlesh()
     {
         setRegistryName("entrail_flesh");
-        setUnlocalizedName(MainMod.MOD_ID + ".entrail_flesh");
-        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".entrail_flesh");
+        this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
     }
 
     @Override

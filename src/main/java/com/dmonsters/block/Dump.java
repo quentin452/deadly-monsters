@@ -18,7 +18,7 @@ import net.minecraft.world.gen.feature.*;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModBlocks;
 
 public class Dump extends Block
@@ -29,9 +29,9 @@ public class Dump extends Block
     public Dump()
     {
         super(Material.CAKE);
-        setUnlocalizedName(MainMod.MOD_ID + ".dump");
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".dump");
         setRegistryName("dump");
-        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.setHardness(1);
         this.setResistance(1);
         this.setDefaultState(this.blockState.getBaseState().withProperty(STACKS, 0));

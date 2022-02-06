@@ -9,15 +9,15 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityFreezer;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.model.ModelFreezer;
 
 public class RenderFreezer extends RenderLiving<EntityFreezer>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/freezer_idle.png");
-    private final ResourceLocation mobTextureAttaking = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/freezer_angry.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/freezer_idle.png");
+    private final ResourceLocation mobTextureAttaking = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/freezer_angry.png");
 
     public RenderFreezer(RenderManager rendermanagerIn)
     {

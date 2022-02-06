@@ -9,14 +9,14 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityFallenLeader;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.model.ModelFallenLeader;
 
 public class RenderFallenLeader extends RenderLiving<EntityFallenLeader>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/fallen_leader.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/fallen_leader.png");
 
     public RenderFallenLeader(RenderManager rendermanagerIn)
     {

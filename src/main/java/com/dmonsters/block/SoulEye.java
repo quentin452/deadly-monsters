@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModBlocks;
 import com.dmonsters.network.PacketClientFXUpdate;
 import com.dmonsters.network.PacketHandler;
@@ -34,9 +34,9 @@ public class SoulEye extends Block
     public SoulEye()
     {
         super(Material.IRON);
-        setUnlocalizedName(MainMod.MOD_ID + ".soul_eye");
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".soul_eye");
         setRegistryName("soul_eye");
-        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.setHardness(3);
         this.setResistance(3);
         this.setTickRandomly(true);

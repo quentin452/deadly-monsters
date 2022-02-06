@@ -23,7 +23,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModBlocks;
 
 public class BarbedWire extends Block
@@ -31,9 +31,9 @@ public class BarbedWire extends Block
     public BarbedWire()
     {
         super(Material.CACTUS);
-        setUnlocalizedName(MainMod.MOD_ID + ".barbed_wire");
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".barbed_wire");
         setRegistryName("barbed_wire");
-        setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.setHardness(1);
         this.setResistance(1);
     }

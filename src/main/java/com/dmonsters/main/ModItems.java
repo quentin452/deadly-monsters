@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.item.*;
 
 public class ModItems
@@ -69,7 +70,7 @@ public class ModItems
         harpoon_obsidian = new Harpoon("obsidian", 80, 6);
     }
 
-    @Mod.EventBusSubscriber(modid = MainMod.MOD_ID)
+    @Mod.EventBusSubscriber(modid = DeadlyMonsters.MOD_ID)
     public static class RegistrationHandler
     {
         @SubscribeEvent

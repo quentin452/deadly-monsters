@@ -4,15 +4,15 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 
 public class FallenLeaderSpine extends Item
 {
     public FallenLeaderSpine()
     {
         setRegistryName("fallen_leader_spine");
-        setUnlocalizedName(MainMod.MOD_ID + ".fallen_leader_spine");
-        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".fallen_leader_spine");
+        this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.maxStackSize = 1;
     }
 

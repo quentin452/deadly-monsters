@@ -15,8 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.*;
-import com.dmonsters.main.MainMod;
 
 public class MobSpawnerItem extends Item
 {
@@ -25,8 +25,8 @@ public class MobSpawnerItem extends Item
     public MobSpawnerItem(String name)
     {
         setRegistryName("mob_spawner_item_" + name);
-        setUnlocalizedName(MainMod.MOD_ID + ".mob_spawner_item_" + name);
-        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".mob_spawner_item_" + name);
+        this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         mobName = name;
     }
 

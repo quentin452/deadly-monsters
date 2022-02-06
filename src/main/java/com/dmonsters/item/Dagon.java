@@ -11,7 +11,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
-import com.dmonsters.main.MainMod;
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.projectile.EntityDagon;
 
 public class Dagon extends Item
@@ -19,8 +19,8 @@ public class Dagon extends Item
     public Dagon()
     {
         setRegistryName("dagon");
-        setUnlocalizedName(MainMod.MOD_ID + ".dagon");
-        this.setCreativeTab(MainMod.MOD_CREATIVE_TAB);
+        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".dagon");
+        this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
     }
 
     @Override

@@ -6,6 +6,8 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import com.dmonsters.DeadlyMonsters;
+
 public class ModSounds
 {
     public static SoundEvent MUTANT_DEATH;
@@ -129,11 +131,11 @@ public class ModSounds
 
     private static SoundEvent registerSound(String id)
     {
-        ResourceLocation soundID = new ResourceLocation(MainMod.MOD_ID, id);
+        ResourceLocation soundID = new ResourceLocation(DeadlyMonsters.MOD_ID, id);
         return new SoundEvent(soundID).setRegistryName(soundID);
     }
 
-    @Mod.EventBusSubscriber(modid = MainMod.MOD_ID)
+    @Mod.EventBusSubscriber(modid = DeadlyMonsters.MOD_ID)
     public static class RegistrationHandler
     {
         @SubscribeEvent

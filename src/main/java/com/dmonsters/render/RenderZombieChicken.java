@@ -9,14 +9,14 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.client.registry.IRenderFactory;
 
+import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityZombieChicken;
-import com.dmonsters.main.MainMod;
 import com.dmonsters.model.ModelZombieChicken;
 
 public class RenderZombieChicken extends RenderLiving<EntityZombieChicken>
 {
     public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(MainMod.MOD_ID + ":textures/entity/zombie_chicken.png");
+    private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/zombie_chicken.png");
 
     public RenderZombieChicken(RenderManager rendermanagerIn)
     {

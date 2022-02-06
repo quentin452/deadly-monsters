@@ -1,7 +1,6 @@
 package com.dmonsters.main;
 
 import java.util.List;
-import java.util.Set;
 
 import com.google.common.collect.Lists;
 import net.minecraft.world.biome.Biome;
@@ -9,15 +8,14 @@ import net.minecraftforge.common.BiomeDictionary;
 
 public class BiomesProvider
 {
-    public static Biome[] getBiomes()
+    public static Biome[] getCommonBiomes()
     {
         List<Biome> biomes = Lists.newArrayList();
-        for (Biome b : Biome.REGISTRY)
+        for (Biome biome : Biome.REGISTRY)
         {
-            Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(b);
-            if (!types.contains(BiomeDictionary.Type.WATER) || !types.contains(BiomeDictionary.Type.NETHER) || !types.contains(BiomeDictionary.Type.END))
+            if (isValidBiome(biome))
             {
-                biomes.add(b);
+                biomes.add(biome);
             }
         }
         return biomes.toArray(new Biome[0]);
@@ -26,12 +24,14 @@ public class BiomesProvider
     public static Biome[] getSnowBiomes()
     {
         List<Biome> biomes = Lists.newArrayList();
-        for (Biome b : Biome.REGISTRY)
+        for (Biome biome : Biome.REGISTRY)
         {
-            Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(b);
-            if (types.contains(BiomeDictionary.Type.SNOWY) || types.contains(BiomeDictionary.Type.COLD))
+            if (isValidBiome(biome))
             {
-                biomes.add(b);
+                if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.COLD))
+                {
+                    biomes.add(biome);
+                }
             }
         }
         return biomes.toArray(new Biome[0]);
@@ -40,14 +40,21 @@ public class BiomesProvider
     public static Biome[] getWaterBiomes()
     {
         List<Biome> biomes = Lists.newArrayList();
-        for (Biome b : Biome.REGISTRY)
+        for (Biome biome : Biome.REGISTRY)
         {
-            Set<BiomeDictionary.Type> types = BiomeDictionary.getTypes(b);
-            if (types.contains(BiomeDictionary.Type.WATER))
+            if (isValidBiome(biome))
             {
-                biomes.add(b);
+                if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.WATER))
+                {
+                    biomes.add(biome);
+                }
             }
         }
         return biomes.toArray(new Biome[0]);
+    }
+
+    public static boolean isValidBiome(Biome biome)
+    {
+        return !BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.END) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MUSHROOM);
     }
 }

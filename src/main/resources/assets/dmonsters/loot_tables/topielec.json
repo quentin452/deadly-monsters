@@ -41,7 +41,7 @@
         {
           "type": "item",
           "name": "minecraft:fish",
-          "weight": 1,
+          "weight": 10,
           "functions": [
             {
               "function": "set_data",
@@ -59,7 +59,7 @@
         {
           "type": "item",
           "name": "minecraft:fishing_rod",
-          "weight": 0.3,
+          "weight": 3,
           "functions": [
             {
               "function": "enchant_with_levels",

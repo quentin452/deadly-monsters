@@ -37,32 +37,32 @@
         {
           "type": "item",
           "name": "minecraft:bone",
-          "weight": 0.6
+          "weight": 6
         },
         {
           "type": "item",
           "name": "minecraft:baked_potato",
-          "weight": 0.75
+          "weight": 8
         },
         {
           "type": "item",
           "name": "minecraft:leather_helmet",
-          "weight": 1
+          "weight": 10
         },
         {
           "type": "item",
           "name": "minecraft:leather_leggings",
-          "weight": 1
+          "weight": 10
         },
         {
           "type": "item",
           "name": "minecraft:leather_chestplate",
-          "weight": 1
+          "weight": 10
         },
         {
           "type": "item",
           "name": "minecraft:leather_boots",
-          "weight": 1
+          "weight": 10
         }
       ]
     }

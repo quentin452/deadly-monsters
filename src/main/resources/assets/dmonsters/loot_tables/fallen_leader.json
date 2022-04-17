@@ -17,22 +17,22 @@
         {
           "type": "item",
           "name": "dmonsters:fallen_leader_spine",
-          "weight": 0.2
+          "weight": 2
         },
         {
           "type": "item",
           "name": "minecraft:iron_bars",
-          "weight": 0.5
+          "weight": 5
         },
         {
           "type": "item",
           "name": "minecraft:obsidian",
-          "weight": 1
+          "weight": 10
         },
         {
           "type": "item",
           "name": "minecraft:rail",
-          "weight": 1
+          "weight": 10
         }
       ]
     }

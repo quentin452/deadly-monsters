@@ -44,22 +44,22 @@
         {
           "type": "item",
           "name": "minecraft:piston",
-          "weight": 0.5
+          "weight": 5
         },
         {
           "type": "item",
           "name": "minecraft:sticky_piston",
-          "weight": 0.4
+          "weight": 4
         },
         {
           "type": "item",
           "name": "minecraft:mycelium",
-          "weight": 0.5
+          "weight": 5
         },
         {
           "type": "item",
           "name": "minecraft:nether_brick",
-          "weight": 2
+          "weight": 20
         }
       ]
     }

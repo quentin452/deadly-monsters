@@ -44,22 +44,22 @@
         {
           "type": "item",
           "name": "minecraft:melon_seeds",
-          "weight": 0.1
+          "weight": 1
         },
         {
           "type": "item",
           "name": "minecraft:nether_wart",
-          "weight": 1
+          "weight": 10
         },
         {
           "type": "item",
           "name": "minecraft:emerald",
-          "weight": 0.5
+          "weight": 5
         },
         {
           "type": "item",
           "name": "minecraft:sugar",
-          "weight": 1
+          "weight": 10
         }
       ]
     }

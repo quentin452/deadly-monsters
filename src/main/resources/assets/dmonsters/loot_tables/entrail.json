@@ -27,7 +27,7 @@
         {
           "type": "item",
           "name": "minecraft:leather",
-          "weight": 1,
+          "weight": 10,
           "functions": [
             {
               "function": "set_count",
@@ -41,17 +41,17 @@
         {
           "type": "item",
           "name": "minecraft:nether_wart",
-          "weight": 0.2
+          "weight": 2
         },
         {
           "type": "item",
           "name": "minecraft:red_mushroom",
-          "weight": 1
+          "weight": 10
         },
         {
           "type": "item",
           "name": "minecraft:redstone",
-          "weight": 0.5,
+          "weight": 5,
           "functions": [
             {
               "function": "set_count",

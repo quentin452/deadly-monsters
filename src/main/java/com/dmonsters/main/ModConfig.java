@@ -49,6 +49,8 @@ public class ModConfig
         public float globalStrengthMultiplier = 1.0F;
         @Name("Global Speed Multiplier")
         public float globalSpeedMultiplier = 1.0F;
+        @Name("Disable Time Change During Invasions")
+        public boolean disableTimeChangeInvasions = true;
     }
 
     public static class CategoryBloodyMaiden

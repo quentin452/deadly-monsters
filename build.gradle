@@ -9,9 +9,9 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
 
-version = "1.9.4"
+version = "1.12.2-1.9.5"
 group = "com.dmonsters"
-archivesBaseName = "DeadlyMonsters-1.12.2"
+archivesBaseName = "DeadlyMonsters"
 
 sourceCompatibility = targetCompatibility = '1.8'
 compileJava {
@@ -22,6 +22,24 @@ minecraft {
     version = "1.12.2-14.23.5.2847"
     runDir = "run"
     mappings = "snapshot_20171003"
+}
+
+repositories {
+    maven {
+        name 'DVS1 Maven FS'
+        url 'http://dvs1.progwml6.com/files/maven'
+    }
+	maven {
+		name = "Curse Maven"
+		url "https://www.cursemaven.com"
+	}
+}
+
+dependencies {
+    deobfCompile "slimeknights.mantle:Mantle:1.12-1.3.3.55"
+    deobfCompile "slimeknights:TConstruct:1.12.2-2.13.0.183"
+	compile "curse.maven:coroutil-237749:2902920"
+	compile "curse.maven:hostile-worlds-invasions-257244:2851097"
 }
 
 processResources {

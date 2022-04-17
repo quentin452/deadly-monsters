@@ -10,7 +10,9 @@ import net.minecraft.util.text.Style;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 
+import com.corosus.inv.InvasionManager;
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.network.PacketClientFXUpdate;
@@ -31,7 +33,7 @@ public class SunlightDrop extends Item
         ItemStack itemStackIn = playerIn.getHeldItem(hand);
         if (!worldIn.isDaytime())
         {
-            if (ModConfig.CATEGORY_HAUNTED_COW.hauntedCowDisableTimeChange)
+            if (ModConfig.CATEGORY_HAUNTED_COW.hauntedCowDisableTimeChange && checkInvasion(playerIn))
             {
                 Style red = new Style().setColor(TextFormatting.DARK_RED);
                 TextComponentTranslation msg = new TextComponentTranslation("msg.dmonsters.haunted_cow_time_disabled");
@@ -55,5 +57,17 @@ public class SunlightDrop extends Item
         {
             return new ActionResult(EnumActionResult.FAIL, itemStackIn);
         }
+    }
+
+    public boolean checkInvasion(EntityPlayer playerIn)
+    {
+        if (Loader.isModLoaded("hw_inv"))
+        {
+            if (ModConfig.CATEGORY_GENERAL.disableTimeChangeInvasions)
+            {
+                return InvasionManager.shouldLockOutFeaturesForPossibleActiveInvasion(playerIn.getEntityWorld());
+            }
+        }
+        return false;
     }
 }

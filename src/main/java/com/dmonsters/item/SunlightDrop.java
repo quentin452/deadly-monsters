@@ -44,7 +44,7 @@ public class SunlightDrop extends Item
                 PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(playerIn.getPosition(), PacketClientFXUpdate.Type.SUNLIGHT_USE));
                 if (worldIn.getGameRules().getBoolean("doDaylightCycle"))
                 {
-                    long i = worldIn.getWorldTime() + 24000L;
+                    long i = worldIn.getWorldTime();
                     worldIn.setWorldTime(i - i % 24000L);
                 }
                 itemStackIn.shrink(1);

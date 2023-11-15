@@ -4,10 +4,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
 
 import com.dmonsters.DeadlyMonsters;
@@ -18,38 +15,37 @@ public class BloodyMaidenHeart extends Item
 {
     public BloodyMaidenHeart()
     {
-        setRegistryName("bloody_maiden_heart");
-        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".bloody_maiden_heart");
+        setUnlocalizedName("bloody_maiden_heart");
+        setTextureName(DeadlyMonsters.MOD_ID + ".bloody_maiden_heart");
         this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.maxStackSize = 1;
         this.setMaxDamage(11);
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack p_77648_1_, EntityPlayer p_77648_2_, World p_77648_3_, int p_77648_4_, int p_77648_5_, int p_77648_6_, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
     {
-        ItemStack stack = playerIn.getHeldItem(hand);
-        if (!playerIn.canPlayerEdit(pos, facing, stack))
+        if (!p_77648_2_.canPlayerEdit(p_77648_4_, p_77648_5_, p_77648_6_, p_77648_7_, p_77648_1_))
         {
-            return EnumActionResult.FAIL;
+            return false;
         }
         else
         {
-            if (!worldIn.isRemote)
+            if (!p_77648_3_.isRemote)
             {
-                if (playerIn.isSneaking())
+                if (p_77648_2_.isSneaking())
                 {
-                    worldIn.setBlockState(pos, Blocks.WATER.getDefaultState());
+                    p_77648_3_.setBlock(p_77648_4_, p_77648_5_, p_77648_6_, Blocks.water);
                 }
                 else
                 {
-                    worldIn.setBlockState(pos, Blocks.LAVA.getDefaultState());
+                    p_77648_3_.setBlock(p_77648_4_, p_77648_5_, p_77648_6_, Blocks.lava);
                 }
-                PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(pos, PacketClientFXUpdate.Type.BLOODY_MAIDEN_HEART));
-                stack.damageItem(1, playerIn);
-                return EnumActionResult.SUCCESS;
+                PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(new ChunkCoordinates(p_77648_4_, p_77648_5_, p_77648_6_), PacketClientFXUpdate.Type.BLOODY_MAIDEN_HEART));
+                p_77648_1_.damageItem(1, p_77648_2_);
+                return true;
             }
-            return EnumActionResult.SUCCESS;
+            return true;
         }
     }
 }

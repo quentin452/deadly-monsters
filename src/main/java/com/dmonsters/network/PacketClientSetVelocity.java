@@ -1,13 +1,13 @@
 package com.dmonsters.network;
 
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
 import io.netty.buffer.ByteBuf;
 
@@ -43,13 +43,13 @@ public class PacketClientSetVelocity implements IMessage
         @Override
         public IMessage onMessage(PacketClientSetVelocity message, MessageContext ctx)
         {
-            FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> handle(message));
+         //   FMLCommonHandler.instance().getWorldThread(ctx.netHandler).addScheduledTask(() -> handle(message));
             return null;
         }
 
         private void handle(PacketClientSetVelocity message)
         {
-            World world = Minecraft.getMinecraft().world;
+            World world = Minecraft.getMinecraft().theWorld;
             Entity entity = world.getEntityByID(message.entityID);
             entity.setVelocity(message.x, message.y, message.z);
         }

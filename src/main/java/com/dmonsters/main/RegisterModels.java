@@ -1,25 +1,25 @@
 package com.dmonsters.main;
 
+import com.dmonsters.DeadlyMonsters;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.item.Item;
-import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraft.util.ResourceLocation;
 
-@Mod.EventBusSubscriber(Side.CLIENT)
 public class RegisterModels
 {
     @SubscribeEvent
-    public static void registerModels(final ModelRegistryEvent event)
+    public static void registerModels(FMLInitializationEvent event)
     {
-        registerItemModels();
-        registerBlockItemModels();
+     //   registerItemModels();
+     //   registerBlockItemModels();
     }
 
-    private static void registerItemModels()
+  /*  private static void registerItemModels()
     {
         registerItemModel(ModItems.rebar);
         registerItemModel(ModItems.lucky_egg);
@@ -64,16 +64,23 @@ public class RegisterModels
         registerBlockItemModel(ModBlocks.present_box);
     }
 
-    private static void registerItemModel(Item item)
+   */
+
+
+  /*  private static void registerItemModel(Item item)
     {
-        final ModelResourceLocation fullModelLocation = new ModelResourceLocation(item.getRegistryName().toString(), "inventory");
-        ModelLoader.setCustomModelResourceLocation(item, 0, fullModelLocation);
+        ItemRenderer itemRenderer = (ItemRenderer) Minecraft.getMinecraft().getResourceManager();
+        ResourceLocation location = new ResourceLocation(DeadlyMonsters.MOD_ID, "models/item/" + item.getUnlocalizedName().substring(5) + ".json");
+        itemRenderer.getItemModelMesher().register(item, 0, location);
     }
 
     private static void registerBlockItemModel(Block block)
     {
-        final Item item = Item.getItemFromBlock(block);
-        final ModelResourceLocation fullModelLocation = new ModelResourceLocation(item.getRegistryName().toString(), "inventory");
-        ModelLoader.setCustomModelResourceLocation(item, 0, fullModelLocation);
+        Item item = Item.getItemFromBlock(block);
+        ItemRenderer itemRenderer = (ItemRenderer) Minecraft.getMinecraft().getResourceManager();
+        ResourceLocation location = new ResourceLocation(DeadlyMonsters.MOD_ID, "models/item/" + item.getUnlocalizedName().substring(5) + ".json");
+        itemRenderer.getItemModelMesher().register(item, 0, location);
     }
+
+   */
 }

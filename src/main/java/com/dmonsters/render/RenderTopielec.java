@@ -1,26 +1,22 @@
 package com.dmonsters.render;
 
-import javax.annotation.Nonnull;
-
-import org.lwjgl.opengl.GL11;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
-
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityTopielec;
 import com.dmonsters.model.ModelTopielec;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
-public class RenderTopielec extends RenderLiving<EntityTopielec>
+public class RenderTopielec extends RenderLiving
 {
-    public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/topielec.png");
 
-    public RenderTopielec(RenderManager rendermanagerIn)
+    public RenderTopielec(ModelBase modelBase, float shadowSize)
     {
-        super(rendermanagerIn, new ModelTopielec(), 0.5F);
+        super(modelBase, shadowSize);
     }
 
     protected void preRenderCallback(EntityTopielec entity, float f)
@@ -29,18 +25,8 @@ public class RenderTopielec extends RenderLiving<EntityTopielec>
     }
 
     @Override
-    @Nonnull
-    protected ResourceLocation getEntityTexture(@Nonnull EntityTopielec entity)
+    protected ResourceLocation getEntityTexture(Entity entity)
     {
         return mobTexture;
-    }
-
-    public static class Factory implements IRenderFactory<EntityTopielec>
-    {
-        @Override
-        public Render<? super EntityTopielec> createRenderFor(RenderManager manager)
-        {
-            return new RenderTopielec(manager);
-        }
     }
 }

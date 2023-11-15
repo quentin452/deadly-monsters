@@ -1,7 +1,12 @@
 package com.dmonsters.entity;
 
-import javax.annotation.Nullable;
-
+import com.dmonsters.DeadlyMonsters;
+import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
+import com.dmonsters.entity.ai.EntityAIFreezeEnvironment;
+import com.dmonsters.main.ModConfig;
+import com.dmonsters.main.ModSounds;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -10,53 +15,44 @@ import net.minecraft.entity.ai.EntityAIMoveTowardsRestriction;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWander;
-import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.init.Items;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-import com.dmonsters.DeadlyMonsters;
-import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
-import com.dmonsters.entity.ai.EntityAIFreezeEnvironment;
-import com.dmonsters.main.ModConfig;
-import com.dmonsters.main.ModSounds;
 
 public class EntityFreezer extends EntityMob
 {
     public static final ResourceLocation LOOT = new ResourceLocation(DeadlyMonsters.MOD_ID, "freezer");
-    private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityFreezer.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EntityFreezer.class, DataSerializers.BOOLEAN);
-
+    public boolean isAttacking;
     public EntityFreezer(World worldIn)
     {
         super(worldIn);
         setSize(0.9F, 1.95F);
+        initEntityAI();
+
+    }
+    public boolean getAttacking() {
+        return this.isAttacking;
     }
 
-    public void onLivingUpdate()
-    {
-        if (this.world.isDaytime() && !this.world.isRemote)
-        {
-            float f = this.getBrightness();
-            BlockPos blockpos = this.getRidingEntity() instanceof EntityBoat ? (new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ)).up() : new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ);
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos))
-            {
-                this.setFire(8);
-            }
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender(float partialTicks) {
+        int i = MathHelper.floor_double(this.posX);
+        int j = MathHelper.floor_double(this.posZ);
+
+        if (this.worldObj.blockExists(i, 0, j)) {
+            double d0 = (this.boundingBox.maxY - this.boundingBox.minY) * 0.66D;
+            int k = MathHelper.floor_double(this.posY - (double) this.yOffset + d0);
+            return this.worldObj.getLightBrightnessForSkyBlocks(i, k, j, 0);
+        } else {
+            return 0;
         }
-        super.onLivingUpdate();
     }
 
     @Override
@@ -67,15 +63,15 @@ public class EntityFreezer extends EntityMob
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource amageSource)
+    protected String getHurtSound()
     {
-        return ModSounds.FREEZER_HURT;
+        return ModSounds.FREEZER_HURT.toString();
     }
 
     @Override
-    protected SoundEvent getDeathSound()
+    protected String getDeathSound()
     {
-        return ModSounds.FREEZER_DEATH;
+        return ModSounds.FREEZER_DEATH.toString();
     }
 
     @Override
@@ -83,8 +79,8 @@ public class EntityFreezer extends EntityMob
     {
         if (super.attackEntityAsMob(entityIn))
         {
-            ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 600));
-            this.playSound(ModSounds.FREEZER_ATTACK, 1, 1);
+            ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(Potion.moveSlowdown.id, 600));
+            this.playSound(ModSounds.FREEZER_ATTACK.toString(), 1, 1);
             return true;
         }
         else
@@ -97,40 +93,20 @@ public class EntityFreezer extends EntityMob
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.13D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_FREEZER.freezerSpeedMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(16.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_FREEZER.freezerStrengthMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(45.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_FREEZER.freezerHealthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(35.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.13D * ModConfig.globalSpeedMultiplier * ModConfig.freezerSpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(16.0D * ModConfig.globalStrengthMultiplier * ModConfig.freezerStrengthMultiplier);
+        IAttribute armorAttribute = new RangedAttribute("generic.armor", 2.0D, 0.0D, Double.MAX_VALUE).setDescription("Armor Rating");
+        this.getEntityAttribute(armorAttribute).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(45.0D * ModConfig.globalHealthMultiplier * ModConfig.freezerHealthMultiplier);
     }
 
-    @SideOnly(Side.CLIENT)
-    public boolean isArmsRaised()
-    {
-        return this.getDataManager().get(ARMS_RAISED);
-    }
-
-    public void setArmsRaised(boolean armsRaised)
-    {
-        this.getDataManager().set(ARMS_RAISED, armsRaised);
-    }
-
-    public boolean getAttacking()
-    {
-        return this.getDataManager().get(ATTACKING);
-    }
-
-    public void setAttaking(boolean mode)
-    {
-        this.getDataManager().set(ATTACKING, mode);
-    }
 
     public EnumCreatureAttribute getCreatureAttribute()
     {
         return EnumCreatureAttribute.UNDEAD;
     }
 
-    @Override
     protected void initEntityAI()
     {
         this.tasks.addTask(0, new EntityAIFreezeEnvironment(this));
@@ -145,21 +121,25 @@ public class EntityFreezer extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
-        this.getDataManager().register(ARMS_RAISED, Boolean.FALSE);
-        this.getDataManager().register(ATTACKING, Boolean.FALSE);
     }
 
     @Override
-    protected SoundEvent getAmbientSound()
+    protected String getLivingSound()
     {
-        return ModSounds.FREEZER_AMBIENT;
+        return ModSounds.FREEZER_AMBIENT.toString();
     }
 
     @Override
-    @Nullable
-    protected ResourceLocation getLootTable()
+    protected void dropFewItems(boolean recentlyHit, int lootingModifier)
     {
-        return LOOT;
+        if (recentlyHit)
+        {
+            int count = this.rand.nextInt(2 + lootingModifier) + 1;
+            for (int i = 0; i < count; ++i)
+            {
+                this.dropItem(Items.bone, 1);
+            }
+        }
     }
 
     @Override
@@ -173,7 +153,7 @@ public class EntityFreezer extends EntityMob
         double motionX = rand.nextGaussian() * 0.15D;
         double motionY = rand.nextGaussian() * 0.15D;
         double motionZ = rand.nextGaussian() * 0.15D;
-        world.spawnParticle(EnumParticleTypes.SNOW_SHOVEL,
+        worldObj.spawnParticle("note",
             posX + rand.nextFloat() * width * 2.0F - width,
             posY + 0.5D + rand.nextFloat() * height,
             posZ + rand.nextFloat() * width * 2.0F - width,
@@ -183,8 +163,9 @@ public class EntityFreezer extends EntityMob
         );
     }
 
+
     private void applyEntityAI()
     {
-        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false));
+        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false));
     }
 }

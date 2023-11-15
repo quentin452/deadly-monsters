@@ -1,55 +1,66 @@
 package com.dmonsters.entity;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.item.EntityBoat;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 public class EntityBloodyMaiden extends EntityMob
 {
     public static final ResourceLocation LOOT = new ResourceLocation(DeadlyMonsters.MOD_ID, "bloody_maiden");
-    private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityBloodyMaiden.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> TRIGGERED = EntityDataManager.createKey(EntityBloodyMaiden.class, DataSerializers.BOOLEAN);
-
+    private boolean triggered;
     public EntityBloodyMaiden(World worldIn)
     {
         super(worldIn);
         setSize(1.1F, 0.6F);
     }
 
-    public void onLivingUpdate()
-    {
-        if (this.world.isDaytime() && !this.world.isRemote)
-        {
-            float f = this.getBrightness();
-            BlockPos blockpos = this.getRidingEntity() instanceof EntityBoat ? (new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ)).up() : new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ);
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos))
-            {
+    public void onLivingUpdate() {
+        if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
+            int posX = MathHelper.floor_double(this.posX);
+            int posY = MathHelper.floor_double(this.posY);
+            int posZ = MathHelper.floor_double(this.posZ);
+            float f = this.worldObj.getLightBrightness(posX, posY, posZ);
+
+            Entity ridingEntity = this.ridingEntity;
+            ChunkCoordinates blockpos;
+
+            if (ridingEntity instanceof EntityBoat) {
+                blockpos = new ChunkCoordinates(posX, posY + 1, posZ);
+            } else {
+                blockpos = new ChunkCoordinates(posX, posY, posZ);
+            }
+
+            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.worldObj.canBlockSeeTheSky(blockpos.posX, blockpos.posY, blockpos.posZ)) {
                 this.setFire(8);
             }
         }
         super.onLivingUpdate();
     }
+    public boolean getTriggered() {
+        return triggered;
+    }
+
+    public void setTriggered(boolean triggered) {
+        this.triggered = triggered;
+    }
+
 
     @Override
     public void onUpdate()
@@ -58,15 +69,15 @@ public class EntityBloodyMaiden extends EntityMob
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource amageSource)
+    protected String getHurtSound()
     {
-        return ModSounds.MAIDEN_HURT;
+        return ModSounds.MAIDEN_HURT.toString();
     }
 
     @Override
-    protected SoundEvent getDeathSound()
+    protected String getDeathSound()
     {
-        return ModSounds.MAIDEN_DEATH;
+        return ModSounds.MAIDEN_DEATH.toString();
     }
 
     @Override
@@ -74,10 +85,8 @@ public class EntityBloodyMaiden extends EntityMob
     {
         if (super.attackEntityAsMob(entityIn))
         {
-            this.playSound(ModSounds.MAIDEN_ATTACK, 1, 1);
-            if (getTriggered())
-                entityIn.attackEntityFrom(DamageSource.GENERIC, 999);
-            setTriggered(true);
+            this.playSound(ModSounds.MAIDEN_ATTACK.toString(), 1, 1);
+                entityIn.attackEntityFrom(DamageSource.generic, 999);
             return true;
         }
         else
@@ -85,32 +94,16 @@ public class EntityBloodyMaiden extends EntityMob
             return false;
         }
     }
-
+    private static final IAttribute ARMOR_ATTRIBUTE = new RangedAttribute("generic.armor", 0, 0, 30).setShouldWatch(true);
     @Override
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.2D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_BLOODY_MAIDEN.bloodyMaidenSpeedMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(4.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_BLOODY_MAIDEN.bloodyMaidenStrengthMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_BLOODY_MAIDEN.bloodyMaidenHealthMultiplier);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public boolean isArmsRaised()
-    {
-        return this.getDataManager().get(ARMS_RAISED);
-    }
-
-    public boolean getTriggered()
-    {
-        return this.getDataManager().get(TRIGGERED);
-    }
-
-    public void setTriggered(boolean mode)
-    {
-        this.getDataManager().set(TRIGGERED, mode);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(35.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.2D * ModConfig.globalSpeedMultiplier * ModConfig.bloodyMaidenSpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(4.0D * ModConfig.globalStrengthMultiplier * ModConfig.bloodyMaidenStrengthMultiplier);
+        this.getEntityAttribute(ARMOR_ATTRIBUTE).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D * ModConfig.globalHealthMultiplier * ModConfig.bloodyMaidenHealthMultiplier);
     }
 
     public EnumCreatureAttribute getCreatureAttribute()
@@ -118,7 +111,7 @@ public class EntityBloodyMaiden extends EntityMob
         return EnumCreatureAttribute.UNDEAD;
     }
 
-    @Override
+
     protected void initEntityAI()
     {
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -134,22 +127,28 @@ public class EntityBloodyMaiden extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
-        this.getDataManager().register(ARMS_RAISED, Boolean.FALSE);
-        this.getDataManager().register(TRIGGERED, Boolean.FALSE);
+        initEntityAI();
     }
 
     @Override
-    protected SoundEvent getAmbientSound()
+    protected String getLivingSound()
     {
-        return ModSounds.MAIDEN_AMBIENT;
+        return ModSounds.MAIDEN_AMBIENT.toString();
     }
 
     @Override
-    @Nullable
-    protected ResourceLocation getLootTable()
+    protected void dropFewItems(boolean recentlyHit, int lootingModifier)
     {
-        return LOOT;
+        if (recentlyHit)
+        {
+            int count = this.rand.nextInt(2 + lootingModifier) + 1;
+            for (int i = 0; i < count; ++i)
+            {
+                this.dropItem(Items.bone, 1);
+            }
+        }
     }
+
 
     @Override
     public int getMaxSpawnedInChunk()
@@ -159,6 +158,18 @@ public class EntityBloodyMaiden extends EntityMob
 
     private void applyEntityAI()
     {
-        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false));
+        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false));
+    }    @Override
+
+public void readEntityFromNBT(NBTTagCompound compound) {
+    super.readEntityFromNBT(compound);
+    this.triggered = compound.getBoolean("Triggered");
+}
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setBoolean("Triggered", this.triggered);
     }
+
 }

@@ -1,60 +1,60 @@
 package com.dmonsters.main;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.google.common.collect.Lists;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeGenBase;
 import net.minecraftforge.common.BiomeDictionary;
 
 public class BiomesProvider
 {
-    public static Biome[] getCommonBiomes()
+    public static BiomeGenBase[] getCommonBiomes()
     {
-        List<Biome> biomes = Lists.newArrayList();
-        for (Biome biome : Biome.REGISTRY)
+        List<BiomeGenBase> biomes = new ArrayList<>();
+        for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray())
         {
             if (isValidBiome(biome))
             {
                 biomes.add(biome);
             }
         }
-        return biomes.toArray(new Biome[0]);
+        return biomes.toArray(new BiomeGenBase[0]);
     }
 
-    public static Biome[] getSnowBiomes()
+    public static BiomeGenBase[] getSnowBiomes()
     {
-        List<Biome> biomes = Lists.newArrayList();
-        for (Biome biome : Biome.REGISTRY)
+        List<BiomeGenBase> biomes = new ArrayList<BiomeGenBase>();
+        for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray())
         {
             if (isValidBiome(biome))
             {
-                if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.SNOWY) || BiomeDictionary.hasType(biome, BiomeDictionary.Type.COLD))
+                if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.SNOWY) || BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.COLD))
                 {
                     biomes.add(biome);
                 }
             }
         }
-        return biomes.toArray(new Biome[0]);
+        return biomes.toArray(new BiomeGenBase[0]);
     }
 
-    public static Biome[] getWaterBiomes()
+    public static BiomeGenBase[] getWaterBiomes()
     {
-        List<Biome> biomes = Lists.newArrayList();
-        for (Biome biome : Biome.REGISTRY)
+        List<BiomeGenBase> biomes = new ArrayList<BiomeGenBase>();
+        for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray())
         {
             if (isValidBiome(biome))
             {
-                if (BiomeDictionary.hasType(biome, BiomeDictionary.Type.WATER))
+                if (BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.WATER))
                 {
                     biomes.add(biome);
                 }
             }
         }
-        return biomes.toArray(new Biome[0]);
+        return biomes.toArray(new BiomeGenBase[0]);
     }
 
-    public static boolean isValidBiome(Biome biome)
+    public static boolean isValidBiome(BiomeGenBase biome)
     {
-        return !BiomeDictionary.hasType(biome, BiomeDictionary.Type.NETHER) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.END) && !BiomeDictionary.hasType(biome, BiomeDictionary.Type.MUSHROOM);
+        return !BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.NETHER) && !BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.END) && !BiomeDictionary.isBiomeOfType(biome, BiomeDictionary.Type.MUSHROOM);
     }
 }

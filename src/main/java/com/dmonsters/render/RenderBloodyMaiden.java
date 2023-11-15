@@ -1,49 +1,41 @@
 package com.dmonsters.render;
 
-import javax.annotation.Nonnull;
-
-import org.lwjgl.opengl.GL11;
+import com.dmonsters.model.ModelBloodyMaiden;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityBloodyMaiden;
-import com.dmonsters.model.ModelBloodyMaiden;
 
-public class RenderBloodyMaiden extends RenderLiving<EntityBloodyMaiden>
+public class RenderBloodyMaiden extends RenderLiving
 {
-    public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/bloody_maiden.png");
-    private final ResourceLocation mobTextureTriggered = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/bloody_maiden_triggered.png");
+    private static final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/bloody_maiden.png");
+    private static final ResourceLocation mobTextureTriggered = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/bloody_maiden_triggered.png");
 
-    public RenderBloodyMaiden(RenderManager rendermanagerIn)
-    {
-        super(rendermanagerIn, new ModelBloodyMaiden(), 0.5F);
-    }
-
-    protected void preRenderCallback(EntityBloodyMaiden entity, float f)
-    {
-        GL11.glScalef(1.0F, 1.0F, 1.0F);
+    public RenderBloodyMaiden(ModelBase p_i1262_1_, float p_i1262_2_) {
+        super(p_i1262_1_, p_i1262_2_);
     }
 
     @Override
-    @Nonnull
-    protected ResourceLocation getEntityTexture(@Nonnull EntityBloodyMaiden entity)
+    protected ResourceLocation getEntityTexture(Entity entity)
     {
-        if (entity.getTriggered())
+        if (((EntityBloodyMaiden)entity).getTriggered())
             return mobTextureTriggered;
         return mobTexture;
     }
 
-    public static class Factory implements IRenderFactory<EntityBloodyMaiden>
+    public static void registerRenderers()
     {
-        @Override
-        public Render<? super EntityBloodyMaiden> createRenderFor(RenderManager manager)
-        {
-            return new RenderBloodyMaiden(manager);
-        }
+        RenderManager renderManager = RenderManager.instance;
+        renderManager.entityRenderMap.put(EntityBloodyMaiden.class, new RenderBloodyMaiden(new ModelBloodyMaiden(), 0.5F));
+    }
+
+    @Override
+    public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
+    {
     }
 }

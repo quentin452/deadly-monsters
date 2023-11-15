@@ -1,12 +1,10 @@
 package com.dmonsters.main;
 
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
 import com.dmonsters.DeadlyMonsters;
+import net.minecraftforge.client.event.sound.SoundEvent;
 
 public class ModSounds
 {
@@ -131,15 +129,19 @@ public class ModSounds
 
     private static SoundEvent registerSound(String id)
     {
-        ResourceLocation soundID = new ResourceLocation(DeadlyMonsters.MOD_ID, id);
+      /*  ResourceLocation soundID = new ResourceLocation(DeadlyMonsters.MOD_ID, id);
         return new SoundEvent(soundID).setRegistryName(soundID);
+
+       */
+        return null;
     }
 
-    @Mod.EventBusSubscriber(modid = DeadlyMonsters.MOD_ID)
     public static class RegistrationHandler
     {
-        @SubscribeEvent
-        public static void registerSoundEvents(final RegistryEvent.Register<SoundEvent> event)
+     /*   public static void registerSound(FMLInitializationEvent e) {
+            registerSound();
+        }
+        public static void registerSound()
         {
             event.getRegistry().registerAll(
                 DUMP_MAKE,
@@ -204,5 +206,7 @@ public class ModSounds
                 STRANGER_ATTACK
             );
         }
+
+      */
     }
 }

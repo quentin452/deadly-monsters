@@ -3,9 +3,9 @@ package com.dmonsters.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
 
 import com.dmonsters.entity.EntityFreezer;
+import net.minecraft.util.MathHelper;
 
 public class ModelFreezer extends ModelBase
 {
@@ -95,7 +95,11 @@ public class ModelFreezer extends ModelBase
             this.torso.render(scale);
         }
     }
+    private float swingProgress;
 
+    public void setSwingProgress(float swingProgress) {
+        this.swingProgress = swingProgress;
+    }
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
         boolean isAttaking = entityIn instanceof EntityFreezer && ((EntityFreezer) entityIn).getAttacking();
@@ -103,7 +107,6 @@ public class ModelFreezer extends ModelBase
         if (isAttaking)
         {
             super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
-            boolean flag = ((EntityFreezer) entityIn).isArmsRaised();
 
             this.head.rotateAngleY = netHeadYaw * 0.017453292F;
             this.head.rotateAngleX = headPitch * 0.017453292F;
@@ -114,9 +117,6 @@ public class ModelFreezer extends ModelBase
             this.leftarm.rotateAngleZ = 0.0F;
             this.rightarm.rotateAngleY = -(0.1F - f * 0.6F);
             this.leftarm.rotateAngleY = 0.1F - f * 0.6F;
-            float f2 = -(float) Math.PI / (flag ? 1.5F : 2.25F);
-            this.rightarm.rotateAngleX = f2;
-            this.leftarm.rotateAngleX = f2;
             this.rightarm.rotateAngleX += f * 1.2F - f1 * 0.4F;
             this.leftarm.rotateAngleX += f * 1.2F - f1 * 0.4F;
             this.rightarm.rotateAngleZ += MathHelper.cos(ageInTicks * 0.09F) * 0.05F + 0.05F;

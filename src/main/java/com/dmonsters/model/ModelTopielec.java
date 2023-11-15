@@ -3,9 +3,9 @@ package com.dmonsters.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
 
 import com.dmonsters.entity.EntityMutantSteve;
+import net.minecraft.util.MathHelper;
 
 public class ModelTopielec extends ModelBase
 {
@@ -166,11 +166,15 @@ public class ModelTopielec extends ModelBase
         leftupperarm.render(scale);
         rightupperarm.render(scale);
     }
+    private float swingProgress;
 
+    public void setSwingProgress(float swingProgress) {
+        this.swingProgress = swingProgress;
+    }
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
-        boolean flag = entityIn instanceof EntityMutantSteve && ((EntityMutantSteve) entityIn).isArmsRaised();
+        boolean flag = entityIn instanceof EntityMutantSteve;
         this.rightupperleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         this.leftupperleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 1.4F * limbSwingAmount;
 

@@ -4,42 +4,26 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.dmonsters.DeadlyMonsters;
 
 public class PresentBlock extends Block
 {
-    public static final PropertyEnum<EnumMode> COLOR = PropertyEnum.create("color", EnumMode.class);
 
     public PresentBlock()
     {
-        super(Material.IRON);
-        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".present_block");
-        setRegistryName("present_block");
+        super(Material.iron);
+        setBlockTextureName(DeadlyMonsters.MOD_ID + ".present_block");
+        setBlockName("present_block");
         this.setHardness(3);
         this.setResistance(50);
         this.setTickRandomly(true);
     }
 
-    public IBlockState getStateFromMeta(int meta)
+    public void updateTick(World worldIn, int x, int y, int z, Random random)
     {
-        return getDefaultState().withProperty(COLOR, EnumMode.getStateFromMeta(meta));
-    }
-
-    public int getMetaFromState(IBlockState state)
-    {
-        return state.getValue(COLOR).getID();
-    }
-
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
-        worldIn.setBlockToAir(pos);
+        worldIn.setBlockToAir(x,y,z);
     }
 
     @Override
@@ -48,12 +32,7 @@ public class PresentBlock extends Block
         return 0;
     }
 
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, COLOR);
-    }
-
-    public enum EnumMode implements IStringSerializable
+    public enum EnumMode
     {
         GREEN(0, "green"),
         YELLOW(1, "yellow");
@@ -96,7 +75,7 @@ public class PresentBlock extends Block
             this.name = name;
         }
 
-        @Override
+
         public String getName()
         {
             return name;

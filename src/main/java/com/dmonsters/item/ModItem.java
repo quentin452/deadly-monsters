@@ -8,7 +8,7 @@ public class ModItem extends Item
 {
     public ModItem()
     {
-        setRegistryName("mod_item");
-        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".mod_item");
+        setUnlocalizedName("mod_item");
+        setTextureName(DeadlyMonsters.MOD_ID + ".mod_item");
     }
 }

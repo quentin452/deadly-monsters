@@ -5,8 +5,8 @@ import java.util.List;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
 
 public class EntityAIWaterMobNearestPlayer extends DeadlyMonsterAIBase
 {
@@ -22,19 +22,22 @@ public class EntityAIWaterMobNearestPlayer extends DeadlyMonsterAIBase
 
     public boolean shouldExecute()
     {
-        EntityPlayer player = this.owner.world.getClosestPlayerToEntity(this.owner, this.distance);
+        EntityPlayer player = this.owner.worldObj.getClosestPlayerToEntity(this.owner, this.distance);
         this.owner.setAttackTarget(player);
-        BlockPos AABB_01 = new BlockPos(this.owner.posX - this.distance, this.owner.posY - this.distance, this.owner.posZ - this.distance);
-        BlockPos AABB_02 = new BlockPos(this.owner.posX + this.distance, this.owner.posY + this.distance, this.owner.posZ + this.distance);
-        AxisAlignedBB AABB = new AxisAlignedBB(AABB_01, AABB_02);
-        List<Entity> list = this.owner.world.getEntitiesWithinAABBExcludingEntity(this.owner, AABB);
+
+        ChunkCoordinates AABB_01 = new ChunkCoordinates((int) (this.owner.posX - this.distance), (int) (this.owner.posY - this.distance), (int) (this.owner.posZ - this.distance));
+        ChunkCoordinates AABB_02 = new ChunkCoordinates((int) (this.owner.posX + this.distance), (int) (this.owner.posY + this.distance), (int) (this.owner.posZ + this.distance));
+
+        AxisAlignedBB AABB = AxisAlignedBB.getBoundingBox(AABB_01.posX, AABB_01.posY, AABB_01.posZ, AABB_02.posX, AABB_02.posY, AABB_02.posZ);
+
+        List list = this.owner.worldObj.getEntitiesWithinAABBExcludingEntity(this.owner, AABB);
         if (list.isEmpty())
         {
             return false;
         }
         else
         {
-            for (Entity entity : list)
+            for (Object entity : list)
             {
                 if (entity instanceof EntityPlayer)
                 {

@@ -1,14 +1,5 @@
 package com.dmonsters.entity;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.world.World;
-
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.ai.EntityAITopielecAttack;
 import com.dmonsters.entity.ai.EntityAITopielecFollow;
@@ -16,9 +7,20 @@ import com.dmonsters.entity.ai.EntityAITopielecIdle;
 import com.dmonsters.entity.ai.EntityAIWaterMobNearestPlayer;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.init.Items;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 public class EntityTopielec extends EntityMob
 {
+    private static final IAttribute ARMOR_ATTRIBUTE = new RangedAttribute("generic.armor", 0, 0, 30).setShouldWatch(true);
+
     public static final ResourceLocation LOOT = new ResourceLocation(DeadlyMonsters.MOD_ID, "topielec");
     private float targetVectorX;
     private float targetVectorY;
@@ -31,6 +33,8 @@ public class EntityTopielec extends EntityMob
     {
         super(worldIn);
         this.setSize(1F, 1F);
+        initEntityAI();
+
     }
 
     public boolean canBreatheUnderwater()
@@ -62,7 +66,6 @@ public class EntityTopielec extends EntityMob
         return false;
     }
 
-    @Override
     protected void initEntityAI()
     {
         this.tasks.addTask(1, new EntityAITopielecAttack(this, 0.5F));
@@ -76,29 +79,25 @@ public class EntityTopielec extends EntityMob
         return 120;
     }
 
-    public void onEntityUpdate()
-    {
+    public void onEntityUpdate() {
         int i = this.getAir();
         super.onEntityUpdate();
 
-        if (this.isEntityAlive() && !this.isInWater())
-        {
+        if (this.isEntityAlive() && !this.isInWater()) {
             this.setPosition(lastWaterX, lastWaterY, lastWaterZ);
             this.motionX = 0.0D;
             this.motionZ = 0.0D;
-            if (!this.hasNoGravity())
+            if (this.isInsideOfMaterial(Material.water)) {
                 this.motionY -= 0.5D;
+            }
             --i;
             this.setAir(i);
 
-            if (this.getAir() == -20)
-            {
+            if (this.getAir() == -20) {
                 this.setAir(0);
-                this.attackEntityFrom(DamageSource.DROWN, 2.0F);
+                this.attackEntityFrom(DamageSource.drown, 2.0F);
             }
-        }
-        else
-        {
+        } else {
             this.motionX = this.targetVectorX;
             this.motionY = this.targetVectorY;
             this.motionZ = this.targetVectorZ;
@@ -108,58 +107,55 @@ public class EntityTopielec extends EntityMob
     }
 
     @Override
-    protected SoundEvent getAmbientSound()
+    protected String getLivingSound()
     {
-        return ModSounds.TOPIELEC_AMBIENT;
+        return ModSounds.TOPIELEC_AMBIENT.toString();
     }
 
     @Override
-    @Nullable
-    protected ResourceLocation getLootTable()
-    {
-        return LOOT;
+    protected void dropFewItems(boolean recentlyHit, int lootingModifier) {
+        super.dropFewItems(recentlyHit, lootingModifier);
+
+        if (recentlyHit) {
+            this.dropItem(Items.bone, 1 + this.rand.nextInt(2 + lootingModifier));
+        }
     }
+
 
     protected boolean canDespawn()
     {
         return true;
     }
 
-    public boolean isNotColliding()
+    @Override
+    protected String getHurtSound()
     {
-        return this.world.checkNoEntityCollision(this.getEntityBoundingBox(), this);
+        return ModSounds.TOPIELEC_HURT.toString();
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn)
+    protected String getDeathSound()
     {
-        return ModSounds.TOPIELEC_HURT;
+        return ModSounds.TOPIELEC_DEATH.toString();
     }
 
-    @Override
-    protected SoundEvent getDeathSound()
-    {
-        return ModSounds.TOPIELEC_DEATH;
-    }
-
-    public boolean getCanSpawnHere()
-    {
-        return this.posY > 45.0D && this.posY < (double) this.world.getSeaLevel() && super.getCanSpawnHere();
+    public boolean getCanSpawnHere() {
+        return this.posY > 45.0D && this.posY < 63D && super.getCanSpawnHere();
     }
 
     @Override
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.4D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_TOPIELEC.topielecSpeedMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(1.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_TOPIELEC.topielecStrengthMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(20.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_TOPIELEC.topielecHealthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.4D * ModConfig.globalSpeedMultiplier * ModConfig.topielecSpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(1.0D * ModConfig.globalStrengthMultiplier * ModConfig.topielecStrengthMultiplier);
+        this.getEntityAttribute(ARMOR_ATTRIBUTE).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(20.0D * ModConfig.globalHealthMultiplier * ModConfig.topielecHealthMultiplier);
     }
 
     private void applyEntityAI()
     {
-        this.targetTasks.addTask(0, new EntityAIWaterMobNearestPlayer(this, ModConfig.CATEGORY_TOPIELEC.topielecSearchDistance));
+        this.targetTasks.addTask(0, new EntityAIWaterMobNearestPlayer(this, ModConfig.topielecSearchDistance));
     }
 }

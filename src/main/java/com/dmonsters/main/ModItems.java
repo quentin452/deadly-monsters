@@ -1,13 +1,11 @@
 package com.dmonsters.main;
 
-import net.minecraft.item.Item;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.registries.IForgeRegistry;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.item.*;
+import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.item.Item;
 
 public class ModItems
 {
@@ -70,41 +68,44 @@ public class ModItems
         harpoon_obsidian = new Harpoon("obsidian", 80, 6);
     }
 
-    @Mod.EventBusSubscriber(modid = DeadlyMonsters.MOD_ID)
     public static class RegistrationHandler
     {
-        @SubscribeEvent
-        public static void registerItems(final RegistryEvent.Register<Item> event)
+        public static void register(FMLInitializationEvent e) {
+            registerItems();
+        }
+        public static void registerItems()
         {
-            final IForgeRegistry<Item> registry = event.getRegistry();
             init();
-            registry.register(rebar);
-            registry.register(lucky_egg);
-            registry.register(unborn_baby_eye);
-            registry.register(bloody_maiden_heart);
-            registry.register(fallen_leader_spine);
-            registry.register(entrail_flesh);
-            registry.register(poopoo_pill);
-            registry.register(dagon);
-            registry.register(flying_dagon);
-            registry.register(sunlight_drop);
-            registry.register(mod_item);
-            registry.register(mob_spawner_item_unborn_baby);
-            registry.register(mob_spawner_item_climber);
-            registry.register(mob_spawner_item_entrail);
-            registry.register(mob_spawner_item_freezer);
-            registry.register(mob_spawner_item_mutant_steve);
-            registry.register(mob_spawner_item_fallen_leader);
-            registry.register(mob_spawner_item_bloody_maiden);
-            registry.register(mob_spawner_item_zombie_chicken);
-            registry.register(mob_spawner_item_present);
-            registry.register(mob_spawner_item_stranger);
-            registry.register(mob_spawner_item_haunted_cow);
-            registry.register(mob_spawner_item_topielec);
-            registry.register(harpoon_stone);
-            registry.register(harpoon_iron);
-            registry.register(harpoon_diamond);
-            registry.register(harpoon_obsidian);
+            register(rebar, "rebar");
+            register(lucky_egg, "lucky egg");
+            register(unborn_baby_eye, "unborn baby eye");
+            register(bloody_maiden_heart, "blood maiden heart");
+            register(fallen_leader_spine, "fallen leader spine");
+            register(entrail_flesh, "entrail flesh");
+            register(poopoo_pill, "poopoo pill");
+            register(dagon, "dagon");
+            register(flying_dagon, "flying dragon");
+            register(sunlight_drop, "sunlight drop");
+            register(mod_item, "mod item");
+            register(mob_spawner_item_unborn_baby, "mob spawner item unborn baby");
+            register(mob_spawner_item_climber, "mob spawner item climber");
+            register(mob_spawner_item_entrail, "mob spawner item entrail");
+            register(mob_spawner_item_freezer, "mob spawner item freezer");
+            register(mob_spawner_item_mutant_steve, "mob spawner item mutant steve");
+            register(mob_spawner_item_fallen_leader, "mob spawner item fallen leader");
+            register(mob_spawner_item_bloody_maiden, "mob spawner item bloody maiden");
+            register(mob_spawner_item_zombie_chicken, "mob spawner item zombie chicken");
+            register(mob_spawner_item_present, "mob spawner item present");
+            register(mob_spawner_item_stranger, "mob spawner item stranger");
+            register(mob_spawner_item_haunted_cow, "mob spawner item haunted cow");
+            register(mob_spawner_item_topielec, "mob spawner item topielec");
+            register(harpoon_stone, "harpoon stone");
+            register(harpoon_iron, "harpoon iron");
+            register(harpoon_diamond, "harpoon diamond");
+            register(harpoon_obsidian, "harpoon obsidian");
+        }
+        private static void register(Item item, String name) {
+            GameRegistry.registerItem(item, name);
         }
     }
 }

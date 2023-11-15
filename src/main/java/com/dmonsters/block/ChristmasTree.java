@@ -1,65 +1,59 @@
 package com.dmonsters.block;
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModBlocks;
 
 public class ChristmasTree extends Block
 {
-    protected static final AxisAlignedBB BLOCK_COLLISION_AABB = new AxisAlignedBB(0.0625D, 0.0D, 0.0625D, 0.9375D, 1.0D, 0.9375D);
+    protected static final AxisAlignedBB BLOCK_COLLISION_AABB = AxisAlignedBB.getBoundingBox(0.0625D, 0.0D, 0.0625D, 0.9375D, 1.0D, 0.9375D);
 
     public ChristmasTree()
     {
-        super(Material.CACTUS);
-        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".christmas_tree");
-        setRegistryName("christmas_tree");
+        super(Material.cactus);
+        setBlockTextureName(DeadlyMonsters.MOD_ID + ".christmas_tree");
+        setBlockName("christmas_tree");
         setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.setTickRandomly(true);
         this.setHardness(2);
         this.setResistance(50);
     }
 
-    public boolean isFullCube(IBlockState state)
-    {
-        return true;
-    }
-
     @SideOnly(Side.CLIENT)
-    public AxisAlignedBB getSelectedBoundingBox(IBlockState state, World worldIn, BlockPos pos)
+    public AxisAlignedBB getSelectedBoundingBoxFromPool(World worldIn, int x, int y, int z)
     {
-        return BLOCK_COLLISION_AABB.offset(pos);
+        return BLOCK_COLLISION_AABB.offset(x,y,z);
     }
 
-    public boolean isOpaqueCube(IBlockState state)
+    public boolean isOpaqueCube()
     {
         return false;
     }
 
     @Override
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
+    public void updateTick(World worldIn, int x, int y, int z, Random random)
     {
-        Random random = new Random();
         float rndNum = random.nextFloat();
         if (rndNum < 0.99F)
         {
-            BlockPos spawnPos = selectPos(worldIn, pos);
+            ChunkCoordinates spawnPos = selectPos(worldIn, new ChunkCoordinates(x, y, z));
             if (spawnPos != null)
             {
-                worldIn.setBlockState(spawnPos, ModBlocks.present_box.getDefaultState());
+                worldIn.setBlock(spawnPos.posX, spawnPos.posY, spawnPos.posZ, ModBlocks.present_box);
             }
         }
     }
@@ -77,30 +71,34 @@ public class ChristmasTree extends Block
         return this;
     }
 
-    private BlockPos selectPos(World worldIn, BlockPos currPos)
+    private ChunkCoordinates selectPos(World worldIn, ChunkCoordinates currPos)
     {
-        List<BlockPos> posList = new ArrayList<BlockPos>();
+        List<ChunkCoordinates> posList = new ArrayList<>();
         Block block;
-        BlockPos pos;
-        //UP
-        pos = new BlockPos(currPos.getX() + 1, currPos.getY(), currPos.getZ());
-        block = worldIn.getBlockState(pos).getBlock();
-        if (block == Blocks.AIR)
+        ChunkCoordinates pos;
+
+        // UP
+        pos = new ChunkCoordinates(currPos.posX + 1, currPos.posY, currPos.posZ);
+        block = worldIn.getBlock(pos.posX, pos.posY, pos.posZ);
+        if (block == Blocks.air)
             posList.add(pos);
-        //DOWN
-        pos = new BlockPos(currPos.getX() - 1, currPos.getY(), currPos.getZ());
-        block = worldIn.getBlockState(pos).getBlock();
-        if (block == Blocks.AIR)
+
+        // DOWN
+        pos = new ChunkCoordinates(currPos.posX - 1, currPos.posY, currPos.posZ);
+        block = worldIn.getBlock(pos.posX, pos.posY, pos.posZ);
+        if (block == Blocks.air)
             posList.add(pos);
-        //RIGHT
-        pos = new BlockPos(currPos.getX(), currPos.getY(), currPos.getZ() + 1);
-        block = worldIn.getBlockState(pos).getBlock();
-        if (block == Blocks.AIR)
+
+        // RIGHT
+        pos = new ChunkCoordinates(currPos.posX, currPos.posY, currPos.posZ + 1);
+        block = worldIn.getBlock(pos.posX, pos.posY, pos.posZ);
+        if (block == Blocks.air)
             posList.add(pos);
-        //LEFT
-        pos = new BlockPos(currPos.getX(), currPos.getY(), currPos.getZ() - 1);
-        block = worldIn.getBlockState(pos).getBlock();
-        if (block == Blocks.AIR)
+
+        // LEFT
+        pos = new ChunkCoordinates(currPos.posX, currPos.posY, currPos.posZ - 1);
+        block = worldIn.getBlock(pos.posX, pos.posY, pos.posZ);
+        if (block == Blocks.air)
             posList.add(pos);
 
         if (posList.size() > 0)

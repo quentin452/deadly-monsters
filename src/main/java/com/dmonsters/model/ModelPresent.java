@@ -2,9 +2,9 @@ package com.dmonsters.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.MathHelper;
+import org.lwjgl.opengl.GL11;
 
 public class ModelPresent extends ModelBase
 {
@@ -83,12 +83,12 @@ public class ModelPresent extends ModelBase
 
         if (this.isChild)
         {
-            GlStateManager.pushMatrix();
+            GL11.glPushMatrix();
             this.hat.render(scale);
             this.insideHat.render(scale);
             this.rightEye.render(scale);
             this.leftEye.render(scale);
-            GlStateManager.popMatrix();
+            GL11.glPopMatrix();
         }
         else
         {

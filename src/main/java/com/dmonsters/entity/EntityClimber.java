@@ -10,17 +10,12 @@ import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.EntityIronGolem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.init.Items;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
 
@@ -28,11 +23,11 @@ import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
+import net.minecraftforge.client.event.sound.SoundEvent;
 
 public class EntityClimber extends EntityMob
 {
     public static final ResourceLocation LOOT = new ResourceLocation(DeadlyMonsters.MOD_ID, "climber");
-    private static final DataParameter<Byte> CLIMBING = EntityDataManager.createKey(EntityClimber.class, DataSerializers.BYTE);
 
     public EntityClimber(World worldIn)
     {
@@ -40,14 +35,23 @@ public class EntityClimber extends EntityMob
         setSize(0.9F, 1.95F);
     }
 
-    public void onLivingUpdate()
-    {
-        if (this.world.isDaytime() && !this.world.isRemote)
-        {
-            float f = this.getBrightness();
-            BlockPos blockpos = this.getRidingEntity() instanceof EntityBoat ? (new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ)).up() : new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ);
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos))
-            {
+    public void onLivingUpdate() {
+        if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
+            int posX = MathHelper.floor_double(this.posX);
+            int posY = MathHelper.floor_double(this.posY);
+            int posZ = MathHelper.floor_double(this.posZ);
+            float f = this.worldObj.getLightBrightness(posX, posY, posZ);
+
+            Entity ridingEntity = this.ridingEntity;
+            ChunkCoordinates blockpos;
+
+            if (ridingEntity instanceof EntityBoat) {
+                blockpos = new ChunkCoordinates(posX, posY + 1, posZ);
+            } else {
+                blockpos = new ChunkCoordinates(posX, posY, posZ);
+            }
+
+            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.worldObj.canBlockSeeTheSky(blockpos.posX, blockpos.posY, blockpos.posZ)) {
                 this.setFire(8);
             }
         }
@@ -61,15 +65,15 @@ public class EntityClimber extends EntityMob
     {
         super.onUpdate();
 
-        if (!this.world.isRemote)
+        if (!this.worldObj.isRemote)
         {
-            this.setBesideClimbableBlock(this.collidedHorizontally);
+            this.setBesideClimbableBlock(this.isCollidedHorizontally);
         }
     }
 
-    protected SoundEvent getDeathSound()
+    protected String getDeathSound()
     {
-        return ModSounds.CLIMBER_DEATH;
+        return ModSounds.CLIMBER_DEATH.toString();
     }
 
     @Override
@@ -77,7 +81,7 @@ public class EntityClimber extends EntityMob
     {
         if (super.attackEntityAsMob(entityIn))
         {
-            this.playSound(ModSounds.CLIMBER_ATTACK, 1, 1);
+            this.playSound(ModSounds.CLIMBER_ATTACK.toString(), 1, 1);
             return true;
         }
         else
@@ -89,15 +93,16 @@ public class EntityClimber extends EntityMob
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(24.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_CLIMBER.climberHealthMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_CLIMBER.climberSpeedMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_CLIMBER.climberStrengthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(24.0D * ModConfig.globalHealthMultiplier * ModConfig.climberHealthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.1D * ModConfig.globalSpeedMultiplier * ModConfig.climberSpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D * ModConfig.globalStrengthMultiplier * ModConfig.climberStrengthMultiplier);
     }
 
     public boolean isPotionApplicable(PotionEffect potioneffectIn)
     {
-        return potioneffectIn.getPotion() != MobEffects.POISON && super.isPotionApplicable(potioneffectIn);
+        return potioneffectIn.getPotionID() != Potion.poison.id && super.isPotionApplicable(potioneffectIn);
     }
+
 
     public boolean isOnLadder()
     {
@@ -109,25 +114,21 @@ public class EntityClimber extends EntityMob
         return EnumCreatureAttribute.UNDEAD;
     }
 
-    public boolean isBesideClimbableBlock()
-    {
-        return (this.dataManager.get(CLIMBING) & 1) != 0;
+    private static final int CLIMBING_DATA_INDEX = 20;
+    public boolean isBesideClimbableBlock() {
+        return (this.getDataWatcher().getWatchableObjectByte(CLIMBING_DATA_INDEX) & 1) != 0;
     }
 
-    public void setBesideClimbableBlock(boolean climbing)
-    {
-        byte b0 = this.dataManager.get(CLIMBING);
+    public void setBesideClimbableBlock(boolean climbing) {
+        byte b0 = this.getDataWatcher().getWatchableObjectByte(CLIMBING_DATA_INDEX);
 
-        if (climbing)
-        {
+        if (climbing) {
             b0 = (byte) (b0 | 1);
-        }
-        else
-        {
+        } else {
             b0 = (byte) (b0 & -2);
         }
 
-        this.dataManager.set(CLIMBING, b0);
+        this.getDataWatcher().updateObject(CLIMBING_DATA_INDEX, b0);
     }
 
     protected void initEntityAI()
@@ -139,26 +140,33 @@ public class EntityClimber extends EntityMob
         this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(6, new EntityAILookIdle(this));
         this.targetTasks.addTask(1, new EntityAIHurtByTarget(this, false));
-        this.targetTasks.addTask(2, new EntityClimber.AISpiderTarget(this, EntityPlayer.class));
-        this.targetTasks.addTask(3, new EntityClimber.AISpiderTarget(this, EntityIronGolem.class));
+        this.targetTasks.addTask(2, new AISpiderTarget(this, EntityPlayer.class, 0, true));
+        this.targetTasks.addTask(3, new AISpiderTarget(this, EntityIronGolem.class, 0, true));
+
     }
 
     protected void entityInit()
     {
         super.entityInit();
-        this.dataManager.register(CLIMBING, (byte) 0);
+        this.getDataWatcher().addObject(CLIMBING_DATA_INDEX, (byte) 0);
     }
 
-    protected SoundEvent getAmbientSound()
+    protected String getLivingSound()
     {
-        return ModSounds.CLIMBER_AMBIENT;
+        return ModSounds.CLIMBER_AMBIENT.toString();
     }
 
     @Override
-    @Nullable
-    protected ResourceLocation getLootTable()
+    protected void dropFewItems(boolean recentlyHit, int lootingModifier)
     {
-        return LOOT;
+        if (recentlyHit)
+        {
+            int count = this.rand.nextInt(2 + lootingModifier) + 1;
+            for (int i = 0; i < count; ++i)
+            {
+                this.dropItem(Items.bone, 1);
+            }
+        }
     }
 
     @Override
@@ -167,43 +175,18 @@ public class EntityClimber extends EntityMob
         return 5;
     }
 
-    @Nullable
-    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata)
+    protected String getHurtSound()
     {
-        livingdata = super.onInitialSpawn(difficulty, livingdata);
-
-        if (livingdata == null)
-        {
-            livingdata = new EntityClimber.GroupData();
-
-            if (this.world.getDifficulty() == EnumDifficulty.HARD && this.world.rand.nextFloat() < 0.1F * difficulty.getClampedAdditionalDifficulty())
-            {
-                ((EntityClimber.GroupData) livingdata).setRandomEffect(this.world.rand);
-            }
-        }
-
-        if (livingdata instanceof EntityClimber.GroupData)
-        {
-            Potion potion = ((EntityClimber.GroupData) livingdata).effect;
-
-            if (potion != null)
-            {
-                this.addPotionEffect(new PotionEffect(potion, Integer.MAX_VALUE));
-            }
-        }
-
-        return livingdata;
+        return ModSounds.CLIMBER_HURT.toString();
+    }
+   /*
+    protected void playStepSound(int x, int y, int z, Block blockIn)
+    {
+        this.playSound("random.glass", 0.15F, 1.0F);
     }
 
-    protected SoundEvent getHurtSound()
-    {
-        return ModSounds.CLIMBER_HURT;
-    }
+    */
 
-    protected void playStepSound(BlockPos pos, Block blockIn)
-    {
-        this.playSound(SoundEvents.ENTITY_SPIDER_STEP, 0.15F, 1.0F);
-    }
 
     public double getMountedYOffset()
     {
@@ -214,42 +197,32 @@ public class EntityClimber extends EntityMob
     {
     }
 
-    static class AISpiderTarget<T extends EntityLivingBase> extends EntityAINearestAttackableTarget<T>
-    {
-        public AISpiderTarget(EntityClimber spider, Class<T> classTarget)
-        {
-            super(spider, classTarget, true);
+    public static class AISpiderTarget extends EntityAINearestAttackableTarget {
+
+        public AISpiderTarget(EntityCreature entity, Class targetClass,int idk, boolean checkSight) {
+            super(entity,targetClass,idk,checkSight);
         }
 
-        public boolean shouldExecute()
-        {
+        @Override
+        public boolean shouldExecute() {
             return super.shouldExecute();
         }
     }
 
-    public static class GroupData implements IEntityLivingData
-    {
+    public static class GroupData implements IEntityLivingData {
         public Potion effect;
 
-        public void setRandomEffect(Random rand)
-        {
+        public void setRandomEffect(Random rand) {
             int i = rand.nextInt(5);
 
-            if (i == 0)
-            {
-                this.effect = MobEffects.SPEED;
-            }
-            else if (i == 1)
-            {
-                this.effect = MobEffects.STRENGTH;
-            }
-            else if (i == 2)
-            {
-                this.effect = MobEffects.REGENERATION;
-            }
-            else if (i == 3)
-            {
-                this.effect = MobEffects.INVISIBILITY;
+            if (i == 0) {
+                this.effect = Potion.moveSpeed;
+            } else if (i == 1) {
+                this.effect = Potion.damageBoost;
+            } else if (i == 2) {
+                this.effect = Potion.regeneration;
+            } else if (i == 3) {
+                this.effect = Potion.invisibility;
             }
         }
     }

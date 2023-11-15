@@ -2,26 +2,26 @@ package com.dmonsters.entity;
 
 import javax.annotation.Nullable;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.init.Items;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.client.event.sound.SoundEvent;
 
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
@@ -31,52 +31,55 @@ import com.dmonsters.main.ModSounds;
 public class EntityUnbornBaby extends EntityMob
 {
     public static final ResourceLocation LOOT = new ResourceLocation(DeadlyMonsters.MOD_ID, "unborn_baby");
-    private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityUnbornBaby.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EntityUnbornBaby.class, DataSerializers.BOOLEAN);
     private int blindRefreshTick = 0;
 
     public EntityUnbornBaby(World worldIn)
     {
         super(worldIn);
         setSize(0.9F, 1.95F);
+        initEntityAI();
     }
 
-    public void onLivingUpdate()
-    {
-        if (this.world.isDaytime() && !this.world.isRemote)
-        {
-            float f = this.getBrightness();
-            BlockPos blockpos = this.getRidingEntity() instanceof EntityBoat ? (new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ)).up() : new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ);
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos))
-            {
-                this.setFire(8);
+    public void onLivingUpdate() {
+        if (!this.worldObj.isRemote) {
+            // Check if it's daytime
+            if (this.worldObj.isDaytime()) {
+                float brightness = this.getBrightness(1.0F); // Use getBrightness with a parameter
+
+                // Check if the entity is in direct sunlight
+                if (brightness > 0.5F && this.rand.nextFloat() * 30.0F < (brightness - 0.4F) * 2.0F) {
+                    // Set the entity on fire
+                    this.setFire(8);
+                }
+            }
+
+            // Check if babyBlindness is enabled in the config
+            if (ModConfig.babyBlindness && this.getAttackTarget() != null) {
+                // Apply blindness effect to the attack target
+                if (blindRefreshTick == 20) {
+                    blindRefreshTick = 0;
+                    this.getAttackTarget().addPotionEffect(new PotionEffect(Potion.blindness.id, 100)); // Use Potion.blindness.id
+                } else {
+                    blindRefreshTick++;
+                }
             }
         }
-        if (ModConfig.CATEGORY_UNBORN_BABY.babyBlindness && !this.world.isRemote && getAttaking() && this.getAttackTarget() != null)
-        {
-            if (blindRefreshTick == 20)
-            {
-                blindRefreshTick = 0;
-                this.getAttackTarget().addPotionEffect(new PotionEffect(MobEffects.BLINDNESS, 100));
-            }
-            else
-            {
-                blindRefreshTick++;
-            }
-        }
+
+        // Call the superclass method
         super.onLivingUpdate();
     }
 
+
     @Override
-    protected SoundEvent getHurtSound(DamageSource amageSource)
+    protected String getHurtSound()
     {
-        return ModSounds.BABY_HURT;
+        return ModSounds.BABY_HURT.toString();
     }
 
     @Override
-    protected SoundEvent getDeathSound()
+    protected String getDeathSound()
     {
-        return ModSounds.BABY_DEATH;
+        return ModSounds.BABY_DEATH.toString();
     }
 
     @Override
@@ -84,8 +87,8 @@ public class EntityUnbornBaby extends EntityMob
     {
         if (super.attackEntityAsMob(entityIn))
         {
-            ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(MobEffects.SLOWNESS, 600));
-            this.playSound(ModSounds.BABY_ATTACK, 1, 1);
+            ((EntityLivingBase) entityIn).addPotionEffect(new PotionEffect(2, 600));
+            this.playSound(ModSounds.BABY_ATTACK.toString(), 1, 1);
             return true;
         }
         else
@@ -98,40 +101,19 @@ public class EntityUnbornBaby extends EntityMob
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(40.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.25D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_UNBORN_BABY.babySpeedMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_UNBORN_BABY.babyStrengthMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(40.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_UNBORN_BABY.babyHealthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(40.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.25D * ModConfig.globalSpeedMultiplier * ModConfig.babySpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D * ModConfig.globalStrengthMultiplier * ModConfig.babyStrengthMultiplier);
+        this.getEntityAttribute(ARMOR_ATTRIBUTE).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(40.0D * ModConfig.globalHealthMultiplier * ModConfig.babyHealthMultiplier);
     }
-
-    @SideOnly(Side.CLIENT)
-    public boolean isArmsRaised()
-    {
-        return this.getDataManager().get(ARMS_RAISED);
-    }
-
-    public void setArmsRaised(boolean armsRaised)
-    {
-        this.getDataManager().set(ARMS_RAISED, armsRaised);
-    }
-
-    public boolean getAttaking()
-    {
-        return this.getDataManager().get(ATTACKING);
-    }
-
-    public void setAttaking(boolean mode)
-    {
-        this.getDataManager().set(ATTACKING, mode);
-    }
+    private static final IAttribute ARMOR_ATTRIBUTE = new RangedAttribute("generic.armor", 0, 0, 30).setShouldWatch(true);
 
     public EnumCreatureAttribute getCreatureAttribute()
     {
         return EnumCreatureAttribute.UNDEAD;
     }
 
-    @Override
     protected void initEntityAI()
     {
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -147,21 +129,25 @@ public class EntityUnbornBaby extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
-        this.getDataManager().register(ARMS_RAISED, Boolean.FALSE);
-        this.getDataManager().register(ATTACKING, Boolean.FALSE);
     }
 
     @Override
-    protected SoundEvent getAmbientSound()
+    protected String getLivingSound()
     {
-        return ModSounds.BABY_AMBIENT;
+        return ModSounds.BABY_AMBIENT.toString();
     }
 
     @Override
-    @Nullable
-    protected ResourceLocation getLootTable()
+    protected void dropFewItems(boolean recentlyHit, int lootingModifier)
     {
-        return LOOT;
+        if (recentlyHit)
+        {
+            int count = this.rand.nextInt(2 + lootingModifier) + 1;
+            for (int i = 0; i < count; ++i)
+            {
+                this.dropItem(Items.bone, 1);
+            }
+        }
     }
 
     @Override
@@ -172,6 +158,7 @@ public class EntityUnbornBaby extends EntityMob
 
     private void applyEntityAI()
     {
-        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
+
     }
 }

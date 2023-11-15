@@ -1,9 +1,10 @@
 package com.dmonsters.main;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public final class ModCreativeTabs extends CreativeTabs
 {
@@ -14,8 +15,8 @@ public final class ModCreativeTabs extends CreativeTabs
     }
 
     @SideOnly(Side.CLIENT)
-    public ItemStack getTabIconItem()
+    public Item getTabIconItem()
     {
-        return new ItemStack(ModItems.mod_item);
+        return new ItemStack(ModItems.mod_item).getItem();
     }
 }

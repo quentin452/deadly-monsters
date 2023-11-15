@@ -1,26 +1,22 @@
 package com.dmonsters.render;
 
-import javax.annotation.Nonnull;
-
-import org.lwjgl.opengl.GL11;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
-
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityHauntedCow;
 import com.dmonsters.model.ModelHauntedCow;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
-public class RenderHauntedCow extends RenderLiving<EntityHauntedCow>
+public class RenderHauntedCow extends RenderLiving
 {
-    public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/haunted_cow.png");
 
-    public RenderHauntedCow(RenderManager rendermanagerIn)
+    public RenderHauntedCow(ModelBase modelBase, float shadowSize)
     {
-        super(rendermanagerIn, new ModelHauntedCow(), 0.3F);
+        super(modelBase, shadowSize);
     }
 
     protected void preRenderCallback(EntityHauntedCow entity, float f)
@@ -29,18 +25,8 @@ public class RenderHauntedCow extends RenderLiving<EntityHauntedCow>
     }
 
     @Override
-    @Nonnull
-    protected ResourceLocation getEntityTexture(@Nonnull EntityHauntedCow entity)
+    protected ResourceLocation getEntityTexture( Entity entity)
     {
         return mobTexture;
-    }
-
-    public static class Factory implements IRenderFactory<EntityHauntedCow>
-    {
-        @Override
-        public Render<? super EntityHauntedCow> createRenderFor(RenderManager manager)
-        {
-            return new RenderHauntedCow(manager);
-        }
     }
 }

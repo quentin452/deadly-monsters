@@ -1,10 +1,9 @@
 package com.dmonsters.proxy;
-
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-
 import com.dmonsters.main.ModEntities;
+import com.dmonsters.main.RegisterModels;
 import com.dmonsters.network.PacketHandler;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy
 {
@@ -17,9 +16,13 @@ public class ClientProxy extends CommonProxy
     }
 
     @Override
-    public void init(FMLInitializationEvent e)
-    {
+    public void init(FMLInitializationEvent e) {
+
         super.init(e);
+
         ModEntities.initHackModels();
+
+        RegisterModels.registerModels(e);
+
     }
 }

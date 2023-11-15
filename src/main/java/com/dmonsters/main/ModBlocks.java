@@ -1,13 +1,12 @@
 package com.dmonsters.main;
 
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.registries.IForgeRegistry;
 
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.block.*;
@@ -39,33 +38,32 @@ public class ModBlocks
         present_box = new PresentBox();
     }
 
-    @Mod.EventBusSubscriber(modid = DeadlyMonsters.MOD_ID)
     public static class RegistrationHandler
     {
 
-        private static IForgeRegistry<Item> itemRegistry;
-
-        @SubscribeEvent
-        public static void registerBlocks(final RegistryEvent.Register<Block> event)
-        {
-            final IForgeRegistry<Block> registry = event.getRegistry();
+        private static Item itemRegistry;
+        public static void register(FMLInitializationEvent e) {
+            registerBlocks();
+            registerItemBlocks();
+        }
+        public static void registerBlocks() {
             init();
-            registry.register(strengthened_stone);
-            registry.register(strengthened_cobblestone);
-            registry.register(soul_eye);
-            registry.register(christmas_tree);
-            registry.register(dump);
-            registry.register(barbed_wire);
-            registry.register(mesh_fence);
-            registry.register(mesh_fence_pole);
-            registry.register(present_block);
-            registry.register(present_box);
+            registerBlock(strengthened_stone);
+            registerBlock(strengthened_cobblestone);
+            registerBlock(soul_eye);
+            registerBlock(christmas_tree);
+            registerBlock(dump);
+            registerBlock(barbed_wire);
+            registerBlock(mesh_fence);
+            registerBlock(mesh_fence_pole);
+            registerBlock(present_block);
+            registerBlock(present_box);
+        }
+        private static void registerBlock(Block block) {
+            GameRegistry.registerBlock(block, block.getUnlocalizedName());
         }
 
-        @SubscribeEvent
-        public static void registerItemBlocks(final RegistryEvent.Register<Item> event)
-        {
-            itemRegistry = event.getRegistry();
+        public static void registerItemBlocks() {
             registerItemBlock(strengthened_stone);
             registerItemBlock(strengthened_cobblestone);
             registerItemBlock(soul_eye);
@@ -78,11 +76,9 @@ public class ModBlocks
             registerItemBlock(present_box);
         }
 
-        private static void registerItemBlock(Block block)
-        {
-            final Item itemBlock = new ItemBlock(block);
-            final ResourceLocation registryName = block.getRegistryName();
-            itemRegistry.register(itemBlock.setRegistryName(registryName));
+        private static void registerItemBlock(Block block) {
+            ItemBlock itemBlock = new ItemBlock(block);
+            GameRegistry.registerItem(itemBlock, block.getUnlocalizedName());
         }
     }
 }

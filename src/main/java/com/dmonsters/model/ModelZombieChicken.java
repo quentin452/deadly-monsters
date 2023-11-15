@@ -3,7 +3,7 @@ package com.dmonsters.model;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.MathHelper;
 
 public class ModelZombieChicken extends ModelBase
 {
@@ -126,7 +126,7 @@ public class ModelZombieChicken extends ModelBase
         this.head.rotateAngleY = netHeadYaw * 0.017453292F;
         this.rightleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 2.4F * limbSwingAmount;
         this.leftleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float) Math.PI) * 2.4F * limbSwingAmount;
-        this.rightwing.rotateAngleZ = MathHelper.clamp(MathHelper.cos(limbSwing * 1 + (float) Math.PI) * 2.4F, 0.2F, 100);
+        this.rightwing.rotateAngleZ = MathHelper.clamp_float(MathHelper.cos(limbSwing * 1 + (float) Math.PI) * 2.4F, 0.2F, 100);
     }
 
     private void setRotation(ModelRenderer model, float x, float y, float z)

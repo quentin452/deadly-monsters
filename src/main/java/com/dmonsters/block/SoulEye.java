@@ -4,23 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.main.ModBlocks;
@@ -29,88 +24,79 @@ import com.dmonsters.network.PacketHandler;
 
 public class SoulEye extends Block
 {
-    public static final PropertyEnum<EnumMode> MODE = PropertyEnum.create("mode", EnumMode.class);
-
     public SoulEye()
     {
-        super(Material.IRON);
-        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".soul_eye");
-        setRegistryName("soul_eye");
+        super(Material.iron);
+        setBlockTextureName(DeadlyMonsters.MOD_ID + ".soul_eye");
+        setBlockName("soul_eye");
         setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.setHardness(3);
         this.setResistance(3);
         this.setTickRandomly(true);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(MODE, EnumMode.SLEEP));
     }
 
-    public IBlockState getStateFromMeta(int meta)
-    {
-        return getDefaultState().withProperty(MODE, EnumMode.getStateFromMeta(meta));
-    }
-
-    public int getMetaFromState(IBlockState state)
-    {
-        return state.getValue(MODE).getID();
-    }
-
-    public boolean isFullCube(IBlockState state)
+    public boolean isOpaqueCube()
     {
         return false;
     }
 
-    public boolean isOpaqueCube(IBlockState state)
+    @Override
+    public void updateTick(World worldIn, int x, int y, int z, Random random)
     {
-        return false;
-    }
+        Block block = worldIn.getBlock(x, y, z);
 
-    public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
-    {
-        if (!(state.getBlock() instanceof SoulEye))
+        if (!(block instanceof SoulEye))
             return;
-        float lightLevel = worldIn.getLight(pos);
-        int meta = state.getValue(MODE).getID();
+
+        float lightLevel = worldIn.getBlockLightValue(x, y, z);
+        int meta = worldIn.getBlockMetadata(x, y, z);
         EnumMode mode = EnumMode.getStateFromMeta(meta);
+
         if (lightLevel <= 12)
         {
             if (mode == EnumMode.SLEEP)
-                worldIn.setBlockState(pos, ModBlocks.soul_eye.getStateFromMeta(1));
+                worldIn.setBlock(x, y, z, ModBlocks.soul_eye, 1, 2);
             else if (mode == EnumMode.AWAKING)
-                worldIn.setBlockState(pos, ModBlocks.soul_eye.getStateFromMeta(2));
+                worldIn.setBlock(x, y, z, ModBlocks.soul_eye, 2, 2);
             else if (mode == EnumMode.AWAKE)
-                killLivingNearby(worldIn, pos);
+                killLivingNearby(worldIn, x, y, z);
         }
         else
         {
             if (mode == EnumMode.AWAKING)
-                worldIn.setBlockState(pos, ModBlocks.soul_eye.getStateFromMeta(0));
+                worldIn.setBlock(x, y, z, ModBlocks.soul_eye, 0, 2);
             else if (mode == EnumMode.AWAKE)
-                worldIn.setBlockState(pos, ModBlocks.soul_eye.getStateFromMeta(1));
+                worldIn.setBlock(x, y, z, ModBlocks.soul_eye, 1, 2);
         }
     }
 
     @SideOnly(Side.CLIENT)
-    public void randomDisplayTick(IBlockState stateIn, World worldIn, BlockPos pos, Random rand)
+    public void randomDisplayTick(World worldIn, int x, int y, int z, Random random)
     {
-        int meta = stateIn.getValue(MODE).getID();
+        ChunkCoordinates pos = new ChunkCoordinates(x, y, z);
+        int meta = worldIn.getBlockMetadata(x, y, z);
         EnumMode mode = EnumMode.getStateFromMeta(meta);
+
         if (mode != EnumMode.AWAKE)
             return;
-        for (int x = -4; x < 4; x++)
+
+        for (int xOffset = -4; xOffset < 4; xOffset++)
         {
-            for (int z = -4; z < 4; z++)
+            for (int zOffset = -4; zOffset < 4; zOffset++)
             {
                 for (int i = 0; i < 1; i++)
                 {
-                    double motionX = rand.nextGaussian() * 0.001D;
-                    double motionY = Math.abs(rand.nextGaussian() * 0.02D);
-                    double motionZ = rand.nextGaussian() * 0.001D;
-                    float randX = rand.nextFloat();
-                    float randY = rand.nextFloat();
-                    float randZ = rand.nextFloat();
-                    worldIn.spawnParticle(EnumParticleTypes.SMOKE_NORMAL,
-                        pos.getX() + x + 0.5F + randX,
-                        pos.getY() + randY,
-                        pos.getZ() + z + 0.5F + randZ,
+                    double motionX = random.nextGaussian() * 0.001D;
+                    double motionY = Math.abs(random.nextGaussian() * 0.02D);
+                    double motionZ = random.nextGaussian() * 0.001D;
+                    float randX = random.nextFloat();
+                    float randY = random.nextFloat();
+                    float randZ = random.nextFloat();
+
+                    worldIn.spawnParticle("smoke",
+                        pos.posX + xOffset + 0.5F + randX,
+                        pos.posY + randY,
+                        pos.posZ + zOffset + 0.5F + randZ,
                         motionX,
                         motionY,
                         motionZ
@@ -133,27 +119,23 @@ public class SoulEye extends Block
         return this;
     }
 
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, MODE);
-    }
+    private void killLivingNearby(World worldIn, int x, int y, int z) {
+        if (!worldIn.isRemote) {
+            int range = 4;
+            AxisAlignedBB boundingBox = AxisAlignedBB.getBoundingBox(x - range, y, z - range, x + range, y + range, z + range);
+            List<EntityLiving> entities = worldIn.getEntitiesWithinAABB(EntityLiving.class, boundingBox);
 
-    private void killLivingNearby(World worldIn, BlockPos pos)
-    {
-        if (!worldIn.isRemote)
-        {
-            BlockPos AABB_01 = new BlockPos(pos.getX() - 4, pos.getY(), pos.getZ() - 4);
-            BlockPos AABB_02 = new BlockPos(pos.getX() + 4, pos.getY() + 4, pos.getZ() + 4);
-            AxisAlignedBB AABB = new AxisAlignedBB(AABB_01, AABB_02);
-            List<EntityLiving> entities = worldIn.getEntitiesWithinAABB(EntityLiving.class, AABB);
-            for (Entity entity : entities)
-            {
+            for (Entity entity : entities) {
                 spawnItem(entity);
                 entity.setDead();
-                PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(entity.getPosition(), PacketClientFXUpdate.Type.SOULEYE));
+                PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(
+                    new ChunkCoordinates((int) entity.posX, (int) entity.posY, (int) entity.posZ),
+                    PacketClientFXUpdate.Type.SOULEYE
+                ));
             }
         }
     }
+
 
     private void spawnItem(Entity entity)
     {
@@ -169,12 +151,12 @@ public class SoulEye extends Block
     private List<Item> createDropTable()
     {
         List<Item> items = new ArrayList<>();
-        items.add(Items.EMERALD);
-        items.add(Items.GOLD_NUGGET);
-        items.add(Items.GUNPOWDER);
-        items.add(Items.REDSTONE);
-        items.add(Items.IRON_INGOT);
-        items.add(Items.QUARTZ);
+        items.add(Items.emerald);
+        items.add(Items.gold_nugget);
+        items.add(Items.gunpowder);
+        items.add(Items.redstone);
+        items.add(Items.iron_ingot);
+        items.add(Items.quartz);
         return items;
     }
 
@@ -186,7 +168,7 @@ public class SoulEye extends Block
         return items.get(randomItem);
     }
 
-    public enum EnumMode implements IStringSerializable
+    public enum EnumMode
     {
         SLEEP(0, "sleep"),
         AWAKING(1, "awaking"),
@@ -218,7 +200,7 @@ public class SoulEye extends Block
             this.name = name;
         }
 
-        @Override
+
         public String getName()
         {
             return name;
@@ -228,5 +210,9 @@ public class SoulEye extends Block
         {
             return ID;
         }
+    }
+          @Override
+    public boolean renderAsNormalBlock() {
+        return false;
     }
 }

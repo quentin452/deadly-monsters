@@ -4,19 +4,11 @@ import javax.annotation.Nullable;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.Style;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.util.text.TextFormatting;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 
 import com.dmonsters.DeadlyMonsters;
@@ -28,24 +20,24 @@ public class PoopooPill extends Item
 {
     public PoopooPill()
     {
-        setRegistryName("poopoo_pill");
-        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".poopoo_pill");
+        setUnlocalizedName("poopoo_pill");
+        setTextureName(DeadlyMonsters.MOD_ID + ".poopoo_pill");
         this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand)
+    public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer player)
     {
-        ItemStack itemStackIn = playerIn.getHeldItem(hand);
-        //System.out.println(itemStackIn);
-        if (playerIn.canEat(true))
+        ItemStack heldItem = player.getHeldItem();
+        // System.out.println(heldItem);
+        if (player.canEat(true))
         {
-            playerIn.setActiveHand(hand);
-            return new ActionResult(EnumActionResult.SUCCESS, itemStackIn);
+            player.setItemInUse(heldItem, this.getMaxItemUseDuration(heldItem));
+            return new ItemStack(itemStackIn.getItem(), 1, itemStackIn.getItemDamage());
         }
         else
         {
-            return new ActionResult(EnumActionResult.FAIL, itemStackIn);
+            return new ItemStack(itemStackIn.getItem(), 0, itemStackIn.getItemDamage());
         }
     }
 
@@ -57,21 +49,21 @@ public class PoopooPill extends Item
             EntityPlayer entityplayer = (EntityPlayer) entityLiving;
             if (entityplayer.getFoodStats().getFoodLevel() < 20)
             {
-                Style red = new Style().setColor(TextFormatting.DARK_RED);
-                TextComponentTranslation errorMsg = new TextComponentTranslation("msg.dmonsters.poopoo_pill.error");
-                errorMsg.setStyle(red);
-                entityplayer.sendMessage(errorMsg);
+                // Use predefined color and style from EnumChatFormatting
+                String errorMsg = EnumChatFormatting.DARK_RED + "msg.dmonsters.poopoo_pill.error";
+                entityplayer.addChatMessage(new ChatComponentText(errorMsg));
+
                 if (entityplayer.getHealth() > 1)
                     entityplayer.setHealth(1);
                 else
-                    entityplayer.attackEntityFrom(DamageSource.GENERIC, 999);
+                    entityplayer.attackEntityFrom(DamageSource.generic, 999);
             }
             else
             {
-                stack.shrink(1);
+                stack.stackSize--;
                 this.onFoodEaten(worldIn, entityplayer);
                 addDumpBlockUnderPlayer(worldIn, entityplayer);
-                PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(entityplayer.getPosition(), PacketClientFXUpdate.Type.DUMP));
+                PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(new ChunkCoordinates((int) entityplayer.posX, (int) entityplayer.posY, (int) entityplayer.posZ), PacketClientFXUpdate.Type.DUMP));
             }
         }
         return stack;
@@ -80,7 +72,7 @@ public class PoopooPill extends Item
     @Override
     public EnumAction getItemUseAction(ItemStack stack)
     {
-        return EnumAction.EAT;
+        return EnumAction.eat;
     }
 
     @Override
@@ -93,7 +85,8 @@ public class PoopooPill extends Item
     {
         if (!worldIn.isRemote)
         {
-            player.addPotionEffect(new PotionEffect(MobEffects.HUNGER, 100));
+            player.addPotionEffect(new PotionEffect(17, 100));
+
             player.getFoodStats().setFoodLevel(2);
             player.getFoodStats().setFoodSaturationLevel(0);
         }
@@ -101,7 +94,10 @@ public class PoopooPill extends Item
 
     private void addDumpBlockUnderPlayer(World worldIn, EntityPlayer playerIn)
     {
-        BlockPos pos = playerIn.getPosition();
-        worldIn.setBlockState(pos, ModBlocks.dump.getDefaultState());
+        int posX = MathHelper.floor_double(playerIn.posX);
+        int posY = MathHelper.floor_double(playerIn.posY);
+        int posZ = MathHelper.floor_double(playerIn.posZ);
+
+        worldIn.setBlock(posX, posY, posZ, ModBlocks.dump);
     }
 }

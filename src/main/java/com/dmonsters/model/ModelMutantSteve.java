@@ -2,11 +2,11 @@ package com.dmonsters.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
 
 import com.dmonsters.entity.EntityMutantSteve;
+import net.minecraft.util.MathHelper;
+import org.lwjgl.opengl.GL11;
 
 public class ModelMutantSteve extends ModelBase
 {
@@ -84,17 +84,17 @@ public class ModelMutantSteve extends ModelBase
 
         if (this.isChild)
         {
-            GlStateManager.pushMatrix();
+            GL11.glPushMatrix();
             this.head.render(scale);
-            GlStateManager.popMatrix();
-            GlStateManager.pushMatrix();
+            GL11.glPopMatrix();
+            GL11.glPushMatrix();
             this.body.render(scale);
             this.rightarm.render(scale);
             this.leftarm.render(scale);
             this.rightleg.render(scale);
             this.leftleg.render(scale);
             this.leftarmHammer.render(scale);
-            GlStateManager.popMatrix();
+            GL11.glPopMatrix();
         }
         else
         {
@@ -106,11 +106,15 @@ public class ModelMutantSteve extends ModelBase
             this.leftleg.render(scale);
         }
     }
+    private float swingProgress;
 
+    public void setSwingProgress(float swingProgress) {
+        this.swingProgress = swingProgress;
+    }
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
-        boolean flag = entityIn instanceof EntityMutantSteve && ((EntityMutantSteve) entityIn).isArmsRaised();
+        boolean flag = entityIn instanceof EntityMutantSteve;
         float f = MathHelper.sin(this.swingProgress * (float) Math.PI);
         float f1 = MathHelper.sin((1.0F - (1.0F - this.swingProgress) * (1.0F - this.swingProgress)) * (float) Math.PI);
         this.rightarm.rotateAngleZ = 0.0F;

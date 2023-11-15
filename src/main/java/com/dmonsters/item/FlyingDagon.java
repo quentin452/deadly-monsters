@@ -8,7 +8,7 @@ public class FlyingDagon extends Item
 {
     public FlyingDagon()
     {
-        setRegistryName("flying_dagon");
-        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".flying_dagon");
+        setUnlocalizedName("flying_dagon");
+        setTextureName(DeadlyMonsters.MOD_ID + ".flying_dagon");
     }
 }

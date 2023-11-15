@@ -1,27 +1,23 @@
 package com.dmonsters.render;
 
-import javax.annotation.Nonnull;
-
-import org.lwjgl.opengl.GL11;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
-
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityFreezer;
 import com.dmonsters.model.ModelFreezer;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
-public class RenderFreezer extends RenderLiving<EntityFreezer>
+public class RenderFreezer extends RenderLiving
 {
-    public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/freezer_idle.png");
     private final ResourceLocation mobTextureAttaking = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/freezer_angry.png");
 
-    public RenderFreezer(RenderManager rendermanagerIn)
+    public RenderFreezer(ModelBase modelBase, float shadowSize)
     {
-        super(rendermanagerIn, new ModelFreezer(), 0.5F);
+        super(modelBase, shadowSize);
     }
 
     protected void preRenderCallback(EntityFreezer entity, float f)
@@ -30,20 +26,15 @@ public class RenderFreezer extends RenderLiving<EntityFreezer>
     }
 
     @Override
-    @Nonnull
-    protected ResourceLocation getEntityTexture(@Nonnull EntityFreezer entity)
-    {
-        if (entity.getAttacking())
-            return mobTextureAttaking;
-        return mobTexture;
-    }
+    protected ResourceLocation getEntityTexture(Entity entity) {
 
-    public static class Factory implements IRenderFactory<EntityFreezer>
-    {
-        @Override
-        public Render<? super EntityFreezer> createRenderFor(RenderManager manager)
-        {
-            return new RenderFreezer(manager);
+        EntityFreezer freezer = (EntityFreezer)entity;
+
+        if(freezer.isAttacking) {
+            return mobTextureAttaking;
         }
+
+        return mobTexture;
+
     }
 }

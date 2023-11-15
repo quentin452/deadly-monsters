@@ -1,17 +1,13 @@
 package com.dmonsters.projectile;
 
+import com.dmonsters.main.ModItems;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-
-import com.dmonsters.main.ModItems;
 
 public class EntityDagon extends EntityThrowable
 {
@@ -31,27 +27,22 @@ public class EntityDagon extends EntityThrowable
     }
 
     @Override
-    protected void onImpact(RayTraceResult result)
-    {
-        if (result.entityHit != null)
-        {
+    protected void onImpact(MovingObjectPosition result) {
+        if (result.entityHit != null) {
             result.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), 5.0F);
         }
 
-        if (!this.world.isRemote)
-        {
+        if (!this.worldObj.isRemote) {
             ItemStack newItem = new ItemStack(ModItems.dagon, 1);
-            EntityItem item = new EntityItem(world, this.posX, this.posY, this.posZ, newItem);
-            world.spawnEntity(item);
+            EntityItem item = new EntityItem(worldObj, this.posX, this.posY, this.posZ, newItem);
+            worldObj.spawnEntityInWorld(item);
         }
 
-        for (int k = 0; k < 8; ++k)
-        {
-            this.world.spawnParticle(EnumParticleTypes.CRIT_MAGIC, this.posX, this.posY, this.posZ, ((double) this.rand.nextFloat() - 0.5D) * 0.08D, ((double) this.rand.nextFloat() - 0.5D) * 0.08D, ((double) this.rand.nextFloat() - 0.5D) * 0.08D, Item.getIdFromItem(Items.EGG));
+        for (int k = 0; k < 8; ++k) {
+            this.worldObj.spawnParticle("crit", this.posX, this.posY, this.posZ, ((double) this.rand.nextFloat() - 0.5D) * 0.08D, ((double) this.rand.nextFloat() - 0.5D) * 0.08D, ((double) this.rand.nextFloat() - 0.5D) * 0.08D);
         }
 
-        if (!this.world.isRemote)
-        {
+        if (!this.worldObj.isRemote) {
             this.setDead();
         }
     }

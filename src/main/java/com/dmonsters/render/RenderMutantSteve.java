@@ -1,26 +1,22 @@
 package com.dmonsters.render;
 
-import javax.annotation.Nonnull;
-
-import org.lwjgl.opengl.GL11;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
-
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityMutantSteve;
 import com.dmonsters.model.ModelMutantSteve;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
-public class RenderMutantSteve extends RenderLiving<EntityMutantSteve>
+public class RenderMutantSteve extends RenderLiving
 {
-    public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/mutant_steve.png");
 
-    public RenderMutantSteve(RenderManager rendermanagerIn)
+    public RenderMutantSteve(ModelBase modelBase, float shadowSize)
     {
-        super(rendermanagerIn, new ModelMutantSteve(), 0.5F);
+        super(modelBase, shadowSize);
     }
 
     protected void preRenderCallback(EntityMutantSteve entity, float f)
@@ -29,18 +25,8 @@ public class RenderMutantSteve extends RenderLiving<EntityMutantSteve>
     }
 
     @Override
-    @Nonnull
-    protected ResourceLocation getEntityTexture(@Nonnull EntityMutantSteve entity)
+    protected ResourceLocation getEntityTexture(Entity entity)
     {
         return mobTexture;
-    }
-
-    public static class Factory implements IRenderFactory<EntityMutantSteve>
-    {
-        @Override
-        public Render<? super EntityMutantSteve> createRenderFor(RenderManager manager)
-        {
-            return new RenderMutantSteve(manager);
-        }
     }
 }

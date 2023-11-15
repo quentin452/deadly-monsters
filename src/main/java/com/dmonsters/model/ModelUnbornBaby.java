@@ -2,11 +2,11 @@ package com.dmonsters.model;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.math.MathHelper;
 
 import com.dmonsters.entity.EntityUnbornBaby;
+import net.minecraft.util.MathHelper;
+import org.lwjgl.opengl.GL11;
 
 public class ModelUnbornBaby extends ModelBase
 {
@@ -106,11 +106,11 @@ public class ModelUnbornBaby extends ModelBase
 
         if (this.isChild)
         {
-            GlStateManager.pushMatrix();
+            GL11.glPushMatrix();
             righteye.render(scale);
             lefteye.render(scale);
             mounth.render(scale);
-            GlStateManager.popMatrix();
+            GL11.glPopMatrix();
         }
         else
         {
@@ -124,11 +124,15 @@ public class ModelUnbornBaby extends ModelBase
             this.leg.render(scale);
         }
     }
+    private float swingProgress;
 
+    public void setSwingProgress(float swingProgress) {
+        this.swingProgress = swingProgress;
+    }
     public void setRotationAngles(float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch, float scaleFactor, Entity entityIn)
     {
         super.setRotationAngles(limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch, scaleFactor, entityIn);
-        boolean flag = entityIn instanceof EntityUnbornBaby && ((EntityUnbornBaby) entityIn).isArmsRaised();
+        boolean flag = entityIn instanceof EntityUnbornBaby;
         this.leg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
         //this.leftleg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F + (float)Math.PI) * 1.4F * limbSwingAmount;
 

@@ -6,21 +6,16 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.*;
-import net.minecraft.entity.passive.EntitySkeletonHorse;
-import net.minecraft.entity.passive.EntityZombieHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -30,29 +25,29 @@ import com.dmonsters.main.ModItems;
 
 public class PresentBox extends Block
 {
-    protected static final AxisAlignedBB AABB = new AxisAlignedBB(0.13, 0.0D, 0.13, 0.87, 0.75, 0.87);
+    protected static final AxisAlignedBB AABB = AxisAlignedBB.getBoundingBox(0.13, 0.0D, 0.13, 0.87, 0.75, 0.87);
 
     public PresentBox()
     {
-        super(Material.CACTUS);
-        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".present_box");
-        setRegistryName("present_box");
+        super(Material.cactus);
+        setBlockTextureName(DeadlyMonsters.MOD_ID + ".present_box");
+        setBlockName("present_box");
         setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.setHardness(1);
         this.setResistance(50);
     }
 
-    public boolean isFullCube(IBlockState state)
-    {
+    @Override
+    public boolean renderAsNormalBlock() {
         return true;
     }
 
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
+    public AxisAlignedBB getCollisionBoundingBoxFromPool(World worldIn, int x, int y, int z)
     {
         return AABB;
     }
 
-    public boolean isOpaqueCube(IBlockState state)
+    public boolean isOpaqueCube()
     {
         return false;
     }
@@ -64,35 +59,37 @@ public class PresentBox extends Block
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World worldIn, int x, int y, int z, EntityPlayer player, int side, float subX, float subY, float subZ)
     {
         if (!worldIn.isRemote)
         {
             Random rand = new Random();
             float rndNum = rand.nextFloat();
+
             if (rndNum < 0.7F)
             {
-                worldIn.setBlockToAir(pos);
-                worldIn.createExplosion(null, pos.getX(), pos.getY(), pos.getZ(), 1, true);
+                worldIn.setBlockToAir(x, y, z);
+                worldIn.createExplosion(null, player.posX, player.posY, player.posZ, 1, true);
             }
             else if (rndNum > 0.7F && rndNum < 0.8F)
             {
                 Item spawnedItem = spawnRandomItem();
                 ItemStack newItem = new ItemStack(spawnedItem, 1);
-                EntityItem item = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), newItem);
-                worldIn.spawnEntity(item);
-                worldIn.setBlockToAir(pos);
+                EntityItem item = new EntityItem(worldIn, player.posX, player.posY, player.posZ, newItem);
+                worldIn.spawnEntityInWorld(item);
+                worldIn.setBlockToAir(x, y, z);
             }
             else if (rndNum > 0.8F && rndNum < 0.95F)
             {
                 EntityLiving entity = spawnMonster(worldIn);
-                entity.setLocationAndAngles(pos.getX(), pos.getY(), pos.getZ(), playerIn.rotationYaw, 0.0F);
-                worldIn.spawnEntity(entity);
-                worldIn.setBlockToAir(pos);
+                entity.setLocationAndAngles(player.posX, player.posY, player.posZ, player.rotationYaw, 0.0F);
+                worldIn.spawnEntityInWorld(entity);
+                worldIn.setBlockToAir(x, y, z);
             }
             else
             {
-                worldIn.setBlockState(pos, ModBlocks.dump.getStateFromMeta(rand.nextInt(5)));
+                int newMetadata = rand.nextInt(16);
+                worldIn.setBlockMetadataWithNotify(x, y, z, newMetadata, 3);
             }
         }
         return true;
@@ -108,16 +105,16 @@ public class PresentBox extends Block
     private Item spawnRandomItem()
     {
         List<Item> itemsList = new ArrayList<>();
-        itemsList.add(Items.APPLE);
-        itemsList.add(Items.GOLD_NUGGET);
-        itemsList.add(Items.LEATHER_HELMET);
-        itemsList.add(Items.FISH);
-        itemsList.add(Items.REDSTONE);
+        itemsList.add(Items.apple);
+        itemsList.add(Items.gold_nugget);
+        itemsList.add(Items.leather_helmet);
+        itemsList.add(Items.fish);
+        itemsList.add(Items.redstone);
         itemsList.add(ModItems.mob_spawner_item_present);
-        itemsList.add(Items.GUNPOWDER);
-        itemsList.add(Items.REDSTONE);
-        itemsList.add(Items.IRON_INGOT);
-        itemsList.add(Items.IRON_SWORD);
+        itemsList.add(Items.gunpowder);
+        itemsList.add(Items.redstone);
+        itemsList.add(Items.iron_ingot);
+        itemsList.add(Items.iron_sword);
         Random rand = new Random();
         int rndNum = rand.nextInt(itemsList.size());
         return itemsList.get(rndNum);
@@ -132,8 +129,6 @@ public class PresentBox extends Block
         monstersList.add(new EntitySilverfish(worldIn));
         monstersList.add(new EntityBlaze(worldIn));
         monstersList.add(new EntityMagmaCube(worldIn));
-        monstersList.add(new EntityZombieHorse(worldIn));
-        monstersList.add(new EntitySkeletonHorse(worldIn));
         monstersList.add(new EntityPigZombie(worldIn));
         Random rand = new Random();
         int rndNum = rand.nextInt(monstersList.size());

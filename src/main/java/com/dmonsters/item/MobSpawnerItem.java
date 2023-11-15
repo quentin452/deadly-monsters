@@ -1,22 +1,17 @@
 package com.dmonsters.item;
 
+import com.dmonsters.DeadlyMonsters;
+import com.dmonsters.entity.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.World;
-
-import com.dmonsters.DeadlyMonsters;
-import com.dmonsters.entity.*;
 
 public class MobSpawnerItem extends Item
 {
@@ -24,49 +19,70 @@ public class MobSpawnerItem extends Item
 
     public MobSpawnerItem(String name)
     {
-        setRegistryName("mob_spawner_item_" + name);
-        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".mob_spawner_item_" + name);
+        setUnlocalizedName("mob_spawner_item_" + name);
+        setTextureName(DeadlyMonsters.MOD_ID + ".mob_spawner_item_" + name);
         this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         mobName = name;
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer playerIn, World worldIn, BlockPos pos, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ)
+    public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
     {
-        ItemStack stack = playerIn.getHeldItem(hand);
-        if (worldIn.isRemote)
+        if (world.isRemote)
         {
-            return EnumActionResult.SUCCESS;
+            return true;
         }
-        else if (!playerIn.canPlayerEdit(pos.offset(facing), facing, stack))
+        else if (!player.canPlayerEdit(x, y, z, side, stack))
         {
-            return EnumActionResult.FAIL;
+            return false;
         }
         else
         {
-            IBlockState iblockstate = worldIn.getBlockState(pos);
+            ChunkCoordinates pos = new ChunkCoordinates(x, y, z);
+            Block block = world.getBlock(x, y, z);
 
-            pos = pos.offset(facing);
+            switch (side)
+            {
+                case 0:
+                    pos.posY--;
+                    break;
+                case 1:
+                    pos.posY++;
+                    break;
+                case 2:
+                    pos.posZ--;
+                    break;
+                case 3:
+                    pos.posZ++;
+                    break;
+                case 4:
+                    pos.posX--;
+                    break;
+                case 5:
+                    pos.posX++;
+                    break;
+            }
+
             double d0 = 0.0D;
 
-            if (facing == EnumFacing.UP && iblockstate.getBlock() instanceof BlockFence) //Forge: Fix Vanilla bug comparing state instead of block
+            if (side == 1 && block instanceof BlockFence)
             {
                 d0 = 0.5D;
             }
 
-            Entity entity = spawnEntity(worldIn, (double) pos.getX() + 0.5D, (double) pos.getY() + d0, (double) pos.getZ() + 0.5D);
+            Entity entity = spawnEntity(world, (double) pos.posX + 0.5D, (double) pos.posY + d0, (double) pos.posZ + 0.5D);
 
             if (entity instanceof EntityLivingBase && stack.hasDisplayName())
             {
-                entity.setCustomNameTag(stack.getDisplayName());
+                entity.getDataWatcher().updateObject(10, stack.getDisplayName());
             }
 
-            if (!playerIn.capabilities.isCreativeMode)
+            if (!player.capabilities.isCreativeMode)
             {
-                stack.shrink(1);
+                stack.stackSize--;
             }
 
-            return EnumActionResult.SUCCESS;
+            return true;
         }
     }
 
@@ -74,11 +90,11 @@ public class MobSpawnerItem extends Item
     {
         Entity entity = getEntity(worldIn);
         EntityLiving entityliving = (EntityLiving) entity;
-        entity.setLocationAndAngles(x, y, z, MathHelper.wrapDegrees(worldIn.rand.nextFloat() * 360.0F), 0.0F);
+        entity.setLocationAndAngles(x, y, z, worldIn.rand.nextFloat() * 360.0F, 0.0F);
         entityliving.rotationYawHead = entityliving.rotationYaw;
         entityliving.renderYawOffset = entityliving.rotationYaw;
-        entityliving.onInitialSpawn(worldIn.getDifficultyForLocation(new BlockPos(entityliving)), null);
-        worldIn.spawnEntity(entity);
+        entityliving.onSpawnWithEgg(null);
+        worldIn.spawnEntityInWorld(entity);
         entityliving.playLivingSound();
         return entity;
     }

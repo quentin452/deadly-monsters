@@ -10,8 +10,8 @@ public class FallenLeaderSpine extends Item
 {
     public FallenLeaderSpine()
     {
-        setRegistryName("fallen_leader_spine");
-        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".fallen_leader_spine");
+        setUnlocalizedName("fallen_leader_spine");
+        setTextureName(DeadlyMonsters.MOD_ID + ".fallen_leader_spine");
         this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.maxStackSize = 1;
     }

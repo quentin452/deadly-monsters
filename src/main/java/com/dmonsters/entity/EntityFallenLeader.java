@@ -1,50 +1,53 @@
 package com.dmonsters.entity;
 
-import javax.annotation.Nullable;
-
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.*;
-import net.minecraft.entity.item.EntityBoat;
-import net.minecraft.entity.monster.EntityMob;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
-import net.minecraft.network.datasync.EntityDataManager;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.ai.DeadlyMonsterAIMelee;
 import com.dmonsters.main.ModConfig;
 import com.dmonsters.main.ModSounds;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EnumCreatureAttribute;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.ai.attributes.RangedAttribute;
+import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 public class EntityFallenLeader extends EntityMob
 {
     public static final ResourceLocation LOOT = new ResourceLocation(DeadlyMonsters.MOD_ID, "fallen_leader");
-    private static final DataParameter<Boolean> ARMS_RAISED = EntityDataManager.createKey(EntityFallenLeader.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(EntityFallenLeader.class, DataSerializers.BOOLEAN);
 
     public EntityFallenLeader(World worldIn)
     {
         super(worldIn);
         setSize(0.9F, 1.95F);
+        initEntityAI();
+
     }
 
-    public void onLivingUpdate()
-    {
-        if (this.world.isDaytime() && !this.world.isRemote)
-        {
-            float f = this.getBrightness();
-            BlockPos blockpos = this.getRidingEntity() instanceof EntityBoat ? (new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ)).up() : new BlockPos(this.posX, (double) Math.round(this.posY), this.posZ);
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos))
-            {
+    public void onLivingUpdate() {
+        if (this.worldObj.isDaytime() && !this.worldObj.isRemote) {
+            int posX = MathHelper.floor_double(this.posX);
+            int posY = MathHelper.floor_double(this.posY);
+            int posZ = MathHelper.floor_double(this.posZ);
+            float f = this.worldObj.getLightBrightness(posX, posY, posZ);
+
+            Entity ridingEntity = this.ridingEntity;
+            ChunkCoordinates blockpos;
+
+            if (ridingEntity instanceof EntityBoat) {
+                blockpos = new ChunkCoordinates(posX, posY + 1, posZ);
+            } else {
+                blockpos = new ChunkCoordinates(posX, posY, posZ);
+            }
+
+            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.worldObj.canBlockSeeTheSky(blockpos.posX, blockpos.posY, blockpos.posZ)) {
                 this.setFire(8);
             }
         }
@@ -58,15 +61,15 @@ public class EntityFallenLeader extends EntityMob
     }
 
     @Override
-    protected SoundEvent getHurtSound(DamageSource amageSource)
+    protected String getHurtSound()
     {
-        return ModSounds.WIDEMAN_HURT;
+        return ModSounds.WIDEMAN_HURT.toString();
     }
 
     @Override
-    protected SoundEvent getDeathSound()
+    protected String getDeathSound()
     {
-        return ModSounds.WIDEMAN_DEATH;
+        return ModSounds.WIDEMAN_DEATH.toString();
     }
 
     @Override
@@ -75,8 +78,7 @@ public class EntityFallenLeader extends EntityMob
         if (super.attackEntityAsMob(entityIn))
         {
             this.heal(60);
-            this.playSound(ModSounds.WIDEMAN_ATTACK, 1, 1);
-            System.out.println(this.getHealth());
+            this.playSound(ModSounds.WIDEMAN_ATTACK.toString(), 1, 1);
             return true;
         }
         else
@@ -84,22 +86,17 @@ public class EntityFallenLeader extends EntityMob
             return false;
         }
     }
+    private static final IAttribute ARMOR_ATTRIBUTE = new RangedAttribute("generic.armor", 0, 0, 30).setShouldWatch(true);
 
     @Override
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.1D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_FALLEN_LEADER.fallenLeaderSpeedMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(20.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_FALLEN_LEADER.fallenLeaderStrengthMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(1.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(60.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_FALLEN_LEADER.fallenLeaderHealthMultiplier);
-    }
-
-    @SideOnly(Side.CLIENT)
-    public boolean isArmsRaised()
-    {
-        return this.getDataManager().get(ARMS_RAISED);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(35.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.1D * ModConfig.globalSpeedMultiplier * ModConfig.fallenLeaderSpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(20.0D * ModConfig.globalStrengthMultiplier * ModConfig.fallenLeaderStrengthMultiplier);
+        this.getEntityAttribute(ARMOR_ATTRIBUTE).setBaseValue(1.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(60.0D * ModConfig.globalHealthMultiplier * ModConfig.fallenLeaderHealthMultiplier);
     }
 
     public EnumCreatureAttribute getCreatureAttribute()
@@ -107,7 +104,6 @@ public class EntityFallenLeader extends EntityMob
         return EnumCreatureAttribute.UNDEAD;
     }
 
-    @Override
     protected void initEntityAI()
     {
         this.tasks.addTask(1, new EntityAISwimming(this));
@@ -122,21 +118,25 @@ public class EntityFallenLeader extends EntityMob
     protected void entityInit()
     {
         super.entityInit();
-        this.getDataManager().register(ARMS_RAISED, Boolean.FALSE);
-        this.getDataManager().register(ATTACKING, Boolean.FALSE);
     }
 
     @Override
-    protected SoundEvent getAmbientSound()
+    protected String getLivingSound()
     {
-        return ModSounds.WIDEMAN_AMBIENT;
+        return ModSounds.WIDEMAN_AMBIENT.toString();
     }
 
     @Override
-    @Nullable
-    protected ResourceLocation getLootTable()
+    protected void dropFewItems(boolean recentlyHit, int lootingModifier)
     {
-        return LOOT;
+        if (recentlyHit)
+        {
+            int count = this.rand.nextInt(2 + lootingModifier) + 1;
+            for (int i = 0; i < count; ++i)
+            {
+                this.dropItem(Items.bone, 1);
+            }
+        }
     }
 
     @Override
@@ -147,6 +147,6 @@ public class EntityFallenLeader extends EntityMob
 
     private void applyEntityAI()
     {
-        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, false));
+        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, false));
     }
 }

@@ -1,15 +1,18 @@
 package com.dmonsters;
 
+import com.dmonsters.main.*;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.Logger;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import com.dmonsters.main.ModCreativeTabs;
-import com.dmonsters.main.ModSounds;
 import com.dmonsters.proxy.CommonProxy;
+
+import java.io.File;
 
 @Mod(modid = DeadlyMonsters.MOD_ID, name = DeadlyMonsters.MOD_NAME, version = DeadlyMonsters.MOD_VERSION)
 public class DeadlyMonsters
@@ -33,11 +36,22 @@ public class DeadlyMonsters
         logger = event.getModLog();
         ModSounds.init();
         proxy.preInit(event);
+        File configFile = new File(event.getSuggestedConfigurationFile().getParentFile(), MOD_ID + ".cfg");
+        ModConfig.preInit(configFile);
     }
 
+    public static void registerEvent(Object obj) {
+        FMLCommonHandler.instance()
+            .bus()
+            .register(obj);
+        MinecraftForge.EVENT_BUS.register(obj);
+    }
     @Mod.EventHandler
     public void init(FMLInitializationEvent e)
     {
+        ModBlocks.RegistrationHandler.register(e);
+        ModItems.RegistrationHandler.register(e);
+      //  ModSounds.RegistrationHandler.registerSound(e);
         proxy.init(e);
     }
 

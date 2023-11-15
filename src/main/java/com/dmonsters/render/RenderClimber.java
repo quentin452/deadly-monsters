@@ -1,46 +1,36 @@
 package com.dmonsters.render;
 
-import javax.annotation.Nonnull;
-
-import org.lwjgl.opengl.GL11;
-import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityClimber;
 import com.dmonsters.model.ModelClimber;
+import org.lwjgl.opengl.GL11;
 
-public class RenderClimber extends RenderLiving<EntityClimber>
+public class RenderClimber extends RenderLiving
 {
-    public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/climber.png");
 
-    public RenderClimber(RenderManager rendermanagerIn)
+    public RenderClimber(ModelBase modelBase, float shadowSize)
     {
-        super(rendermanagerIn, new ModelClimber(), 0.5F);
+        super(modelBase, shadowSize);
     }
 
+  /*  @Override
     protected void preRenderCallback(EntityClimber entity, float f)
     {
         GL11.glScalef(1.0F, 1.0F, 1.0F);
     }
 
+   */
+
     @Override
-    @Nonnull
-    protected ResourceLocation getEntityTexture(@Nonnull EntityClimber entity)
+    protected ResourceLocation getEntityTexture(Entity entity)
     {
         return mobTexture;
-    }
-
-    public static class Factory implements IRenderFactory<EntityClimber>
-    {
-        @Override
-        public Render<? super EntityClimber> createRenderFor(RenderManager manager)
-        {
-            return new RenderClimber(manager);
-        }
     }
 }

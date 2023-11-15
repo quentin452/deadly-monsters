@@ -2,6 +2,7 @@ package com.dmonsters.item;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -12,26 +13,35 @@ public class EntrailFlesh extends Item
 {
     public EntrailFlesh()
     {
-        setRegistryName("entrail_flesh");
-        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".entrail_flesh");
+        setUnlocalizedName("entrail_flesh");
+        setTextureName(DeadlyMonsters.MOD_ID + ".entrail_flesh");
         this.setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
     }
 
     @Override
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker)
     {
-        if (!attacker.world.isRemote && !(target instanceof EntityEntrail))
+        if (!attacker.worldObj.isRemote && !(target instanceof EntityEntrail))
         {
             target.setDead();
             double x, y, z;
             x = target.posX;
             y = target.posY;
             z = target.posZ;
-            Entity slime = new EntityEntrail(attacker.world);
+            Entity slime = new EntityEntrail(attacker.worldObj);
             slime.setPosition(x, y, z);
-            attacker.world.spawnEntity(slime);
-            stack.shrink(1);
+            attacker.worldObj.spawnEntityInWorld(slime);
+
+            if (attacker instanceof EntityPlayer)
+            {
+                EntityPlayer player = (EntityPlayer) attacker;
+                if (!player.capabilities.isCreativeMode)
+                {
+                    stack.stackSize--;
+                }
+            }
         }
         return true;
     }
+
 }

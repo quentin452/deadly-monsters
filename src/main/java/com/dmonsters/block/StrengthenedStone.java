@@ -4,15 +4,12 @@ import java.util.Random;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.dmonsters.DeadlyMonsters;
@@ -22,22 +19,23 @@ public class StrengthenedStone extends Block
 {
     public StrengthenedStone()
     {
-        super(Material.IRON);
-        setUnlocalizedName(DeadlyMonsters.MOD_ID + ".strengthened_stone");
-        setRegistryName("strengthened_stone");
+        super(Material.iron);
+        setBlockTextureName(DeadlyMonsters.MOD_ID + ".strengthened_stone");
+        setBlockName("strengthened_stone");
         setCreativeTab(DeadlyMonsters.MOD_CREATIVE_TAB);
         this.setHardness(10);
         this.setResistance(25);
     }
 
     @Override
-    public void breakBlock(World worldIn, BlockPos pos, IBlockState state)
+    public void breakBlock(World worldIn, int x, int y, int z, Block blockBroken, int meta)
     {
-        super.breakBlock(worldIn, pos, state);
+        super.breakBlock(worldIn, x, y, z, blockBroken, meta);
         ItemStack newItem = new ItemStack(ModItems.rebar, 1);
-        EntityItem item = new EntityItem(worldIn, pos.getX(), pos.getY(), pos.getZ(), newItem);
-        worldIn.spawnEntity(item);
+        EntityItem item = new EntityItem(worldIn, x, y, z, newItem);
+        worldIn.spawnEntityInWorld(item);
     }
+
 
     @Override
     public int quantityDropped(Random random)
@@ -46,19 +44,19 @@ public class StrengthenedStone extends Block
     }
 
     @Override
-    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
+    public boolean onBlockActivated(World worldIn, int x, int y, int z, EntityPlayer player, int side, float subX, float subY, float subZ)
     {
-        if (playerIn.isSneaking())
+        if (player.isSneaking())
         {
             if (!worldIn.isRemote)
             {
-                worldIn.setBlockState(pos, Blocks.STONE.getDefaultState());
+                worldIn.setBlock(x, y, z, Blocks.stone);
             }
             return true;
         }
         else
         {
-            return super.onBlockActivated(worldIn, pos, state, playerIn, hand, side, hitX, hitY, hitZ);
+            return super.onBlockActivated(worldIn, x, y, z, player, side, subX, subY, subZ);
         }
     }
 

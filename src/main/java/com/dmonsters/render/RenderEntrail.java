@@ -2,25 +2,25 @@ package com.dmonsters.render;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityEntrail;
 import com.dmonsters.model.ModelEntrail;
 
-public class RenderEntrail extends RenderLiving<EntityEntrail>
+public class RenderEntrail extends RenderLiving
 {
-    public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/entrail.png");
 
-    public RenderEntrail(RenderManager rendermanagerIn)
+    public RenderEntrail(ModelBase modelBase, float shadowSize)
     {
-        super(rendermanagerIn, new ModelEntrail(), 0.5F);
+        super(modelBase, shadowSize);
     }
 
     protected void preRenderCallback(EntityEntrail entity, float f)
@@ -29,18 +29,8 @@ public class RenderEntrail extends RenderLiving<EntityEntrail>
     }
 
     @Override
-    @Nonnull
-    protected ResourceLocation getEntityTexture(@Nonnull EntityEntrail entity)
+    protected ResourceLocation getEntityTexture(Entity entity)
     {
         return mobTexture;
-    }
-
-    public static class Factory implements IRenderFactory<EntityEntrail>
-    {
-        @Override
-        public Render<? super EntityEntrail> createRenderFor(RenderManager manager)
-        {
-            return new RenderEntrail(manager);
-        }
     }
 }

@@ -1,12 +1,12 @@
 package com.dmonsters.entity.ai;
 
-import net.minecraft.util.math.MathHelper;
-
 import com.dmonsters.entity.EntityTopielec;
+import net.minecraft.util.MathHelper;
 
 public class EntityAITopielecIdle extends DeadlyMonsterAIBase
 {
     private final EntityTopielec topielec;
+    private int idleTime;
 
     public EntityAITopielecIdle(EntityTopielec topielec)
     {
@@ -20,8 +20,13 @@ public class EntityAITopielecIdle extends DeadlyMonsterAIBase
 
     public void updateTask()
     {
-        int i = this.topielec.getIdleTime();
-        if (i > 100)
+        if (this.topielec.onGround) {
+            idleTime++;
+        } else {
+            idleTime = 0;
+        }
+
+        if (idleTime > 100)
         {
             this.topielec.setMovementVector(0.0F, 0.0F, 0.0F);
         }

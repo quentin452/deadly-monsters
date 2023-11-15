@@ -1,46 +1,28 @@
 package com.dmonsters.render;
 
-import javax.annotation.Nonnull;
-
-import org.lwjgl.opengl.GL11;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderLiving;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
-
 import com.dmonsters.DeadlyMonsters;
-import com.dmonsters.entity.EntityZombieChicken;
-import com.dmonsters.model.ModelZombieChicken;
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 
-public class RenderZombieChicken extends RenderLiving<EntityZombieChicken>
+public class RenderZombieChicken extends RenderLiving
 {
-    public static final Factory FACTORY = new Factory();
-    private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/zombie_chicken.png");
+    private static final ResourceLocation TEXTURE = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/zombie_chicken.png");
 
-    public RenderZombieChicken(RenderManager rendermanagerIn)
-    {
-        super(rendermanagerIn, new ModelZombieChicken(), 0.3F);
+    public RenderZombieChicken(ModelBase modelBase, float shadowSize) {
+        super(modelBase, shadowSize);
     }
 
-    protected void preRenderCallback(EntityZombieChicken entity, float f)
-    {
+    protected void preRenderCallback(EntityLivingBase entity, float f) {
         GL11.glScalef(1.0F, 1.0F, 1.0F);
     }
 
     @Override
-    @Nonnull
-    protected ResourceLocation getEntityTexture(@Nonnull EntityZombieChicken entity)
-    {
-        return mobTexture;
+    protected ResourceLocation getEntityTexture(Entity entity) {
+        return TEXTURE;
     }
 
-    public static class Factory implements IRenderFactory<EntityZombieChicken>
-    {
-        @Override
-        public Render<? super EntityZombieChicken> createRenderFor(RenderManager manager)
-        {
-            return new RenderZombieChicken(manager);
-        }
-    }
 }

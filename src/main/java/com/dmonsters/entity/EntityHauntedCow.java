@@ -1,18 +1,17 @@
 package com.dmonsters.entity;
 
 import java.util.Random;
-import javax.annotation.Nullable;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.ai.attributes.RangedAttribute;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.DamageSource;
+import net.minecraft.init.Items;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundEvent;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import com.dmonsters.DeadlyMonsters;
@@ -43,57 +42,66 @@ public class EntityHauntedCow extends EntityMob
         this.applyEntityAI();
     }
 
-    protected SoundEvent getAmbientSound()
+    protected String getLivingSound()
     {
-        return ModSounds.HAUNTEDCOW_AMBIENT;
+        return ModSounds.HAUNTEDCOW_AMBIENT.toString();
     }
 
     @Override
-    @Nullable
-    protected ResourceLocation getLootTable()
+    protected void dropFewItems(boolean recentlyHit, int lootingModifier)
     {
-        return LOOT;
+        if (recentlyHit)
+        {
+            int count = this.rand.nextInt(2 + lootingModifier) + 1;
+            for (int i = 0; i < count; ++i)
+            {
+                this.dropItem(Items.bone, 1);
+            }
+        }
     }
 
     protected void applyEntityAI()
     {
-        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, true));
+        this.targetTasks.addTask(0, new EntityAINearestAttackableTarget(this, EntityPlayer.class, 0, true));
     }
 
-    protected SoundEvent getHurtSound(DamageSource damageSourceIn)
+    protected String getHurtSound()
     {
-        return ModSounds.HAUNTEDCOW_HURT;
+        return ModSounds.HAUNTEDCOW_HURT.toString();
     }
 
-    protected SoundEvent getDeathSound()
+    protected String getDeathSound()
     {
-        return ModSounds.HAUNTEDCOW_DEATH;
+        return ModSounds.HAUNTEDCOW_DEATH.toString();
     }
 
     @Override
-    public boolean attackEntityAsMob(Entity entityIn)
-    {
+    public boolean attackEntityAsMob(Entity entityIn) {
         super.attackEntityAsMob(entityIn);
-        this.playSound(ModSounds.HAUNTEDCOW_AMBIENT, 1, 1);
-        if (ModConfig.CATEGORY_HAUNTED_COW.hauntedCowDisableTimeChange)
-        {
+        this.playSound(ModSounds.HAUNTEDCOW_AMBIENT.toString(), 1, 1);
+
+        if (ModConfig.hauntedCowDisableTimeChange) {
             return true;
         }
+
         Random random = new Random();
         float rndNum = random.nextFloat();
-        if (rndNum < 0.5f)
-        {
+
+        if (rndNum < 0.5f) {
             return true;
         }
-        if (entityIn.world.isDaytime())
-        {
-            PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(entityIn.getPosition(), PacketClientFXUpdate.Type.TIME_CHANGE));
-            if (entityIn.world.getGameRules().getBoolean("doDaylightCycle"))
-            {
-                long i = world.getWorldTime() + 24000L;
-                world.setWorldTime((i - i % 24000L) - 6000L);
+
+        if (entityIn.worldObj.isDaytime()) {
+            ChunkCoordinates entityPos = new ChunkCoordinates((int) entityIn.posX, (int) entityIn.posY, (int) entityIn.posZ);
+
+            PacketHandler.INSTANCE.sendToAll(new PacketClientFXUpdate(entityPos, PacketClientFXUpdate.Type.TIME_CHANGE));
+
+            if (entityIn.worldObj.getGameRules().getGameRuleBooleanValue("doDaylightCycle")) {
+                long worldTime = entityIn.worldObj.getWorldTime() + 24000L;
+                entityIn.worldObj.setWorldTime((worldTime - worldTime % 24000L) - 6000L);
             }
         }
+
         return true;
     }
 
@@ -102,19 +110,22 @@ public class EntityHauntedCow extends EntityMob
     {
         return true;
     }
+    private static final IAttribute ARMOR_ATTRIBUTE = new RangedAttribute("generic.armor", 0, 0, 30).setShouldWatch(true);
 
     protected void applyEntityAttributes()
     {
         super.applyEntityAttributes();
-        this.getEntityAttribute(SharedMonsterAttributes.FOLLOW_RANGE).setBaseValue(35.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.3D * ModConfig.CATEGORY_GENERAL.globalSpeedMultiplier * ModConfig.CATEGORY_HAUNTED_COW.hauntedCowSpeedMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(12.0D * ModConfig.CATEGORY_GENERAL.globalStrengthMultiplier * ModConfig.CATEGORY_HAUNTED_COW.hauntedCowStrengthMultiplier);
-        this.getEntityAttribute(SharedMonsterAttributes.ARMOR).setBaseValue(2.0D);
-        this.getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH).setBaseValue(24.0D * ModConfig.CATEGORY_GENERAL.globalHealthMultiplier * ModConfig.CATEGORY_HAUNTED_COW.hauntedCowHealthMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.followRange).setBaseValue(35.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.movementSpeed).setBaseValue(0.3D * ModConfig.globalSpeedMultiplier * ModConfig.hauntedCowSpeedMultiplier);
+        this.getEntityAttribute(SharedMonsterAttributes.attackDamage).setBaseValue(12.0D * ModConfig.globalStrengthMultiplier * ModConfig.hauntedCowStrengthMultiplier);
+        this.getEntityAttribute(ARMOR_ATTRIBUTE).setBaseValue(2.0D);
+        this.getEntityAttribute(SharedMonsterAttributes.maxHealth).setBaseValue(24.0D * ModConfig.globalHealthMultiplier * ModConfig.hauntedCowHealthMultiplier);
     }
-
-    protected void playStepSound(BlockPos pos, Block blockIn)
+/*
+    protected void playStepSound(ChunkCoordinates pos, Block blockIn)
     {
         this.playSound(ModSounds.HAUNTEDCOW_STEP, 0.15F, 1.0F);
     }
+
+ */
 }

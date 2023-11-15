@@ -2,25 +2,24 @@ package com.dmonsters.render;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.entity.Entity;
 import org.lwjgl.opengl.GL11;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderLiving;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
 
 import com.dmonsters.DeadlyMonsters;
 import com.dmonsters.entity.EntityPresent;
 import com.dmonsters.model.ModelPresent;
 
-public class RenderPresent extends RenderLiving<EntityPresent>
+public class RenderPresent extends RenderLiving
 {
-    public static final Factory FACTORY = new Factory();
     private final ResourceLocation mobTexture = new ResourceLocation(DeadlyMonsters.MOD_ID + ":textures/entity/present.png");
 
-    public RenderPresent(RenderManager rendermanagerIn)
+    public RenderPresent(ModelBase modelBase, float shadowSize)
     {
-        super(rendermanagerIn, new ModelPresent(), 0.5F);
+        super(modelBase, shadowSize);
     }
 
     protected void preRenderCallback(EntityPresent entity, float f)
@@ -29,18 +28,8 @@ public class RenderPresent extends RenderLiving<EntityPresent>
     }
 
     @Override
-    @Nonnull
-    protected ResourceLocation getEntityTexture(@Nonnull EntityPresent entity)
+    protected ResourceLocation getEntityTexture(@Nonnull Entity entity)
     {
         return mobTexture;
-    }
-
-    public static class Factory implements IRenderFactory<EntityPresent>
-    {
-        @Override
-        public Render<? super EntityPresent> createRenderFor(RenderManager manager)
-        {
-            return new RenderPresent(manager);
-        }
     }
 }
